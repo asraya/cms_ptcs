@@ -11,20 +11,41 @@ class PagesController extends Controller
         $page_title = 'Dashboard';
         $page_description = 'Some description for the page';
 
-        return view('auth.login', compact('page_title', 'page_description'));
+        return view('pages.dashboard', compact('page_title', 'page_description'));
     }
 
     /**
      * Demo methods below
      */
+    public function sendemail()
+    {
+        $page_title = 'spt_request';
+        $page_description = 'This is spt_request test page';
 
+        return view('pages.sendemail', compact('page_title', 'page_description'));
+    }
+    //spt
+    public function spt_request()
+    {
+        $page_title = 'spt_request';
+        $page_description = 'This is spt_request test page';
+
+        return view('pages.spt.spt_request', compact('page_title', 'page_description'));
+    }
+    public function role()
+    {
+        $page_title = 'spt_request';
+        $page_description = 'This is spt_request test page';
+
+        return view('pages.role.index', compact('page_title', 'page_description'));
+    }
     // Datatables
     public function datatables()
     {
-        $page_title = 'Datatables';
-        $page_description = 'This is datatables test page';
+        $page_title = 'User Data';
+        $page_description = 'Corporate Management Systems';
 
-        return view('pages.datatables', compact('page_title', 'page_description'));
+        return view('pages.user.datatables', compact('page_title', 'page_description'));
     }
 
     // KTDatatables
@@ -36,13 +57,13 @@ class PagesController extends Controller
         return view('pages.ktdatatables', compact('page_title', 'page_description'));
     }
 
-    // Select2
-    public function select2()
+    // add
+    public function add()
     {
         $page_title = 'Select 2';
-        $page_description = 'This is Select2 test page';
+        $page_description = 'This is add test page';
 
-        return view('pages.select2', compact('page_title', 'page_description'));
+        return view('pages.add', compact('page_title', 'page_description'));
     }
 
     // custom-icons

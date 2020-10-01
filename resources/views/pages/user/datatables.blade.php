@@ -8,7 +8,7 @@
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
                 <h3 class="card-label">HTML Table
-                    <div class="text-muted pt-2 font-size-sm">Datatable initialized from HTML table</div>
+                    <!-- <div class="text-muted pt-2 font-size-sm">Datatable initialized from HTML table</div> -->
                 </h3>
             </div>
             <div class="card-toolbar">
@@ -79,7 +79,7 @@
                 </div>
                 <!--end::Dropdown-->
                 <!--begin::Button-->
-                <a href="/select2" class="btn btn-primary font-weight-bolder">
+                <a href="/add" class="btn btn-primary font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -178,7 +178,7 @@
     <!-- <script src="{{ asset('js/pages/crud/datatables/basic/basic.js') }}" type="text/javascript"></script> -->
     <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
     <script> 
-    var table = $('#kt_datatable').DataTable({
+    var table = $('.kt_datatable').DataTable({
         processing: true,
         serverSide: true,
         ajax: "{{ route ('api.user') }}",
