@@ -65,7 +65,7 @@ class UserController extends Controller
            return redirect('/list');
         }
         $check = user::where('id', $request->id)->update($data);
-        return Redirect::to("datatables")->withSuccess('Great! User has been updated');
+        return Redirect::to("datauser")->withSuccess('Great! User has been updated');
     }
 
     public function delete(Request $request, $id)

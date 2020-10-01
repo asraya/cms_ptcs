@@ -145,7 +145,7 @@
             </div>
             <!--end::Search Form-->
 
-            <table class="table table-bordered table-hover" id="kt_datatable">
+            <table class="table table-bordered table-hover kt_datatable">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -175,8 +175,8 @@
     <script src="{{ asset('plugins/custom/datatables/datatables.bundle.js') }}" type="text/javascript"></script>
 
     {{-- page scripts --}}
-    <!-- <script src="{{ asset('js/pages/crud/datatables/basic/basic.js') }}" type="text/javascript"></script> -->
-    <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pages/crud/datatables/basic/basic.js') }}" type="text/javascript"></script>
+    <!-- <script src="{{ asset('js/app.js') }}" type="text/javascript"></script> -->
     <script> 
     var table = $('.kt_datatable').DataTable({
         processing: true,

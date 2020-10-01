@@ -45,7 +45,7 @@ class PagesController extends Controller
         $page_title = 'User Data';
         $page_description = 'Corporate Management Systems';
 
-        return view('pages.user.datatables', compact('page_title', 'page_description'));
+        return view('pages.datatables', compact('page_title', 'page_description'));
     }
 
     // KTDatatables
