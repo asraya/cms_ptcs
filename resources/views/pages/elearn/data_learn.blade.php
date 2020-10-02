@@ -79,7 +79,7 @@
                 </div>
                 <!--end::Dropdown-->
                 <!--begin::Button-->
-                <a href="/add" class="btn btn-primary font-weight-bolder">
+                <a href="/add_elearn" class="btn btn-primary font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -90,7 +90,8 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>New Record</a>
+                </span>Create</a>
+                
                 <!--end::Button-->
             </div>
         </div>
@@ -181,11 +182,11 @@
     var table = $('.kt_datatable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route ('api.user') }}",
+        ajax: "{{ route ('api.elearn') }}",
         columns: [
-            {"data":"id"},
-            {"data":"name"},
-            {"data":"email"},
+            {"data":"emp_id"},
+            {"data":"emp_name"},
+            {"data":"learn_register"},
             {data: 'action', name: 'action', orderable: false, searchable: false},
 
         ],

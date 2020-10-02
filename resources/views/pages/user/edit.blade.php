@@ -20,15 +20,15 @@
       <input type="hidden" name="id" class="form-control" value="{{ $user->id }}" id="formGroupExampleInput">
 
       <div class="form-group">
-        <label for="formGroupExampleInput">name</label>
-        <input type="text" name="name" class="form-control" id="formGroupExampleInput" placeholder="Please enter name" value="{{ $user->name }}">
-        <span class="text-danger">{{ $errors->first('name') }}</span>
+        <label for="formGroupExampleInput">username</label>
+        <input type="text" name="user_name" class="form-control" id="formGroupExampleInput" placeholder="Please enter name" value="{{ $user->user_name }}" readonly>
+        <span class="text-danger">{{ $errors->first('user_name') }}</span>
       </div> 
 
       <div class="form-group">
         <label for="message">email</label>
-        <textarea name="email" class="form-control" id="email" placeholder="Please enter email">{{ $user->email }}</textarea>
-        <span class="text-danger">{{ $errors->first('email') }}</span>
+        <textarea name="user_email" class="form-control" id="user_email" placeholder="Please enter email" readonly>{{ $user->user_email }}</textarea>
+        <span class="text-danger">{{ $errors->first('user_email') }}</span>
       </div>
 
       <div class="form-group">

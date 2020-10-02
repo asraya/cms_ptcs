@@ -20,6 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/user')->name('api.user')->uses('UserController@datatables');
 
-Route::get('/spt')->name('api.spt')->uses('SptRequestController@index');
-Route::get('/add_spt')->name('api.spt')->uses('SptRequestController@index');
+Route::get('/spt')->name('api.spt')->uses('SptRequestController@datatables');
 
+Route::get('/heldesk')->name('api.heldesk')->uses('HelpdeskRequestController@datatables');
+
+Route::get('/elearn')->name('api.elearn')->uses('ElearnController@datatables');

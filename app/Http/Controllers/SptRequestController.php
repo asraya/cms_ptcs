@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Spt;
+use DataTables;
+use Validator,Redirect,Response;
 
 class SptRequestController extends Controller
 {
-    public function index()
+    // public function index()
+    // {
+    //     return view('pages/spt/spt_request');
+    // }
+    public function datatables()
     {
-        return view('pages/spt/spt_request');
-    }
-    public function spt_request()
-    {
-        return spt_request ( spt_request::all())
+        return datatables ( Spt::all())
         ->addIndexColumn()
                 ->addColumn('action', function($data){
                        
@@ -26,11 +29,11 @@ class SptRequestController extends Controller
      ->rawColumns(['action'])
      ->make(true);
     }
-    public function add_spt()
-    {
-        return view('pages/spt/spt_request');
+    // public function add_spt()
+    // {
+    //     return view('pages/spt/spt_request');
 
-    }   
+    // }   
     public function store(Request $request)
     {
         $validatedData = $request->validate([

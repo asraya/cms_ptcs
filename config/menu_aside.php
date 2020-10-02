@@ -20,14 +20,14 @@ return [
             'title' => 'User & Phone Line Information',
             'root' => true,
             'icon' => 'media/svg/icons/Home/Library.svg',
-            'page' => 'datatables',
+            'page' => '/data_user',
             'visible' => 'preview',
         ],
         [
             'title' => 'Role Permissions',
             'root' => true,
             'icon' => 'media/svg/icons/Home/Library.svg',
-            'page' => 'role',
+            'page' => '/index',
             'visible' => 'preview',
         ],  
         [
@@ -54,19 +54,22 @@ return [
             'icon' => 'media/svg/icons/Home/Library.svg',
             'page' => 'builder',
             'visible' => 'preview',
-        ], [
+        ],
+        [
             'title' => 'Helpdesk Request',
             'root' => true,
             'icon' => 'media/svg/icons/Home/Library.svg',
-            'page' => 'builder',
+            'page' => '/helpdesk',
             'visible' => 'preview',
-        ], [
-            'title' => 'Helpdesk Request',
+        ],
+        [
+            'title' => 'E learning Registration ',
             'root' => true,
             'icon' => 'media/svg/icons/Home/Library.svg',
-            'page' => 'builder',
+            'page' => '/elearn',
             'visible' => 'preview',
-        ], [
+        ],
+        [
             'title' => 'Meeting Room Request',
             'root' => true,
             'icon' => 'media/svg/icons/Home/Library.svg',

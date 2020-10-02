@@ -32,6 +32,14 @@ class PagesController extends Controller
 
         return view('pages.spt.spt_request', compact('page_title', 'page_description'));
     }
+    //elearn
+     public function elearn()
+    {
+        $page_title = 'elearn';
+        $page_description = 'This is elearn test page';
+
+        return view('pages.elearn.data_learn', compact('page_title', 'page_description'));
+    }
     public function role()
     {
         $page_title = 'spt_request';
@@ -39,13 +47,13 @@ class PagesController extends Controller
 
         return view('pages.role.index', compact('page_title', 'page_description'));
     }
-    // Datatables
-    public function datatables()
+    // data user
+    public function data_user()
     {
         $page_title = 'User Data';
         $page_description = 'Corporate Management Systems';
 
-        return view('pages.datatables', compact('page_title', 'page_description'));
+        return view('pages.user.data_user', compact('page_title', 'page_description'));
     }
 
     // KTDatatables
@@ -57,15 +65,21 @@ class PagesController extends Controller
         return view('pages.ktdatatables', compact('page_title', 'page_description'));
     }
 
-    // add
-    public function add()
+    // add_user
+    public function add_user()
     {
-        $page_title = 'Select 2';
-        $page_description = 'This is add test page';
+        $page_title = 'add user';
+        $page_description = 'This is add_user test page';
 
-        return view('pages.add', compact('page_title', 'page_description'));
+        return view('pages.user.add_user', compact('page_title', 'page_description'));
     }
+    public function add_spt()
+    {
+        $page_title = 'add user';
+        $page_description = 'This is add_user test page';
 
+        return view('pages.spt.add_spt', compact('page_title', 'page_description'));
+    }
     // custom-icons
     public function customIcons()
     {

@@ -8,7 +8,7 @@
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
                 <h3 class="card-label">HTML Table
-                    <div class="text-muted pt-2 font-size-sm">Datatable initialized from HTML table</div>
+                    <!-- <div class="text-muted pt-2 font-size-sm">Datatable initialized from HTML table</div> -->
                 </h3>
             </div>
             <div class="card-toolbar">
@@ -79,7 +79,7 @@
                 </div>
                 <!--end::Dropdown-->
                 <!--begin::Button-->
-                <a href="/add_spt" class="btn btn-primary font-weight-bolder">
+                <a href="/add_user" class="btn btn-primary font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -104,7 +104,7 @@
                         <div class="row align-items-center">
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="input-icon">
-                                    <input type="text" class="form-control" placeholder="Search..." id="spt_data_search_query"/>
+                                    <input type="text" class="form-control" placeholder="Search..." id="kt_datatable_search_query"/>
                                     <span><i class="flaticon2-search-1 text-muted"></i></span>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
                                     <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
-                                    <select class="form-control" id="spt_data_search_status">
+                                    <select class="form-control" id="kt_datatable_search_status">
                                         <option value="">All</option>
                                         <option value="1">Pending</option>
                                         <option value="2">Delivered</option>
@@ -126,7 +126,7 @@
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
                                     <label class="mr-3 mb-0 d-none d-md-block">Type:</label>
-                                    <select class="form-control" id="spt_data_search_type">
+                                    <select class="form-control" id="kt_datatable_search_type">
                                         <option value="">All</option>
                                         <option value="1">Online</option>
                                         <option value="2">Retail</option>
@@ -144,18 +144,21 @@
                 </div>
             </div>
             <!--end::Search Form-->
-            <table class="table table-bordered table-hover spt_data">
+
+            <table class="table table-bordered table-hover kt_datatable">
                 <thead>
                 <tr>
-                    <th>No</th>
-                    <th>SPT NO</th>
-                    <th>Purpose</th>
-                    <th>Status</th>   
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>                 
                     <th>Actions</th>
                 </tr>
-                </thead>               
+                </thead>
+               
             </table>
-       </div>
+
+        </div>
+
     </div>
 
 @endsection
@@ -175,15 +178,14 @@
     <script src="{{ asset('js/pages/crud/datatables/basic/basic.js') }}" type="text/javascript"></script>
     <!-- <script src="{{ asset('js/app.js') }}" type="text/javascript"></script> -->
     <script> 
-   var table = $('.spt_data').DataTable({
+    var table = $('.kt_datatable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route ('api.spt') }}",
+        ajax: "{{ route ('api.user') }}",
         columns: [
-            {"data":"spt_id"},
-            {"data":"spt_no"},
-            {"data":"purpose"},
-            {"data":"status"},
+            {"data":"emp_id"},
+            {"data":"user_name"},
+            {"data":"user_email"},
             {data: 'action', name: 'action', orderable: false, searchable: false},
 
         ],
@@ -197,7 +199,7 @@
        type: "get",
        url: "{{ url('delete-user') }}"+'/'+user_id,
        success: function (data) {
-       var oTable = $('#spt_data').dataTable(); 
+       var oTable = $('#kt_datatable').dataTable(); 
        oTable.fnDraw(false);
        },
        error: function (data) {

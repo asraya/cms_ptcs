@@ -25,35 +25,35 @@
                     <div class="form-group row">
             <label class="col-form-label col-lg-3 col-sm-12">User ID</label>
             <div class=" col-lg-9 col-md-9 col-sm-12">
-               <input type="text" name="id" class="form-control form-control-solid form-control-lg"  placeholder="Enter your User Id"/>
+               <input type="text" name="user_id" class="form-control form-control-solid form-control-lg"  placeholder="Enter your ID">
             </div>
         </div>
 
                     <div class="form-group row">
             <label class="col-form-label col-lg-3 col-sm-12">Employee ID</label>
             <div class=" col-lg-9 col-md-9 col-sm-12">
-               <input type="text" name="emp_id" class="form-control form-control-solid form-control-lg"  placeholder="Enter your Employee ID"/>
+               <input type="text" name="user_name" class="form-control form-control-solid form-control-lg"  placeholder="Enter your name"/>
             </div>
         </div>
 
                     <div class="form-group row">
             <label class="col-form-label col-lg-3 col-sm-12">Division/Dept</label>
             <div class=" col-lg-9 col-md-9 col-sm-12">
-               <input type="email" name="user_division"  class="form-control form-control-solid form-control-lg" placeholder="Enter your User Division"/>
+               <input type="email" name="user_email"  class="form-control form-control-solid form-control-lg" placeholder="Enter your email"/>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-lg-3 col-sm-12">First Name</label>
             <div class=" col-lg-9 col-md-9 col-sm-12">
-               <input type="email" name="first_name"  class="form-control form-control-solid form-control-lg" placeholder="Enter your First Name "/>
+               <input type="email" name="user_email"  class="form-control form-control-solid form-control-lg" placeholder="Enter your email"/>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-lg-3 col-sm-12">Last Name</label>
             <div class=" col-lg-9 col-md-9 col-sm-12">
-               <input type="email" name="last_name"  class="form-control form-control-solid form-control-lg" placeholder="Enter your Last Name"/>
+               <input type="email" name="user_email"  class="form-control form-control-solid form-control-lg" placeholder="Enter your email"/>
             </div>
         </div>
 
@@ -67,55 +67,66 @@
         <div class="form-group row">
             <label class="col-form-label col-lg-3 col-sm-12">Line Extension</label>
             <div class=" col-lg-9 col-md-9 col-sm-12">
-               <input type="email" name="user_phone"  class="form-control form-control-solid form-control-lg" placeholder="Enter your Line Extention"/>
+               <input type="email" name="user_email"  class="form-control form-control-solid form-control-lg" placeholder="Enter your email"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-lg-3 col-sm-12">User Email</label>
+            <div class=" col-lg-9 col-md-9 col-sm-12">
+               <input type="email" name="user_email"  class="form-control form-control-solid form-control-lg" placeholder="Enter your email"/>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-lg-3 col-sm-12">Phone Matrix</label>
             <div class=" col-lg-9 col-md-9 col-sm-12">
-               <input type="email" name="user_matrix"  class="form-control form-control-solid form-control-lg" placeholder="Enter your Phone Matrtix"/>
+               <input type="email" name="user_email"  class="form-control form-control-solid form-control-lg" placeholder="Enter your email"/>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-lg-3 col-sm-12">User Name</label>
             <div class=" col-lg-9 col-md-9 col-sm-12">
-               <input type="email" name="user_name"  class="form-control form-control-solid form-control-lg" placeholder="Enter your Username"/>
+               <input type="email" name="user_email"  class="form-control form-control-solid form-control-lg" placeholder="Enter your email"/>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-lg-3 col-sm-12">Password</label>
             <div class=" col-lg-9 col-md-9 col-sm-12">
-               <input type="email" name="password"  class="form-control form-control-solid form-control-lg" placeholder="Enter your Password"/>
+               <input type="email" name="user_email"  class="form-control form-control-solid form-control-lg" placeholder="Enter your email"/>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-lg-3 col-sm-12">Retype Password</label>
             <div class=" col-lg-9 col-md-9 col-sm-12">
-               <input type="email" name="password"  class="form-control form-control-solid form-control-lg" placeholder="Enter your Retype Password"/>
+               <input type="email" name="user_email"  class="form-control form-control-solid form-control-lg" placeholder="Enter your email"/>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-lg-3 col-sm-12">User Privilege</label>
             <div class=" col-lg-9 col-md-9 col-sm-12">
-               <input type="email" name="user_email"  class="form-control form-control-solid form-control-lg" placeholder="Enter your email"/>
-            </div>
+
+<select id="cars">
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="opel">Opel</option>
+  <option value="audi">Audi</option>
+</select>            </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-lg-3 col-sm-12">User Active</label>
             <div class=" col-lg-9 col-md-9 col-sm-12">
-               <input type="email" name="user_email"  class="form-control form-control-solid form-control-lg" placeholder="Enter your email"/>
-            </div>
-        </div>  
-					<!--end::Input-->
-
-					<!--begin::Input-->
-                  
+<input type="radio" id="male" name="gender" value="male">
+<label for="male">Male</label><br>
+<input type="radio" id="female" name="gender" value="female">
+<label for="female">Female</label><br>
+       </div>
+        </div>
 		<!--end::Input-->                    
 				</div>
 				<div class="col-xl-3"></div>
@@ -142,7 +153,7 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
-            $('.add_spt').add_spt();
+            $('.add_user').add_user();
         });
     </script>
 @endsection

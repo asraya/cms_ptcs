@@ -15,9 +15,9 @@ class UserController extends Controller
         ->addIndexColumn()
                 ->addColumn('action', function($data){
                        
-                       $editUrl = url('edit/'.$data->id);
-                       $btn = '<a href="'.$editUrl.'" data-toggle="tooltip" data-original-title="Edit" class="edit btn btn-primary btn-sm">Edit</a>';
-                       $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteTodo">Delete</a>';
+                       $editUrl = url('edit/'.$data->user_id);
+                       $btn = '<a href="'.$editUrl.'" data-toggle="tooltip" data-original-title="Edit" class="edit btn btn-primary btn-sm">View</a>';
+                    //    $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->user_id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteTodo">Delete</a>';
     
                         return $btn;
                         
@@ -41,9 +41,9 @@ class UserController extends Controller
         return redirect('/user')->with('success', 'User Case is successfully saved');
     }
 
-    public function edit(Request $request, $id)
+    public function edit(Request $request, $user_id)
     {       
-        $data['user'] = User::where('id', $id)->first();
+        $data['user'] = User::where('user_id', $user_id)->first();
         $user = $data['user'];
 
         if(!$data['user']){
