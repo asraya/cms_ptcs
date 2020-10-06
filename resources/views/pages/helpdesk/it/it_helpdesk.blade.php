@@ -7,7 +7,7 @@
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
-                <h3 class="card-label">Corporate Management Systems
+                <h3 class="card-label">HTML Table
                     <!-- <div class="text-muted pt-2 font-size-sm">Datatable initialized from HTML table</div> -->
                 </h3>
             </div>
@@ -90,8 +90,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>Create</a>
-                
+                </span>New Record</a>
                 <!--end::Button-->
             </div>
         </div>
@@ -145,12 +144,13 @@
                 </div>
             </div>
             <!--end::Search Form-->
-            <table class="table table-bordered table-striped kt_datatable">
+
+            <table class="table table-bordered table-hover it_helpdesk">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>                 
+                    <th>Ticket</th>
+                    <th>Problem</th>                    
+                    <th>Request</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -178,14 +178,14 @@
     <script src="{{ asset('js/pages/crud/datatables/basic/basic.js') }}" type="text/javascript"></script>
     <!-- <script src="{{ asset('js/app.js') }}" type="text/javascript"></script> -->
     <script> 
-    var table = $('.kt_datatable').DataTable({
+    var table = $('.it_helpdesk').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route ('api.user') }}",
+        ajax: "{{ route ('api.it_helpdesk') }}",
         columns: [
-            {"data":"id"},
-            {"data":"name"},
-            {"data":"email"},
+            {"data":"help_ticket"},
+            {"data":"help_type"},
+            {"data":"help_reqdate"},
             {data: 'action', name: 'action', orderable: false, searchable: false},
 
         ],

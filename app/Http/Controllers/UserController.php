@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Auth;
+use DataTables;
+use Validator,Redirect,Response;
 
 use App\User;
 use DB;
@@ -19,8 +21,8 @@ class UserController extends Controller
         ->addIndexColumn()
                 ->addColumn('action', function($data){
                        
-                       $editUrl = url('edit/'.$data->user_id);
-                       $btn = '<a href="'.$editUrl.'" data-toggle="tooltip" data-original-title="Edit" class="edit btn btn-primary btn-sm">View</a>';
+                       $editUrl = url('edit/'.$data->id);
+                       $btn = '<a href="'.$editUrl.'" data-toggle="tooltip" data-original-title="Edit" class="btn-sm fa fa-bars"></a>';
                     //    $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->user_id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteTodo">Delete</a>';
     
                         return $btn;
@@ -63,10 +65,17 @@ class UserController extends Controller
         return redirect(route('users.index'))->with(['success' => 'User: <strong>' . $user->name . '</strong> Ditambahkan']);
     }
 
-    public function edit($id)
-    {
-        $user = User::findOrFail($id);
-        return view('users.edit', compact('user'));
+    public function edit(Request $request, $id)
+    {       
+        $data['user'] = User::where('id', $id)->first();
+        $user = $data['user'];
+
+        if(!$data['user']){
+           return redirect('/list');
+        }
+        $page_title = 'Edit data';
+        $page_description = '--';
+        return view('pages/user/edit', compact('user', 'page_title', 'page_description'));
     }
 
     public function update(Request $request, $id)

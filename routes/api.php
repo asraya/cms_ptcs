@@ -21,7 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Route::get('/user')->name('api.user')->uses('UserController@datatables');
 
 // Route::get('/spt')->name('api.spt')->uses('SptRequestController@datatables');
+Route::get('/listitstock')->name('api.listitstock')->uses('ListItStockController@datatables');
 
-// Route::get('/heldesk')->name('api.heldesk')->uses('HelpdeskRequestController@datatables');
+Route::get('/it_helpdesk')->name('api.it_helpdesk')->uses('HelpdeskRequestController@itdatatables');
 
 Route::get('/elearn')->name('api.elearn')->uses('ElearnController@datatables');

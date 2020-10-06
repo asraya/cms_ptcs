@@ -7,8 +7,8 @@
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
-                <h3 class="card-label">HTML Table
-                    <div class="text-muted pt-2 font-size-sm">Datatable initialized from HTML table</div>
+                <h3 class="card-label">Corporate Management Systems
+                    <!-- <div class="text-muted pt-2 font-size-sm">Datatable initialized from HTML table</div> -->
                 </h3>
             </div>
             <div class="card-toolbar">
@@ -144,7 +144,7 @@
                 </div>
             </div>
             <!--end::Search Form-->
-            <table class="table table-bordered table-hover spt_data">
+            <table class="table table-bordered table-striped spt_data">
                 <thead>
                 <tr>
                     <th>No</th>
@@ -180,7 +180,7 @@
         serverSide: true,
         ajax: "{{ route ('api.spt') }}",
         columns: [
-            {"data":"spt_id"},
+            {"data":"emp_id"},
             {"data":"spt_no"},
             {"data":"purpose"},
             {"data":"status"},

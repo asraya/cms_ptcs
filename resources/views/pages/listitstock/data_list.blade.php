@@ -145,20 +145,19 @@
                 </div>
             </div>
             <!--end::Search Form-->
-            <table class="table table-bordered table-striped kt_datatable">
+            <table class="table table-bordered table-hover list">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>                 
+                    <th>Asset code</th>
+                    <!-- <th>Umur</th> -->
+                    <th>Description</th>  
+                    <th>Category</th>
+                    <th>location</th>
                     <th>Actions</th>
                 </tr>
-                </thead>
-               
+                </thead>               
             </table>
-
         </div>
-
     </div>
 
 @endsection
@@ -178,14 +177,16 @@
     <script src="{{ asset('js/pages/crud/datatables/basic/basic.js') }}" type="text/javascript"></script>
     <!-- <script src="{{ asset('js/app.js') }}" type="text/javascript"></script> -->
     <script> 
-    var table = $('.kt_datatable').DataTable({
+    var table = $('.list').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route ('api.user') }}",
+        ajax: "{{ route ('api.listitstock') }}",
         columns: [
-            {"data":"id"},
-            {"data":"name"},
-            {"data":"email"},
+            {"data":"asset_code"},
+            // {"data":"umur"},
+            {"data":"Description"},
+            {"data":"category"},
+            {"data":"asset_location"},
             {data: 'action', name: 'action', orderable: false, searchable: false},
 
         ],

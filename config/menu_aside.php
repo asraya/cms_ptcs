@@ -31,9 +31,9 @@ return [
             'icon' => 'media/svg/icons/Home/Library.svg',
             'page' => '/role',
             'visible' => 'preview',
-            'roles' => ['admin'],
-
-        ],  
+            'can' => 'read-role',
+            'role' => 'Admin'   
+             ],  
         [
             'title' => 'send mail',
             'root' => true,
@@ -44,6 +44,13 @@ return [
         // Layout
         [
             'section' => 'Layout',
+        ],
+        [
+            'title' => 'List IT Stock',
+            'root' => true,
+            'icon' => 'media/svg/icons/Home/Library.svg',
+            'page' => 'listitstock',
+            'visible' => 'preview',
         ],
         [
             'title' => 'SPT Request',
@@ -59,12 +66,29 @@ return [
             'page' => 'builder',
             'visible' => 'preview',
         ],
+        // [
+        //     'title' => 'Helpdesk Request',
+        //     'root' => true,
+        //     'icon' => 'media/svg/icons/Home/Library.svg',
+        //     'page' => '/helpdesk',
+        //     'visible' => 'preview',
+        // ],
         [
             'title' => 'Helpdesk Request',
-            'root' => true,
+            'bullet' => 'dot',
             'icon' => 'media/svg/icons/Home/Library.svg',
-            'page' => '/helpdesk',
-            'visible' => 'preview',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'IT Helpdesk',
+                    'page' => '/it_helpdesk',
+                ],
+                [
+                    'title' => 'GA Helpdesk',
+                    'page' => '/ga_helpdesk'
+                ],    
+                
+            ]
         ],
         [
             'title' => 'E learning Registration ',
@@ -79,67 +103,78 @@ return [
             'icon' => 'media/svg/icons/Home/Library.svg',
             'page' => 'builder',
             'visible' => 'preview',
-        ], [
+        ], 
+        [
             'title' => 'Document Approval Request',
             'root' => true,
             'icon' => 'media/svg/icons/Home/Library.svg',
             'page' => 'builder',
             'visible' => 'preview',
-        ], [
+        ], 
+        [
             'title' => 'Trip Request',
             'root' => true,
             'icon' => 'media/svg/icons/Home/Library.svg',
             'page' => 'builder',
             'visible' => 'preview',
-        ], [
+        ], 
+        [
             'title' => 'Car Request',
             'root' => true,
             'icon' => 'media/svg/icons/Home/Library.svg',
             'page' => 'builder',
             'visible' => 'preview',
-        ], [
+        ], 
+        [
             'title' => 'Taxi Request',
             'root' => true,
             'icon' => 'media/svg/icons/Home/Library.svg',
             'page' => 'builder',
             'visible' => 'preview',
-        ], [
+        ], 
+        [
             'title' => 'General Request',
             'root' => true,
             'icon' => 'media/svg/icons/Home/Library.svg',
             'page' => 'builder',
             'visible' => 'preview',
-        ], [
+        ], 
+        [
             'title' => 'Shipment Request',
             'root' => true,
             'icon' => 'media/svg/icons/Home/Library.svg',
             'page' => 'builder',
             'visible' => 'preview',
-        ], [
+        ], 
+        [
             'title' => 'Fingerprint Data',
             'root' => true,
             'icon' => 'media/svg/icons/Home/Library.svg',
             'page' => 'builder',
             'visible' => 'preview',
-        ], [
+        ], 
+        [
             'title' => 'Corporate Rate Hotel',
             'root' => true,
             'icon' => 'media/svg/icons/Home/Library.svg',
             'page' => 'builder',
             'visible' => 'preview',
-        ], [
+        ], 
+        [
             'title' => 'PSD Service Request',
             'root' => true,
             'icon' => 'media/svg/icons/Home/Library.svg',
             'page' => 'builder',
             'visible' => 'preview',
-        ], [
+        ], 
+        [
             'title' => 'HSE Reporting',
             'root' => true,
             'icon' => 'media/svg/icons/Home/Library.svg',
             'page' => 'builder',
             'visible' => 'preview',
-        ], [
+        ], 
+        [
             'title' => 'AI-PSG SOP',
             'root' => true,
             'icon' => 'media/svg/icons/Home/Library.svg',
@@ -155,13 +190,15 @@ return [
             'icon' => 'media/svg/icons/Home/Library.svg',
             'page' => 'builder',
             'visible' => 'preview',
-        ], [
+        ], 
+        [
             'title' => 'SIT HELPDESK',
             'root' => true,
             'icon' => 'media/svg/icons/Home/Library.svg',
             'page' => 'builder',
             'visible' => 'preview',
-        ], [
+        ], 
+        [
             'title' => 'QHSE E-NCR',
             'root' => true,
             'icon' => 'media/svg/icons/Home/Library.svg',

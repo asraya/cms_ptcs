@@ -19,10 +19,9 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function() {
    Route::get('logout', 'AuthController@logout')->name('logout');
 
-    Route::group(['middleware' => ['role:admin']], function () {
-        Route::resource('/role', 'RoleController')->except([
-            'create', 'show', 'edit', 'update'
-        ]);
+   Route::group(['middleware' => ['auth']], function() {
+    Route::resource('roles','RoleController');
+
 
         Route::resource('/users', 'UserController')->except([
             'show'
@@ -56,6 +55,56 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/home', 'HomeController@index')->name('home');
 });
 
+
+Route::get('/elearn', 'PagesController@elearn');
+
+// Route::get('/role', 'PagesController@role');
+Route::get('/profile', 'ProfileController@index')->name('profile');
+
+Route::get('/it_helpdesk')->name('api.it_helpdesk')->uses('HelpdeskRequestController@itdatatables');
+Route::get('/it_helpdesk', 'PagesController@itdatatables');
+
+
+Route::get('/listitstock', 'PagesController@listdatatables');
+
+Route::get('/spt_request', 'PagesController@spt_request');
+Route::get('/spt')->name('api.spt')->uses('SptRequestController@datatables');
+Route::get('/add_spt', 'PagesController@add_spt');
+
+// Route::get('/ktdatatables', 'PagesController@ktDatatables');
+Route::get('/user')->name('api.user')->uses('UserController@datatables');
+Route::get('/data_user', 'PagesController@data_user');
+Route::get('/add_user', 'PagesController@add_user');
+Route::get('edit/{id?}','UserController@edit');
+Route::post('update-user','UserController@update');
+
+Route::get('/icons/custom-icons', 'PagesController@customIcons');
+Route::get('/icons/fontawesome', 'PagesController@fontawesome');
+Route::get('/icons/lineawesome', 'PagesController@lineawesome');
+Route::get('/icons/socicons', 'PagesController@socicons');
+Route::get('/icons/svg', 'PagesController@svg');
+
+// // Route::get('user','UserController@index');
+
+// Route::get('user','UserController@index');
+// Route::get('user/json','UserController@json');
+// Route::get('user/json','UserController@json');
+// Route::get('add-user','UserController@create');
+// Route::post('post-user','UserController@store');
+
+// Route::get('delete-user/{id?}','UserController@delete');
+
+
+// // Quick search dummy route to display html elements in search dropdown (header search)
+Route::get('/quick-search', 'PagesController@quickSearch')->name('quick-search');
+
+// Auth::routes();
+
+
+Route::get('/sendemail', 'SendEmailController@index');
+Route::post('/sendemail/send', 'SendEmailController@send');
+
+
 // Route::get('/', 'AuthController@showFormLogin')->name('login');
 // Route::get('login', 'AuthController@showFormLogin')->name('login');
 // Route::post('login', 'AuthController@login');
@@ -73,50 +122,6 @@ Route::group(['middleware' => 'auth'], function() {
 // });
 
 // Route::get('/', 'PagesController@index');
-
-
-// // Demo routes
-Route::get('/elearn', 'PagesController@elearn');
-
-// Route::get('/role', 'PagesController@role');
-Route::get('/profile', 'ProfileController@index')->name('profile');
-
-
-Route::get('/spt_request', 'PagesController@spt_request');
-Route::get('/spt')->name('api.spt')->uses('SptRequestController@datatables');
-Route::get('/add_spt', 'PagesController@add_spt');
-
-// Route::get('/ktdatatables', 'PagesController@ktDatatables');
-Route::get('/user')->name('api.user')->uses('UserController@datatables');
-Route::get('/data_user', 'PagesController@data_user');
-Route::get('/add_user', 'PagesController@add_user');
-
-// Route::get('/icons/custom-icons', 'PagesController@customIcons');
-// Route::get('/icons/fontawesome', 'PagesController@fontawesome');
-// Route::get('/icons/lineawesome', 'PagesController@lineawesome');
-// Route::get('/icons/socicons', 'PagesController@socicons');
-// Route::get('/icons/svg', 'PagesController@svg');
-
-// // Route::get('user','UserController@index');
-
-// Route::get('user','UserController@index');
-// Route::get('user/json','UserController@json');
-// Route::get('user/json','UserController@json');
-// Route::get('add-user','UserController@create');
-// Route::post('post-user','UserController@store');
-
-// Route::get('delete-user/{id?}','UserController@delete');
-// Route::get('edit/{id?}','UserController@edit');
-// Route::post('update-user','UserController@update');
-
-// // Quick search dummy route to display html elements in search dropdown (header search)
-Route::get('/quick-search', 'PagesController@quickSearch')->name('quick-search');
-
-// Auth::routes();
-
-
-// Route::get('/sendemail', 'SendEmailController@index');
-// Route::post('/sendemail/send', 'SendEmailController@send');
 
 
 

@@ -21,8 +21,8 @@ class SptRequestController extends Controller
                 ->addColumn('action', function($data){
                        
                        $editUrl = url('edit/'.$data->id);
-                       $btn = '<a href="'.$editUrl.'" data-toggle="tooltip" data-original-title="Edit" class="edit btn btn-primary btn-sm">Edit</a>';
-                       $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteTodo">Delete</a>';
+                       $btn = '<a href="'.$editUrl.'" data-toggle="tooltip" data-original-title="Edit" class="btn-sm fa fa-bars"></a>';
+                    //    $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteTodo">Delete</a>';
     
                         return $btn;
                         
@@ -47,15 +47,15 @@ class SptRequestController extends Controller
 
     public function edit(Request $request, $id)
     {       
-        $data['user'] = User::where('id', $id)->first();
-        $user = $data['user'];
+        $data['spt'] = Spt::where('spt_id', $id)->first();
+        $spt = $data['spt'];
 
-        if(!$data['user']){
+        if(!$data['spt']){
            return redirect('/list');
         }
         $page_title = 'Edit data';
         $page_description = '--';
-        return view('pages/user/edit', compact('user', 'page_title', 'page_description'));
+        return view('pages/spt/edit', compact('spt', 'page_title', 'page_description'));
     }
 
     public function update(Request $request)

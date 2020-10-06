@@ -19,18 +19,18 @@ class PagesController extends Controller
      */
     public function sendemail()
     {
-        $page_title = 'spt_request';
-        $page_description = 'This is spt_request test page';
+        $page_title = 'Spt request';
+        // $page_description = 'This is spt_request test page';
 
-        return view('pages.sendemail', compact('page_title', 'page_description'));
+        return view('pages.sendemail', compact('page_title'));
     }
     //spt
     public function spt_request()
     {
-        $page_title = 'spt_request';
-        $page_description = 'This is spt_request test page';
+        $page_title = 'Spt request';
+        // $page_description = 'This is spt_request test page';
 
-        return view('pages.spt.spt_request', compact('page_title', 'page_description'));
+        return view('pages.spt.spt_request', compact('page_title'));
     }
     //elearn
      public function elearn()
@@ -47,13 +47,26 @@ class PagesController extends Controller
 
         return view('pages.role.role', compact('page_title', 'page_description'));
     }
-    // data user
+    public function listdatatables()
+    {
+        $page_title = 'List IT Stoct';
+
+        return view('pages.listitstock.data_list', compact('page_title'));
+    }
+
+    public function itdatatables()
+    {
+        $page_title = 'it helpdesk';
+        // $page_description = 'Corporate Management Systems';
+
+        return view('pages.helpdesk.it.it_helpdesk', compact('page_title'));
+    }
     public function data_user()
     {
         $page_title = 'User Data';
-        $page_description = 'Corporate Management Systems';
+        // $page_description = 'Corporate Management Systems';
 
-        return view('pages.user.data_user', compact('page_title', 'page_description'));
+        return view('pages.user.data_user', compact('page_title'));
     }
 
     // KTDatatables
