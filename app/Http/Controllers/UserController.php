@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Auth;
+
 use App\User;
-use DataTables;
-use Validator,Redirect,Response;
+use DB;
+use Session;
 
 class UserController extends Controller
 {
@@ -28,50 +32,124 @@ class UserController extends Controller
     
     public function index()
     {
-        return view('user/list_user');        
+        $users = User::orderBy('created_at', 'DESC')->paginate(10);
+        return view('users.index', compact('users'));
     }
-    
+
+    public function create()
+    {
+        $role = Role::orderBy('name', 'ASC')->get();
+        return view('users.create', compact('role'));
+    }
+
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|email',
+        $this->validate($request, [
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+            'role' => 'required|string|exists:roles,name'
         ]);
-        $show = User::create($validatedData);   
-        return redirect('/user')->with('success', 'User Case is successfully saved');
-    }
 
-    public function edit(Request $request, $user_id)
-    {       
-        $data['user'] = User::where('user_id', $user_id)->first();
-        $user = $data['user'];
-
-        if(!$data['user']){
-           return redirect('/list');
-        }
-        $page_title = 'Edit data';
-        $page_description = '--';
-        return view('pages/user/edit', compact('user', 'page_title', 'page_description'));
-    }
-
-    public function update(Request $request)
-    {
-        $data = request()->validate([
-        'name' => 'required',
-        'email' => 'required|email',
+        $user = User::firstOrCreate([
+            'email' => $request->email
+        ], [
+            'name' => $request->name,
+            'password' => bcrypt($request->password),
+            'status' => true
         ]);
-       
-        if(!$request->id){
-           return redirect('/list');
-        }
-        $check = user::where('id', $request->id)->update($data);
-        return Redirect::to("datauser")->withSuccess('Great! User has been updated');
+
+        $user->assignRole($request->role);
+        return redirect(route('users.index'))->with(['success' => 'User: <strong>' . $user->name . '</strong> Ditambahkan']);
     }
 
-    public function delete(Request $request, $id)
+    public function edit($id)
     {
-        $check = User::where('id', $id)->delete(); 
-        return Response::json($check);
+        $user = User::findOrFail($id);
+        return view('users.edit', compact('user'));
     }
- 
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|exists:users,email',
+            'password' => 'nullable|min:6',
+        ]);
+
+        $user = User::findOrFail($id);
+        $password = !empty($request->password) ? bcrypt($request->password):$user->password;
+        $user->update([
+            'name' => $request->name,
+            'password' => $password
+        ]);
+        return redirect(route('users.index'))->with(['success' => 'User: <strong>' . $user->name . '</strong> Diperbaharui']);
+    }
+
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->back()->with(['success' => 'User: <strong>' . $user->name . '</strong> Dihapus']);
+    }
+
+    public function roles(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $roles = Role::all()->pluck('name');
+        return view('users.roles', compact('user', 'roles'));
+    }
+    public function logout()
+    {
+        Auth::logout(); // menghapus session yang aktif
+        return redirect()->route('login');
+    }
+    public function setRole(Request $request, $id)
+    {
+        $this->validate($request, [
+            'role' => 'required'
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->syncRoles($request->role);
+        return redirect()->back()->with(['success' => 'Role Sudah Di Set']);
+    }
+
+    public function rolePermission(Request $request)
+    {
+        $role = $request->get('role');
+        $permissions = null;
+        $hasPermission = null;
+
+        $roles = Role::all()->pluck('name');
+
+        if (!empty($role)) {
+            $getRole = Role::findByName($role);
+            $hasPermission = DB::table('role_has_permissions')
+                ->select('permissions.name')
+                ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
+                ->where('role_id', $getRole->id)->get()->pluck('name')->all();
+            $permissions = Permission::all()->pluck('name');
+        }
+        return view('users.role_permission', compact('roles', 'permissions', 'hasPermission'));
+    }
+
+    public function addPermission(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|string|unique:permissions'
+        ]);
+
+        $permission = Permission::firstOrCreate([
+            'name' => $request->name
+        ]);
+        return redirect()->back();
+    }
+
+    public function setRolePermission(Request $request, $role)
+    {
+        $role = Role::findByName($role);
+        $role->syncPermissions($request->permission);
+        return redirect()->back()->with(['success' => 'Permission to Role Saved!']);
+    }
 }

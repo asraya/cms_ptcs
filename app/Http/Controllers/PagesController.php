@@ -45,7 +45,7 @@ class PagesController extends Controller
         $page_title = 'spt_request';
         $page_description = 'This is spt_request test page';
 
-        return view('pages.role.index', compact('page_title', 'page_description'));
+        return view('pages.role.role', compact('page_title', 'page_description'));
     }
     // data user
     public function data_user()

@@ -105,7 +105,7 @@
                         <div class="row align-items-center">
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="input-icon">
-                                    <input type="text" class="form-control" placeholder="Search..." id="kt_datatable_search_query"/>
+                                    <input type="text" class="form-control" placeholder="Search..." id="elearn_search_query"/>
                                     <span><i class="flaticon2-search-1 text-muted"></i></span>
                                 </div>
                             </div>
@@ -113,7 +113,7 @@
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
                                     <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
-                                    <select class="form-control" id="kt_datatable_search_status">
+                                    <select class="form-control" id="elearn_search_status">
                                         <option value="">All</option>
                                         <option value="1">Pending</option>
                                         <option value="2">Delivered</option>
@@ -127,7 +127,7 @@
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
                                     <label class="mr-3 mb-0 d-none d-md-block">Type:</label>
-                                    <select class="form-control" id="kt_datatable_search_type">
+                                    <select class="form-control" id="elearn_search_type">
                                         <option value="">All</option>
                                         <option value="1">Online</option>
                                         <option value="2">Retail</option>
@@ -146,7 +146,7 @@
             </div>
             <!--end::Search Form-->
 
-            <table class="table table-bordered table-hover kt_datatable">
+            <table class="table table-bordered table-hover elearn">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -179,13 +179,13 @@
     <script src="{{ asset('js/pages/crud/datatables/basic/basic.js') }}" type="text/javascript"></script>
     <!-- <script src="{{ asset('js/app.js') }}" type="text/javascript"></script> -->
     <script> 
-    var table = $('.kt_datatable').DataTable({
+ var table = $('.elearn').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route ('api.elearn') }}",
+        ajax: "{{ route ('api.spt') }}",
         columns: [
             {"data":"emp_id"},
-            {"data":"emp_name"},
+            {"data":"user_name"},
             {"data":"learn_register"},
             {data: 'action', name: 'action', orderable: false, searchable: false},
 
@@ -200,7 +200,7 @@
        type: "get",
        url: "{{ url('delete-user') }}"+'/'+user_id,
        success: function (data) {
-       var oTable = $('#kt_datatable').dataTable(); 
+       var oTable = $('#elearn').dataTable(); 
        oTable.fnDraw(false);
        },
        error: function (data) {

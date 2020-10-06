@@ -15,6 +15,7 @@ class SptRequestController extends Controller
     // }
     public function datatables()
     {
+        
         return datatables ( Spt::all())
         ->addIndexColumn()
                 ->addColumn('action', function($data){

@@ -12,34 +12,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('/', function() {
-//     return redirect(route('login'));
-// });
-// Auth::routes();
-// Route::group(['middleware' => 'auth'], function() {
-
-//     Route::group(['middleware' => ['role:admin']], function () {
-//         Route::resource('/role', 'RoleController')->except([
-//             'create', 'show', 'edit', 'update'
-//         ]);
-
-//         Route::resource('/users', 'UserController')->except([
-//             'show'
-//         ]);
-//         Route::get('/users/roles/{id}', 'UserController@roles')->name('users.roles');
-//         Route::put('/users/roles/{id}', 'UserController@setRole')->name('users.set_role');
-//         Route::post('/users/permission', 'UserController@addPermission')->name('users.add_permission');
-//         Route::get('/users/role-permission', 'UserController@rolePermission')->name('users.roles_permission');
-//         Route::put('/users/permission/{role}', 'UserController@setRolePermission')->name('users.setRolePermission');
-//     });
-//     Route::get('/home', 'HomeController@index')->name('home');
-
-// });
 Route::get('/', function() {
     return redirect(route('login'));
 });
 Auth::routes();
 Route::group(['middleware' => 'auth'], function() {
+   Route::get('logout', 'AuthController@logout')->name('logout');
 
     Route::group(['middleware' => ['role:admin']], function () {
         Route::resource('/role', 'RoleController')->except([
@@ -78,20 +56,40 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/home', 'HomeController@index')->name('home');
 });
 
+// Route::get('/', 'AuthController@showFormLogin')->name('login');
+// Route::get('login', 'AuthController@showFormLogin')->name('login');
+// Route::post('login', 'AuthController@login');
+// Route::get('register', 'AuthController@showFormRegister')->name('register');
+// Route::post('register', 'AuthController@register');
+ 
+// Route::group(['middleware' => 'auth'], function () {
+ 
+//     Route::get('home', 'HomeController@index')->name('home');
+//     Route::get('logout', 'AuthController@logout')->name('logout');
+ 
+   
+
+
+// });
+
 // Route::get('/', 'PagesController@index');
 
 
 // // Demo routes
-// Route::get('/elearn', 'PagesController@elearn');
+Route::get('/elearn', 'PagesController@elearn');
+
+// Route::get('/role', 'PagesController@role');
+Route::get('/profile', 'ProfileController@index')->name('profile');
 
 
-// Route::get('/spt_request', 'PagesController@spt_request');
-// Route::get('/add_spt', 'PagesController@add_spt');
+Route::get('/spt_request', 'PagesController@spt_request');
+Route::get('/spt')->name('api.spt')->uses('SptRequestController@datatables');
+Route::get('/add_spt', 'PagesController@add_spt');
 
 // Route::get('/ktdatatables', 'PagesController@ktDatatables');
-
-// Route::get('/data_user', 'PagesController@data_user');
-// Route::get('/add_user', 'PagesController@add_user');
+Route::get('/user')->name('api.user')->uses('UserController@datatables');
+Route::get('/data_user', 'PagesController@data_user');
+Route::get('/add_user', 'PagesController@add_user');
 
 // Route::get('/icons/custom-icons', 'PagesController@customIcons');
 // Route::get('/icons/fontawesome', 'PagesController@fontawesome');
@@ -112,7 +110,7 @@ Route::group(['middleware' => 'auth'], function() {
 // Route::post('update-user','UserController@update');
 
 // // Quick search dummy route to display html elements in search dropdown (header search)
-// Route::get('/quick-search', 'PagesController@quickSearch')->name('quick-search');
+Route::get('/quick-search', 'PagesController@quickSearch')->name('quick-search');
 
 // Auth::routes();
 
@@ -121,3 +119,7 @@ Route::group(['middleware' => 'auth'], function() {
 // Route::post('/sendemail/send', 'SendEmailController@send');
 
 
+
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');

@@ -5,11 +5,13 @@ return [
     'items' => [
         // Dashboard
         [
+            
             'title' => 'Dashboard',
             'root' => true,
             'icon' => 'media/svg/icons/Design/Layers.svg', // or can be 'flaticon-home' or any flaticon-*
             'page' => '/',
             'new-tab' => false,
+
         ],
 
         // Custom
@@ -27,8 +29,10 @@ return [
             'title' => 'Role Permissions',
             'root' => true,
             'icon' => 'media/svg/icons/Home/Library.svg',
-            'page' => '/index',
+            'page' => '/role',
             'visible' => 'preview',
+            'roles' => ['admin'],
+
         ],  
         [
             'title' => 'send mail',
