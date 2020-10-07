@@ -26,3 +26,7 @@ Route::get('/listitstock')->name('api.listitstock')->uses('ListItStockController
 Route::get('/it_helpdesk')->name('api.it_helpdesk')->uses('HelpdeskRequestController@itdatatables');
 
 Route::get('/elearn')->name('api.elearn')->uses('ElearnController@datatables');
+
+Route::get('/stasionary')->name('api.stasionary')->uses('GeneralRequestController@stasionarydatatables');
+
+Route::get('/souvenir')->name('api.souvenir')->uses('GeneralRequestController@souvenirdatatables');

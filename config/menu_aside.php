@@ -132,12 +132,29 @@ return [
             'page' => 'builder',
             'visible' => 'preview',
         ], 
+        // [
+        //     'title' => 'General Request',
+        //     'root' => true,
+        //     'icon' => 'media/svg/icons/Home/Library.svg',
+        //     'page' => 'builder',
+        //     'visible' => 'preview',
+        // ],
         [
             'title' => 'General Request',
-            'root' => true,
+            'bullet' => 'dot',
             'icon' => 'media/svg/icons/Home/Library.svg',
-            'page' => 'builder',
-            'visible' => 'preview',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'Stasionary',
+                    'page' => '/stasionary',
+                ],
+                [
+                    'title' => 'Souvenir',
+                    'page' => '/souvenir'
+                ],    
+                
+            ]
         ], 
         [
             'title' => 'Shipment Request',

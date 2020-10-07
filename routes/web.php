@@ -71,6 +71,10 @@ Route::get('/spt_request', 'PagesController@spt_request');
 Route::get('/spt')->name('api.spt')->uses('SptRequestController@datatables');
 Route::get('/add_spt', 'PagesController@add_spt');
 
+Route::get('/stasionary', 'PagesController@stasionarydatatables');
+Route::get('/souvenir', 'PagesController@souvenirdatatables');
+
+
 // Route::get('/ktdatatables', 'PagesController@ktDatatables');
 Route::get('/user')->name('api.user')->uses('UserController@datatables');
 Route::get('/data_user', 'PagesController@data_user');

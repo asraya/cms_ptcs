@@ -26,7 +26,7 @@ class SendEmailController extends Controller
             'message'   =>   $request->message
         );
 
-     Mail::to('asep.rayana09@gmail.com')->send(new SendMail($data));
+     Mail::to('asep.rayana@ymail.com')->send(new SendMail($data));
      return back()->with('success', 'Thanks for contacting us!');
 
     }

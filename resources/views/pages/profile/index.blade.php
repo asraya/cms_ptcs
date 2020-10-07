@@ -70,21 +70,16 @@
 					</div>				
                     
 					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label text-right">First Name</label>
+						<label class="col-xl-3 col-lg-3 col-form-label text-right">Name</label>
 						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="Nick"/>
+							<input class="form-control form-control-lg form-control-solid" type="text" value="{{ Auth::user()->name }}" readonly/>
 						</div>
 					</div>
-					<div class="form-group row">
-						<label class="col-xl-3 col-lg-3 col-form-label text-right">Last Name</label>
-						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="Bold"/>
-						</div>
-					</div>
+					
 					<div class="form-group row">
 						<label class="col-xl-3 col-lg-3 col-form-label text-right">Company Name</label>
 						<div class="col-lg-9 col-xl-6">
-							<input class="form-control form-control-lg form-control-solid" type="text" value="Loop Inc."/>
+							<input class="form-control form-control-lg form-control-solid" type="text" value="PT.Control Systems Arena Para Nusa" readonly/>
 							<span class="form-text text-muted">If you want your invoices addressed to a company. Leave blank to use your full name.</span>
 						</div>
 					</div>
@@ -99,7 +94,7 @@
 						<div class="col-lg-9 col-xl-6">
 							<div class="input-group input-group-lg input-group-solid">
 								<div class="input-group-prepend"><span class="input-group-text"><i class="la la-phone"></i></span></div>
-								<input type="text" class="form-control form-control-lg form-control-solid" value="+35278953712" placeholder="Phone" />
+								<input type="text" class="form-control form-control-lg form-control-solid" value="" placeholder="Phone" readonly/>
 							</div>
 							<span class="form-text text-muted">We'll never share your email with anyone else.</span>
 						</div>
@@ -109,7 +104,7 @@
 						<div class="col-lg-9 col-xl-6">
 							<div class="input-group input-group-lg input-group-solid">
 								<div class="input-group-prepend"><span class="input-group-text"><i class="la la-at"></i></span></div>
-								<input type="text" class="form-control form-control-lg form-control-solid" value="nick.bold@loop.com" placeholder="Email" />
+								<input type="text" class="form-control form-control-lg form-control-solid" value="{{ Auth::user()->email }}" readonly/>
 							</div>
 						</div>
 					</div>
@@ -138,28 +133,7 @@
 				</div>
 				<!--end::Content-->
 
-									<!--begin::Footer-->
-<div class="footer bg-white py-4 d-flex flex-lg-column " id="kt_footer">
-	<!--begin::Container-->
-	<div class=" container-fluid  d-flex flex-column flex-md-row align-items-center justify-content-between">
-		<!--begin::Copyright-->
-		<div class="text-dark order-2 order-md-1">
-			<span class="text-muted font-weight-bold mr-2">2020&copy;</span>
-			<a href="http://keenthemes.com/metronic" target="_blank" class="text-dark-75 text-hover-primary">Keenthemes</a>
-		</div>
-		<!--end::Copyright-->
-
-		<!--begin::Nav-->
-		<div class="nav nav-dark">
-			<a href="http://keenthemes.com/metronic" target="_blank" class="nav-link pl-0 pr-5">About</a>
-			<a href="http://keenthemes.com/metronic" target="_blank" class="nav-link pl-0 pr-5">Team</a>
-			<a href="http://keenthemes.com/metronic" target="_blank" class="nav-link pl-0 pr-0">Contact</a>
-		</div>
-		<!--end::Nav-->
-	</div>
-	<!--end::Container-->
-</div>
-<!--end::Footer-->
+								
 							</div>
 			<!--end::Wrapper-->
 		</div>
@@ -1440,308 +1414,8 @@
 </svg><!--end::Svg Icon--></span></div>
 <!--end::Scrolltop-->
 
-                            <!--begin::Sticky Toolbar-->
-<ul class="sticky-toolbar nav flex-column pl-2 pr-2 pt-3 pb-3 mt-4">
-	<!--begin::Item-->
-	<li class="nav-item mb-2" id="kt_demo_panel_toggle" data-toggle="tooltip"  title="Check out more demos" data-placement="right">
-		<a class="btn btn-sm btn-icon btn-bg-light btn-icon-success btn-hover-success" href="#">
-			<i class="flaticon2-drop"></i>
-		</a>
-	</li>
-	<!--end::Item-->
-
-	<!--begin::Item-->
-	<li class="nav-item mb-2" data-toggle="tooltip" title="Layout Builder" data-placement="left">
-        		<a class="btn btn-sm btn-icon btn-bg-light btn-icon-primary btn-hover-primary" href="https://preview.keenthemes.com/metronic/preview/demo1/builder.html" target="_blank">
-			<i class="flaticon2-gear"></i>
-		</a>
-	</li>
-	<!--end::Item-->
-
-	<!--begin::Item-->
-	<li class="nav-item mb-2" data-toggle="tooltip" title="Documentation" data-placement="left">
-		<a class="btn btn-sm btn-icon btn-bg-light btn-icon-warning btn-hover-warning" href="https://keenthemes.com/metronic/?page=docs" target="_blank">
-			<i class="flaticon2-telegram-logo"></i>
-		</a>
-	</li>
-	<!--end::Item-->
-
-			<!--begin::Item-->
-		<li class="nav-item" id="kt_sticky_toolbar_chat_toggler" data-toggle="tooltip" title="Chat Example" data-placement="left">
-			<a class="btn btn-sm btn-icon btn-bg-light btn-icon-danger btn-hover-danger" href="#" data-toggle="modal" data-target="#kt_chat_modal">
-				<i class="flaticon2-chat-1"></i>
-			</a>
-		</li>
-		<!--end::Item-->
-	</ul>
-<!--end::Sticky Toolbar-->
-                <!--begin::Demo Panel-->
-<div id="kt_demo_panel" class="offcanvas offcanvas-right p-10">
-	<!--begin::Header-->
-	<div class="offcanvas-header d-flex align-items-center justify-content-between pb-7">
-		<h4 class="font-weight-bold m-0">
-			Select A Demo
-		</h4>
-		<a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_demo_panel_close">
-			<i class="ki ki-close icon-xs text-muted"></i>
-		</a>
-	</div>
-	<!--end::Header-->
-
-	<!--begin::Content-->
-	<div class="offcanvas-content">
-		<!--begin::Wrapper-->
-		<div class="offcanvas-wrapper mb-5 scroll-pull">
-	    	<h5 class="font-weight-bold mb-4 text-center">Demo 1</h5><div class="overlay rounded-lg mb-8 offcanvas-demo offcanvas-demo-active">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/assets" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="https://keenthemes.com/metronic/preview/demo1/index.html" class="btn font-weight-bold btn-primary btn-shadow " target="_blank">Default</a>
-							<a href="https://keenthemes.com/metronic/preview/demo1/rtl/index.html" class="btn btn-light btn-shadow" target="_blank">RTL Version</a>
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 2</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="https://keenthemes.com/metronic/preview/demo2/index.html" class="btn font-weight-bold btn-primary btn-shadow " target="_blank">Default</a>
-							<a href="https://keenthemes.com/metronic/preview/demo2/rtl/index.html" class="btn btn-light btn-shadow" target="_blank">RTL Version</a>
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 3</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo2.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="https://keenthemes.com/metronic/preview/demo3/index.html" class="btn font-weight-bold btn-primary btn-shadow " target="_blank">Default</a>
-							<a href="https://keenthemes.com/metronic/preview/demo3/rtl/index.html" class="btn btn-light btn-shadow" target="_blank">RTL Version</a>
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 4</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="https://keenthemes.com/metronic/preview/demo4/index.html" class="btn font-weight-bold btn-primary btn-shadow " target="_blank">Default</a>
-							<a href="https://keenthemes.com/metronic/preview/demo4/rtl/index.html" class="btn btn-light btn-shadow" target="_blank">RTL Version</a>
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 5</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="https://keenthemes.com/metronic/preview/demo5/index.html" class="btn font-weight-bold btn-primary btn-shadow " target="_blank">Default</a>
-							<a href="https://keenthemes.com/metronic/preview/demo5/rtl/index.html" class="btn btn-light btn-shadow" target="_blank">RTL Version</a>
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 6</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="https://keenthemes.com/metronic/preview/demo6/index.html" class="btn font-weight-bold btn-primary btn-shadow " target="_blank">Default</a>
-							<a href="https://keenthemes.com/metronic/preview/demo6/rtl/index.html" class="btn btn-light btn-shadow" target="_blank">RTL Version</a>
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 7</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="https://keenthemes.com/metronic/preview/demo7/index.html" class="btn font-weight-bold btn-primary btn-shadow " target="_blank">Default</a>
-							<a href="https://keenthemes.com/metronic/preview/demo7/rtl/index.html" class="btn btn-light btn-shadow" target="_blank">RTL Version</a>
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 8</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="https://keenthemes.com/metronic/preview/demo8/index.html" class="btn font-weight-bold btn-primary btn-shadow " target="_blank">Default</a>
-							<a href="https://keenthemes.com/metronic/preview/demo8/rtl/index.html" class="btn btn-light btn-shadow" target="_blank">RTL Version</a>
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 9</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="https://keenthemes.com/metronic/preview/demo9/index.html" class="btn font-weight-bold btn-primary btn-shadow " target="_blank">Default</a>
-							<a href="https://keenthemes.com/metronic/preview/demo9/rtl/index.html" class="btn btn-light btn-shadow" target="_blank">RTL Version</a>
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 10</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="https://keenthemes.com/metronic/preview/demo10/index.html" class="btn font-weight-bold btn-primary btn-shadow " target="_blank">Default</a>
-							<a href="https://keenthemes.com/metronic/preview/demo10/rtl/index.html" class="btn btn-light btn-shadow" target="_blank">RTL Version</a>
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 11</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="https://keenthemes.com/metronic/preview/demo11/index.html" class="btn font-weight-bold btn-primary btn-shadow " target="_blank">Default</a>
-							<a href="https://keenthemes.com/metronic/preview/demo11/rtl/index.html" class="btn btn-light btn-shadow" target="_blank">RTL Version</a>
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 12</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="https://keenthemes.com/metronic/preview/demo12/index.html" class="btn font-weight-bold btn-primary btn-shadow " target="_blank">Default</a>
-							<a href="https://keenthemes.com/metronic/preview/demo12/rtl/index.html" class="btn btn-light btn-shadow" target="_blank">RTL Version</a>
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 13</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="https://keenthemes.com/metronic/preview/demo13/index.html" class="btn font-weight-bold btn-primary btn-shadow " target="_blank">Default</a>
-							<a href="https://keenthemes.com/metronic/preview/demo13/rtl/index.html" class="btn btn-light btn-shadow" target="_blank">RTL Version</a>
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 14</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo2.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="#" class="btn font-weight-bold btn-primary btn-shadow disabled" >Coming soon</a>
-
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 15</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="#" class="btn font-weight-bold btn-primary btn-shadow disabled" >Coming soon</a>
-
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 16</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="#" class="btn font-weight-bold btn-primary btn-shadow disabled" >Coming soon</a>
-
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 17</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="#" class="btn font-weight-bold btn-primary btn-shadow disabled" >Coming soon</a>
-
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 18</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="#" class="btn font-weight-bold btn-primary btn-shadow disabled" >Coming soon</a>
-
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 19</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="#" class="btn font-weight-bold btn-primary btn-shadow disabled" >Coming soon</a>
-
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 20</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="#" class="btn font-weight-bold btn-primary btn-shadow disabled" >Coming soon</a>
-
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 21</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo2.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="#" class="btn font-weight-bold btn-primary btn-shadow disabled" >Coming soon</a>
-
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 22</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="#" class="btn font-weight-bold btn-primary btn-shadow disabled" >Coming soon</a>
-
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 23</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="#" class="btn font-weight-bold btn-primary btn-shadow disabled" >Coming soon</a>
-
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 24</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="#" class="btn font-weight-bold btn-primary btn-shadow disabled" >Coming soon</a>
-
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 25</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="#" class="btn font-weight-bold btn-primary btn-shadow disabled" >Coming soon</a>
-
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 26</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="#" class="btn font-weight-bold btn-primary btn-shadow disabled" >Coming soon</a>
-
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 27</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="#" class="btn font-weight-bold btn-primary btn-shadow disabled" >Coming soon</a>
-
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 28</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="#" class="btn font-weight-bold btn-primary btn-shadow disabled" >Coming soon</a>
-
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 29</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="#" class="btn font-weight-bold btn-primary btn-shadow disabled" >Coming soon</a>
-
-			            </div>
-					</div><h5 class="font-weight-bold mb-4 text-center">Demo 30</h5><div class="overlay rounded-lg mb-8 offcanvas-demo ">
-						<div class="overlay-wrapper rounded-lg">
-                        <img src="assets//../../../../../../doc/assets/img/demos/demo1.png" alt="" class="w-100"/>
-						</div>
-						<div class="overlay-layer">
-							<a href="#" class="btn font-weight-bold btn-primary btn-shadow disabled" >Coming soon</a>
-
-			            </div>
-					</div>		</div>
-		<!--end::Wrapper-->
-
-		<!--begin::Purchase-->
-		<div class="offcanvas-footer">
-			<a href="https://1.envato.market/EA4JP" target="_blank" class="btn btn-block btn-danger btn-shadow font-weight-bolder text-uppercase">
-				Buy Metronic Now!
-			</a>
-		</div>
-		<!--end::Purchase-->
+                          
+                
 	</div>
 	<!--end::Content-->
 </div>

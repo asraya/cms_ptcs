@@ -14,8 +14,7 @@ class SptRequestController extends Controller
     //     return view('pages/spt/spt_request');
     // }
     public function datatables()
-    {
-        
+    {        
         return datatables ( Spt::all())
         ->addIndexColumn()
                 ->addColumn('action', function($data){
@@ -49,7 +48,6 @@ class SptRequestController extends Controller
     {       
         $data['spt'] = Spt::where('spt_id', $id)->first();
         $spt = $data['spt'];
-
         if(!$data['spt']){
            return redirect('/list');
         }

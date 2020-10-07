@@ -10,7 +10,6 @@ class PagesController extends Controller
     {
         $page_title = 'Dashboard';
         $page_description = 'Some description for the page';
-
         return view('pages.dashboard', compact('page_title', 'page_description'));
     }
 
@@ -21,36 +20,44 @@ class PagesController extends Controller
     {
         $page_title = 'Spt request';
         // $page_description = 'This is spt_request test page';
-
         return view('pages.sendemail', compact('page_title'));
     }
     //spt
     public function spt_request()
     {
-        $page_title = 'Spt request';
+        $page_title = 'Liat Spt request';
         // $page_description = 'This is spt_request test page';
-
         return view('pages.spt.spt_request', compact('page_title'));
+    }
+   // stasionarydatatables
+    public function stasionarydatatables()
+    {
+        $page_title = 'Liat stasionary';
+        return view('pages.generalrequest.stasionary.stasionary', compact('page_title'));
+
+    }
+    public function souvenirdatatables()
+    {
+        $page_title = 'Liat souvenir';
+        return view('pages.generalrequest.souvenir.souvenir', compact('page_title'));
+
     }
     //elearn
      public function elearn()
     {
-        $page_title = 'elearn';
+        $page_title = 'Liat elearn';
         $page_description = 'This is elearn test page';
-
         return view('pages.elearn.data_learn', compact('page_title', 'page_description'));
     }
     public function role()
     {
         $page_title = 'spt_request';
         $page_description = 'This is spt_request test page';
-
         return view('pages.role.role', compact('page_title', 'page_description'));
     }
     public function listdatatables()
     {
         $page_title = 'List IT Stoct';
-
         return view('pages.listitstock.data_list', compact('page_title'));
     }
 
@@ -58,14 +65,12 @@ class PagesController extends Controller
     {
         $page_title = 'it helpdesk';
         // $page_description = 'Corporate Management Systems';
-
         return view('pages.helpdesk.it.it_helpdesk', compact('page_title'));
     }
     public function data_user()
     {
         $page_title = 'User Data';
         // $page_description = 'Corporate Management Systems';
-
         return view('pages.user.data_user', compact('page_title'));
     }
 
@@ -74,7 +79,6 @@ class PagesController extends Controller
     {
         $page_title = 'KTDatatables';
         $page_description = 'This is KTdatatables test page';
-
         return view('pages.ktdatatables', compact('page_title', 'page_description'));
     }
 
@@ -83,14 +87,12 @@ class PagesController extends Controller
     {
         $page_title = 'add user';
         $page_description = 'This is add_user test page';
-
         return view('pages.user.add_user', compact('page_title', 'page_description'));
     }
     public function add_spt()
     {
         $page_title = 'add user';
         $page_description = 'This is add_user test page';
-
         return view('pages.spt.add_spt', compact('page_title', 'page_description'));
     }
     // custom-icons
@@ -98,7 +100,6 @@ class PagesController extends Controller
     {
         $page_title = 'customIcons';
         $page_description = 'This is customIcons test page';
-
         return view('pages.icons.custom-icons', compact('page_title', 'page_description'));
     }
 
@@ -107,7 +108,6 @@ class PagesController extends Controller
     {
         $page_title = 'flaticon';
         $page_description = 'This is flaticon test page';
-
         return view('pages.icons.flaticon', compact('page_title', 'page_description'));
     }
 
@@ -116,7 +116,6 @@ class PagesController extends Controller
     {
         $page_title = 'fontawesome';
         $page_description = 'This is fontawesome test page';
-
         return view('pages.icons.fontawesome', compact('page_title', 'page_description'));
     }
 
@@ -125,7 +124,6 @@ class PagesController extends Controller
     {
         $page_title = 'lineawesome';
         $page_description = 'This is lineawesome test page';
-
         return view('pages.icons.lineawesome', compact('page_title', 'page_description'));
     }
 
@@ -134,7 +132,6 @@ class PagesController extends Controller
     {
         $page_title = 'socicons';
         $page_description = 'This is socicons test page';
-
         return view('pages.icons.socicons', compact('page_title', 'page_description'));
     }
 
@@ -143,7 +140,6 @@ class PagesController extends Controller
     {
         $page_title = 'svg';
         $page_description = 'This is svg test page';
-
         return view('pages.icons.svg', compact('page_title', 'page_description'));
     }
 
