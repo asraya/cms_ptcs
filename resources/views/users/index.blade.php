@@ -79,7 +79,7 @@
                 </div>
                 <!--end::Dropdown-->
                 <!--begin::Button-->
-                <a href="/add_user" class="btn btn-primary font-weight-bolder">
+                <a href="{{ route('users.create') }}" class="btn btn-primary font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -145,67 +145,41 @@
                 </div>
             </div>
             <!--end::Search Form-->
-            <table class="table table-bordered table-striped kt_datatable">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>                 
-                    <th>Actions</th>
-                </tr>
-                </thead>
-               
-            </table>
+            <table class="table table-bordered table-striped">
+ <tr>
+   <th>No</th>
+   <th>Name</th>
+   <th>Email</th>
+   <th>Roles</th>
+   <th width="280px">Action</th>
+ </tr>
+ @foreach ($data as $key => $user)
+  <tr>
+    <td>{{ ++$i }}</td>
+    <td>{{ $user->name }}</td>
+    <td>{{ $user->email }}</td>
+    <td>
+      @if(!empty($user->getRoleNames()))
+        @foreach($user->getRoleNames() as $v)
+           <label class="badge badge-success">{{ $v }}</label>
+        @endforeach
+      @endif
+    </td>
+    <td>
+       <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
+       <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
+        {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
+            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+        {!! Form::close() !!}
+    </td>
+  </tr>
+ @endforeach
+</table>
+</div>
 
-        </div>
-
-    </div>
-
-@endsection
-
-{{-- Styles Section --}}
-@section('styles')
-    <link href="{{ asset('plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css"/>
-@endsection
+</div>
 
 
-{{-- Scripts Section --}}
-@section('scripts')
-    {{-- vendors --}}
-    <script src="{{ asset('plugins/custom/datatables/datatables.bundle.js') }}" type="text/javascript"></script>
+{!! $data->render() !!}
 
-    {{-- page scripts --}}
-    <script src="{{ asset('js/pages/crud/datatables/basic/basic.js') }}" type="text/javascript"></script>
-    <!-- <script src="{{ asset('js/app.js') }}" type="text/javascript"></script> -->
-    <script> 
-    var table = $('.kt_datatable').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route ('api.user') }}",
-        columns: [
-            {"data":"id"},
-            {"data":"name"},
-            {"data":"email"},
-            {data: 'action', name: 'action', orderable: false, searchable: false},
-        ],
-    });
-        $('body').on('click', '.deleteTodo', function () {
- 
- var user_id = $(this).data("id");
- if(confirm("Are You sure want to delete !"))
- {
-   $.ajax({
-       type: "get",
-       url: "{{ url('delete-user') }}"+'/'+user_id,
-       success: function (data) {
-       var oTable = $('#kt_datatable').dataTable(); 
-       oTable.fnDraw(false);
-       },
-       error: function (data) {
-           console.log('Error:', data);
-       }
-   });
-}
-    });
-</script>
 @endsection

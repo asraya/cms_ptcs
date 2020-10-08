@@ -49,11 +49,11 @@ class PagesController extends Controller
         $page_description = 'This is elearn test page';
         return view('pages.elearn.data_learn', compact('page_title', 'page_description'));
     }
-    public function role()
+    public function roles()
     {
-        $page_title = 'spt_request';
+        $page_title = 'roles';
         $page_description = 'This is spt_request test page';
-        return view('pages.role.role', compact('page_title', 'page_description'));
+        return view('pages.roles.index', compact('page_title', 'page_description'));
     }
     public function listdatatables()
     {

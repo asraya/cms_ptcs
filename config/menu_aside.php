@@ -22,18 +22,16 @@ return [
             'title' => 'User & Phone Line Information',
             'root' => true,
             'icon' => 'media/svg/icons/Home/Library.svg',
-            'page' => '/data_user',
+            'page' => '/users',
             'visible' => 'preview',
         ],
         [
             'title' => 'Role Permissions',
             'root' => true,
             'icon' => 'media/svg/icons/Home/Library.svg',
-            'page' => '/role',
+            'page' => '/roles',
             'visible' => 'preview',
-            'can' => 'read-role',
-            'role' => 'Admin'   
-             ],  
+        ],  
         [
             'title' => 'send mail',
             'root' => true,
