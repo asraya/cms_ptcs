@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Alfa6661\AutoNumber\AutoNumberTrait;
+use Spatie\Permission\Traits\HasRoles;
 
 class Spt extends Model
 {
@@ -15,6 +16,10 @@ class Spt extends Model
      *
      * @return array
      */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     public function getAutoNumberOptions()
     {
         return [
@@ -25,5 +30,10 @@ class Spt extends Model
                 'length' => 5
             ]
         ];
+    }
+    public function data()
+    {
+        return $this->belongsTo('App\UserModel');
+    
     }
 }

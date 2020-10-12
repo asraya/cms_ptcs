@@ -6,16 +6,18 @@ use Illuminate\Http\Request;
 use App\Spt;
 use DataTables;
 use Validator,Redirect,Response;
+use App\User;
+use auth;
 
 class SptRequestController extends Controller
 {
-    // public function index()
-    // {
-    //     return view('pages/spt/spt_request');
-    // }
+
     public function datatables()
     {        
-        return datatables ( Spt::all())
+        $user = Auth::user()->email;
+
+        return Datatables::of(Spt::where('email',$user))
+
         ->addIndexColumn()
                 ->addColumn('action', function($data){
                        
@@ -29,11 +31,7 @@ class SptRequestController extends Controller
      ->rawColumns(['action'])
      ->make(true);
     }
-    // public function add_spt()
-    // {
-    //     return view('pages/spt/spt_request');
-
-    // }   
+    
     public function store(Request $request)
     {
         $validatedData = $request->validate([

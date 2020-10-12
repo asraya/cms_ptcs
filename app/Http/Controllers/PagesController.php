@@ -86,14 +86,14 @@ class PagesController extends Controller
     public function add_user()
     {
         $page_title = 'add user';
-        $page_description = 'This is add_user test page';
-        return view('pages.user.add_user', compact('page_title', 'page_description'));
+        // $page_description = 'This is add_user test page';
+        return view('pages.user.add_user', compact('page_title'));
     }
     public function add_spt()
     {
-        $page_title = 'add user';
-        $page_description = 'This is add_user test page';
-        return view('pages.spt.add_spt', compact('page_title', 'page_description'));
+        $page_title = 'add spt';
+        // $page_description = 'This is add_user test page';
+        return view('pages.spt.add_spt', compact('page_title'));
     }
     // custom-icons
     public function customIcons()
