@@ -156,7 +156,7 @@
  @foreach ($data as $key => $user)
   <tr>
     <td>{{ ++$i }}</td>
-    <td>{{ $user->name }}</td>
+    <td>{{ $user->user_name }}</td>
     <td>{{ $user->email }}</td>
     <td>
       @if(!empty($user->getRoleNames()))
@@ -166,9 +166,9 @@
       @endif
     </td>
     <td>
-       <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
-       <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
-        {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
+       <a class="btn btn-info" href="{{ route('users.show',$user->user_id) }}">Show</a>
+       <a class="btn btn-primary" href="{{ route('users.edit',$user->user_id) }}">Edit</a>
+        {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->user_id],'style'=>'display:inline']) !!}
             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
         {!! Form::close() !!}
     </td>

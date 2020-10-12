@@ -16,8 +16,11 @@ use Session;
 
 class GeneralRequestController extends Controller
 {
-    public function stasionarydatatables()
+    public function general_requestdatatables()
     {
+
+
+        
         return datatables ( GeneralRequest::all())
         ->addIndexColumn()
                 ->addColumn('action', function($data){
@@ -32,20 +35,5 @@ class GeneralRequestController extends Controller
      ->rawColumns(['action'])
      ->make(true);
     }
-    public function souvenirdatatables()
-    {
-        return datatables ( Souvenir::all())
-        ->addIndexColumn()
-                ->addColumn('action', function($data){
-                       
-                       $editUrl = url('edit/'.$data->id);
-                       $btn = '<a href="'.$editUrl.'" data-toggle="tooltip" data-original-title="Edit" class="btn-sm fa fa-bars"></a>';
-                    //    $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->user_id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteTodo">Delete</a>';
     
-                        return $btn;
-                        
-                })
-     ->rawColumns(['action'])
-     ->make(true);
-    }
 }

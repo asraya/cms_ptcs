@@ -27,7 +27,7 @@
 @endif
 
 
-{!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!}
+{!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->user_id]]) !!}
 <div class="row">
 <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
@@ -35,18 +35,18 @@
             {!! Form::text('emp_id', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
         </div>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
+    <!-- <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Name:</strong>
-            {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
+            {!! Form::text('user_name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
         </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
+    </div> -->
+    <!-- <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Email:</strong>
-            {!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control')) !!}
+            {!! Form::text('user_email', null, array('placeholder' => 'Email','class' => 'form-control')) !!}
         </div>
-    </div>
+    </div> -->
     <!-- <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Password:</strong>

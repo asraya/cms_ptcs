@@ -17,8 +17,8 @@ class UserController extends Controller
     
     public function index(Request $request)
     {
-        $s = User::orderBy('id','DESC')->paginate(5);
-        return view('users.index',compact('s'))
+        $data = User::orderBy('user_id','DESC')->paginate(5);
+        return view('users.index',compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
@@ -44,7 +44,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'user_name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
             'roles' => 'required',
@@ -72,9 +72,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($user_id)
     {
-        $user = User::find($id);
+        $user = User::find($user_id);
         return view('users.show',compact('user'));
     }
 
@@ -85,9 +85,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($user_id)
     {
-        $user = User::find($id);
+        $user = User::find($user_id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
 
@@ -103,11 +103,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $user_id)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$id,
+            // 'name' => 'required',
+            // 'email' => 'required|email|unique:users,email,'.$user_id,
             'password' => 'same:confirm-password',
             'roles' => 'required',
             'emp_id' => 'required'
@@ -122,9 +122,9 @@ class UserController extends Controller
         // }
 
 
-        $user = User::find($id);
+        $user = User::find($user_id);
         $user->update($input);
-        DB::table('model_has_roles')->where('model_id',$id)->delete();
+        DB::table('model_has_roles')->where('model_id',$user_id)->delete();
 
 
         $user->assignRole($request->input('roles'));

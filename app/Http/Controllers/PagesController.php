@@ -29,16 +29,29 @@ class PagesController extends Controller
         // $page_description = 'This is spt_request test page';
         return view('pages.spt.spt_request', compact('page_title'));
     }
-   // stasionarydatatables
-    public function stasionarydatatables()
-    {
-        $page_title = 'Liat stasionary';
-        return view('pages.generalrequest.stasionary.stasionary', compact('page_title'));
+   // stationary
+   
+   public function general_requestdatatables()
+   {
+       $page_title = 'general request';
+       return view('pages.generalrequest.general_request', compact('page_title'));
 
+   }
+    public function stationarydatatables()
+    {
+        $page_title = 'stationary';
+        return view('pages.generalrequest.stationary.stationary', compact('page_title'));
+
+    }
+    public function add_stationary()
+    {
+        $page_title = 'add stationary';
+        // $page_description = 'This is add_user test page';
+        return view('pages.generalrequest.stationary.create', compact('page_title'));
     }
     public function souvenirdatatables()
     {
-        $page_title = 'Liat souvenir';
+        $page_title = 'souvenir';
         return view('pages.generalrequest.souvenir.souvenir', compact('page_title'));
 
     }

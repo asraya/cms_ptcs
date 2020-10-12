@@ -13,6 +13,14 @@ use App\User;
  
 class AuthController extends Controller
 {
+    public function username()
+    {
+        return 'user_name';
+    }
+    public function getAuthPassword()
+    {
+        return $this->password; // default return $this->password;
+    }
     public function showFormLogin()
     {
         if (Auth::check()) { // true sekalian session field di users nanti bisa dipanggil via Auth
@@ -25,15 +33,17 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $rules = [
-            'email'                 => 'required|email',
+            'user_name'                 => 'required|string',
             'password'              => 'required|string'
         ];
  
         $messages = [
             'email.required'        => 'Email wajib diisi',
             'email.email'           => 'Email tidak valid',
-            'password.required'     => 'Password wajib diisi',
-            'password.string'       => 'Password harus berupa string'
+            'password.required'     => 'password wajib diisi',
+            'password.string'       => 'password harus berupa string',
+            'user_name.required'     => 'user_name wajib diisi',
+            'user_name.string'       => 'user_name harus berupa string'
         ];
  
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -43,7 +53,7 @@ class AuthController extends Controller
         }
  
         $data = [
-            'email'     => $request->input('email'),
+            'user_name'     => $request->input('user_name'),
             'password'  => $request->input('password'),
         ];
  
@@ -82,8 +92,8 @@ class AuthController extends Controller
             'email.required'        => 'Email wajib diisi',
             'email.email'           => 'Email tidak valid',
             'email.unique'          => 'Email sudah terdaftar',
-            'password.required'     => 'Password wajib diisi',
-            'password.confirmed'    => 'Password tidak sama dengan konfirmasi password'
+            'password.required'     => 'password wajib diisi',
+            'password.confirmed'    => 'password tidak sama dengan konfirmasi password'
         ];
  
         $validator = Validator::make($request->all(), $rules, $messages);

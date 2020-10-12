@@ -9,7 +9,7 @@
 @else
     <div class="d-flex flex-column flex-center py-10 bgi-size-cover bgi-no-repeat rounded-top" style="background-image: url('{{ asset('media/misc/bg-1.jpg') }}')">
         <h4 class="text-white font-weight-bold">
-        {{ Auth::user()->name }}
+        {{ Auth::user()->user_name }}
             </h4>
         <!-- <a class="btn btn-light-primary font-weight-bolder btn-sm" href="{{ route('logout') }}">Logout</a> -->
     </div>

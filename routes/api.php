@@ -27,6 +27,8 @@ Route::get('/it_helpdesk')->name('api.it_helpdesk')->uses('HelpdeskRequestContro
 
 Route::get('/elearn')->name('api.elearn')->uses('ElearnController@datatables');
 
-Route::get('/stasionary')->name('api.stasionary')->uses('GeneralRequestController@stasionarydatatables');
+Route::get('/stationary')->name('api.stationary')->uses('StationaryController@stationarydatatables');
 
-Route::get('/souvenir')->name('api.souvenir')->uses('GeneralRequestController@souvenirdatatables');
+Route::get('/souvenir')->name('api.souvenir')->uses('SouveneryController@souvenirdatatables');
+
+Route::get('/general_request')->name('api.general_request')->uses('GeneralRequestController@general_requestdatatables');

@@ -11,11 +11,10 @@
 
                     <!-- <div class="text-muted pt-2 font-size-sm">Datatable initialized from HTML table</div> -->
                 </h3>
-                 <!--begin::Button-->
-                 <a href="/stationary" class="btn btn-primary font-weight-bolder">
-                  <span class="svg-icon svg-icon-md">
-                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
-                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                <a href="/souvenir" class="btn btn-primary font-weight-bolder">
+                <span class="svg-icon svg-icon-md">
+                    <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                             <rect x="0" y="0" width="24" height="24"/>
                             <circle fill="#000000" cx="9" cy="15" r="6"/>
@@ -23,7 +22,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>List Stasionary</a>
+                </span>List Souvenir</a>
                 &nbsp;
                  <!--begin::Button-->
                  <a href="/general_request" class="btn btn-warning font-weight-bolder">
@@ -107,7 +106,7 @@
                 </div>
                 <!--end::Dropdown-->
                 <!--begin::Button-->
-                <a href="/add_user" class="btn btn-primary font-weight-bolder">
+                <a href="/add_stationary" class="btn btn-primary font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -173,11 +172,10 @@
             </div>
             <!--end::Search Form-->
 
-            <table class="table table-bordered table-hover souvenir">
+            <table class="table table-bordered table-hover dtstasionary">
                 <thead>
                 <tr>
-                    <th>Item Code</th>
-                    <th>Item Name</th>                    
+                    <th>Item Name</th>
                     <th>Stock</th>
                     <th>Price</th>
                     <th>Status</th>
@@ -208,16 +206,15 @@
     <script src="{{ asset('js/pages/crud/datatables/basic/basic.js') }}" type="text/javascript"></script>
     <!-- <script src="{{ asset('js/app.js') }}" type="text/javascript"></script> -->
     <script> 
-    var table = $('.souvenir').DataTable({
+    var table = $('.dtstasionary').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route ('api.souvenir') }}",
+        ajax: "{{ route ('api.stationary') }}",
         columns: [
-            {"data":"id_item"},
-            {"data":"name_merc"},
+            {"data":"name_stat"},
             {"data":"stock_item"},
-            {"data":"price_merc"},
-            {"data":"status_merc"},
+            {"data":"price_stat"},
+            {"data":"status_stat"},
             {data: 'action', name: 'action', orderable: false, searchable: false},
 
         ],

@@ -130,30 +130,30 @@ return [
             'page' => 'builder',
             'visible' => 'preview',
         ], 
-        // [
-        //     'title' => 'General Request',
-        //     'root' => true,
-        //     'icon' => 'media/svg/icons/Home/Library.svg',
-        //     'page' => 'builder',
-        //     'visible' => 'preview',
-        // ],
         [
             'title' => 'General Request',
-            'bullet' => 'dot',
-            'icon' => 'media/svg/icons/Home/Library.svg',
             'root' => true,
-            'submenu' => [
-                [
-                    'title' => 'Stasionary',
-                    'page' => '/stasionary',
-                ],
-                [
-                    'title' => 'Souvenir',
-                    'page' => '/souvenir'
-                ],    
+            'icon' => 'media/svg/icons/Home/Library.svg',
+            'page' => 'general_request',
+            'visible' => 'preview',
+        ],
+        // [
+        //     'title' => 'General Request',
+        //     'bullet' => 'dot',
+        //     'icon' => 'media/svg/icons/Home/Library.svg',
+        //     'root' => true,
+        //     'submenu' => [
+        //         [
+        //             'title' => 'Stationary',
+        //             'page' => '/stationary',
+        //         ],
+        //         [
+        //             'title' => 'Souvenir',
+        //             'page' => '/souvenir'
+        //         ],    
                 
-            ]
-        ], 
+        //     ]
+        // ], 
         [
             'title' => 'Shipment Request',
             'root' => true,

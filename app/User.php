@@ -13,6 +13,7 @@ class User extends Authenticatable
         use HasRoles;
 
     // protected $table = 'tbl_users';
+    protected $primaryKey = 'user_id';
 
     /**
      * The attributes that are mass assignable.
@@ -22,7 +23,7 @@ class User extends Authenticatable
   
     
     protected $fillable = [
-        'name', 'email', 'password', 'emp_id'
+        'name', 'email', 'password', 'emp_id', 'user_email', 'user_name'
     ];
 
     /**
@@ -42,9 +43,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+  
+
     public function data()
     {
         return $this->belongsTo('App\UserModel');
     
     }
+    public function tbl_users()
+    {
+        return $this->hasMany('App\tbl_users');
+    }
+  
 }

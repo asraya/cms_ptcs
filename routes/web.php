@@ -38,7 +38,12 @@ Route::get('/spt_request', 'PagesController@spt_request');
 Route::get('/spt')->name('api.spt')->uses('SptRequestController@datatables');
 Route::get('/add_spt', 'PagesController@add_spt');
 
-Route::get('/stasionary', 'PagesController@stasionarydatatables');
+//general req - stationary - souvenir
+Route::get('/stationary', 'PagesController@stationarydatatables');
+Route::get('/add_stationary', 'PagesController@add_stationary');
+
+Route::get('/general_request', 'PagesController@general_requestdatatables');
+
 Route::get('/souvenir', 'PagesController@souvenirdatatables');
 
 

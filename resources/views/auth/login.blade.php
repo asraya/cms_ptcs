@@ -86,7 +86,7 @@
                         </div>
                     @endif                  
                     <div class="form-group">
-                        <input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8" type="text" placeholder="Email" name="email" autocomplete="off"/>
+                        <input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8" type="text" placeholder="Username" name="user_name" autocomplete="off"/>
 
                     </div>
                     <div class="form-group">

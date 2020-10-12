@@ -14,9 +14,8 @@ class SptRequestController extends Controller
 
     public function datatables()
     {        
-        $user = Auth::user()->email;
 
-        return Datatables::of(Spt::where('email',$user))
+        return datatables ( Spt::all())
 
         ->addIndexColumn()
                 ->addColumn('action', function($data){
