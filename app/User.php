@@ -12,7 +12,8 @@ class User extends Authenticatable
     use Notifiable;
         use HasRoles;
 
-    // protected $table = 'tbl_users';
+                            //ini table users bawaan laravel untuk login
+
     protected $primaryKey = 'user_id';
 
     /**

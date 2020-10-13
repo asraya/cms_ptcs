@@ -31,6 +31,8 @@ Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::get('/it_helpdesk')->name('api.it_helpdesk')->uses('HelpdeskRequestController@itdatatables');
 Route::get('/it_helpdesk', 'PagesController@itdatatables');
 
+Route::get('/ga_helpdesk')->name('api.ga_helpdesk')->uses('HelpdeskRequestController@itdatatables');
+Route::get('/ga_helpdesk', 'PagesController@gadatatables');
 
 Route::get('/listitstock', 'PagesController@listdatatables');
 
@@ -43,8 +45,10 @@ Route::get('/stationary', 'PagesController@stationarydatatables');
 Route::get('/add_stationary', 'PagesController@add_stationary');
 
 Route::get('/general_request', 'PagesController@general_requestdatatables');
+Route::get('/add_genreq', 'GeneralRequestController@create');
 
 Route::get('/souvenir', 'PagesController@souvenirdatatables');
+
 
 
 // Route::get('/ktdatatables', 'PagesController@ktDatatables');

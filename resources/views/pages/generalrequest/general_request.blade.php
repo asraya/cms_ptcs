@@ -105,7 +105,7 @@
                 </div>
                 <!--end::Dropdown-->
                 <!--begin::Button-->
-                <a href="/add_stationary" class="btn btn-primary font-weight-bolder">
+                <a href="/add_genreq" class="btn btn-primary font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -178,7 +178,6 @@
                     <th>Request Form</th>
                     <!-- <th>Type Request</th> -->
                     <th>Date</th>
-                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -211,14 +210,13 @@
         serverSide: true,
         ajax: "{{ route ('api.general_request') }}",
         columns: [
-            {"data":"gen_ticket"},
-            {"data":"user_name"},
-            // {"data":"#"},
-            {"data":"gen_date_req"},
-            {"data":"gen_status"},
-            {data: 'action', name: 'action', orderable: false, searchable: false},
+                {data: 'gen_ticket', name: 'tran_general.gen_ticket'},
+                {data: 'employee_name', name: 'employee_name'},
+                {data: 'gen_date_req', name: 'tran_general.gen_date_req'},
+                {data: 'action', name: 'action', orderable: false, searchable: false}
 
-        ],
+            ],
+        
     });
         $('body').on('click', '.deleteTodo', function () {
  

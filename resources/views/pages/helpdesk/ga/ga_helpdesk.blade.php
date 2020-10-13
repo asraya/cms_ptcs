@@ -7,9 +7,21 @@
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
-                <h3 class="card-label">HTML Table
+            <h3 class="card-label">Corporate Management Systems
                     <!-- <div class="text-muted pt-2 font-size-sm">Datatable initialized from HTML table</div> -->
                 </h3>
+                <a href="/it_helpdesk" class="btn btn-danger font-weight-bolder">
+                <span class="svg-icon svg-icon-md">
+                    <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <rect x="0" y="0" width="24" height="24"/>
+                            <circle fill="#000000" cx="9" cy="15" r="6"/>
+                            <path d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z" fill="#000000" opacity="0.3"/>
+                        </g>
+                    </svg>
+                    <!--end::Svg Icon-->
+                </span>GA Helpdesk</a>
             </div>
             <div class="card-toolbar">
                 <!--begin::Dropdown-->
@@ -145,12 +157,16 @@
             </div>
             <!--end::Search Form-->
 
-            <table class="table table-bordered table-hover kt_datatable">
+            <table class="table table-bordered table-hover gahelpdesk">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>                 
+                    <th>Ticket</th>
+                    <th>Problem</th>
+                    <th>File</th>  
+                    <th>Request</th>                 
+                    <th>Request From</th>                 
+                    <th>Solve</th>                 
+                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -178,14 +194,102 @@
     <script src="{{ asset('js/pages/crud/datatables/basic/basic.js') }}" type="text/javascript"></script>
     <!-- <script src="{{ asset('js/app.js') }}" type="text/javascript"></script> -->
     <script> 
-    var table = $('.kt_datatable').DataTable({
+    var table = $('.gahelpdesk').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route ('api.user') }}",
+        ajax: "{{ route ('api.ga_helpdesk') }}",
         columns: [
-            {"data":"emp_id"},
-            {"data":"user_name"},
-            {"data":"user_email"},
+            {"data":"help_ticket"},
+            // {"data":"help_type"},
+            {data:  'help_type',name: 'tran_gahelpdesk.help_type', render: function ( data, type, row ) {
+                var text = "";
+                var label = "";
+                if (data == 1){
+                text = "CAR, PARKING AND FIXTURES";
+                label = "success";
+                } else 
+                if (data == 2){
+                text = "ELECTRICITY";
+                label = "success";
+                }
+                if (data == 3){
+                text = "ELECTRONICS";
+                label = "success";
+                }
+                if (data == 4){
+                text = "FURNITURE AND FIXTURES";
+                label = "success";
+                }
+                if (data == 5){
+                text = "AIR CONDITIONER";
+                label = "success";
+                }
+                if (data == 6){
+                text = "WORKSPACE FIT OUT";
+                label = "success";
+                }
+                if (data == 7){
+                text = "SAFETY";
+                label = "success";
+                }
+                if (data == 8){
+                text = "SANITATION";
+                label = "success";
+                }
+                if (data == 9){
+                text = "TELEPHONE LINE AND GSM";
+                label = "success";
+                }
+                if (data == 10){
+                text = "TOOLKITS AND MACHINERY";
+                label = "success";
+                }
+                if (data == 11){
+                text = "OTHER";
+                label = "success";
+                }
+                return "<span class='badge badge-" + label + "'>"+ text + "</span>";
+                }},
+            
+            // {"data":"help_file"},
+            {data:  'help_file',name: 'tran_gahelpdesk.help_file', render: function ( data, type, row ) {
+                var text = "";
+                var label = "";
+                if (data == 1){
+                text = "Check";
+                label = "warning";
+                } else 
+                if (data == 0){
+                text = "X";
+                label = "warning";
+                }              
+                return "<span class='badge badge-" + label + "'>"+ text + "</span>";
+                }},
+            {"data":"help_reqdate"},
+            {data: 'employee_name', name: 'employee_name'},
+            {"data":"help_solvedate"},
+            // {"data":"help_status"},
+            {data:  'help_status',name: 'tran_gahelpdesk.help_status', render: function ( data, type, row ) {
+                var text = "";
+                var label = "";
+                if (data == 0){
+                text = "Waiting";
+                label = "warning";
+                } else 
+                if (data == 1){
+                text = "On Process";
+                label = "warning";
+                }
+                if (data == 3){
+                text = "Solving";
+                label = "warning";
+                }
+                if (data == 4){
+                text = "Closing";
+                label = "warning";
+                }
+                return "<span class='badge badge-" + label + "'>"+ text + "</span>";
+                }},
             {data: 'action', name: 'action', orderable: false, searchable: false},
 
         ],

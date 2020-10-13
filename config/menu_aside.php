@@ -64,30 +64,30 @@ return [
             'page' => 'builder',
             'visible' => 'preview',
         ],
-        // [
-        //     'title' => 'Helpdesk Request',
-        //     'root' => true,
-        //     'icon' => 'media/svg/icons/Home/Library.svg',
-        //     'page' => '/helpdesk',
-        //     'visible' => 'preview',
-        // ],
         [
             'title' => 'Helpdesk Request',
-            'bullet' => 'dot',
-            'icon' => 'media/svg/icons/Home/Library.svg',
             'root' => true,
-            'submenu' => [
-                [
-                    'title' => 'IT Helpdesk',
-                    'page' => '/it_helpdesk',
-                ],
-                [
-                    'title' => 'GA Helpdesk',
-                    'page' => '/ga_helpdesk'
-                ],    
-                
-            ]
+            'icon' => 'media/svg/icons/Home/Library.svg',
+            'page' => '/it_helpdesk',
+            'visible' => 'preview',
         ],
+        // [
+        //     'title' => 'Helpdesk Request',
+        //     'bullet' => 'dot',
+        //     'icon' => 'media/svg/icons/Home/Library.svg',
+        //     'root' => true,
+        //     'submenu' => [
+        //         [
+        //             'title' => 'IT Helpdesk',
+        //             'page' => '/it_helpdesk',
+        //         ],
+        //         [
+        //             'title' => 'GA Helpdesk',
+        //             'page' => '/ga_helpdesk'
+        //         ],    
+                
+        //     ]
+        // ],
         [
             'title' => 'E learning Registration ',
             'root' => true,

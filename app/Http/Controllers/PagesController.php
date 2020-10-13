@@ -80,6 +80,12 @@ class PagesController extends Controller
         // $page_description = 'Corporate Management Systems';
         return view('pages.helpdesk.it.it_helpdesk', compact('page_title'));
     }
+    public function gadatatables()
+    {
+        $page_title = 'ga helpdesk';
+        // $page_description = 'Corporate Management Systems';
+        return view('pages.helpdesk.ga.ga_helpdesk', compact('page_title'));
+    }
     public function data_user()
     {
         $page_title = 'User Data';

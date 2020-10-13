@@ -11,25 +11,48 @@ use auth;
 
 class SptRequestController extends Controller
 {
-
+  
     public function datatables()
     {        
-
-        return datatables ( Spt::all())
-
-        ->addIndexColumn()
-                ->addColumn('action', function($data){
-                       
-                       $editUrl = url('edit/'.$data->id);
-                       $btn = '<a href="'.$editUrl.'" data-toggle="tooltip" data-original-title="Edit" class="btn-sm fa fa-bars"></a>';
-                    //    $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteTodo">Delete</a>';
-    
-                        return $btn;
-                        
+        $data = Spt::query()
+        ->select([
+          
+            'tran_spt.emp_id as emp_id',
+            'tran_spt.spt_no as spt_no',
+            'tran_spt.purpose as purpose',
+            'tran_spt.status as status',
+            'tbl_users.user_firstname',
+            'tbl_users.user_lastname'
+        ])
+        ->leftJoin('tbl_users', 'tran_spt.emp_id', '=', 'tbl_users.emp_id');   
+        
+        return Datatables::of($data)
+                ->addColumn('employee_name', function($data){
+                    return $data->user_firstname . " " . $data->user_lastname;
                 })
-     ->rawColumns(['action'])
-     ->make(true);
-    }
+                ->addIndexColumn()                
+                            ->addColumn('action', function($data){
+                                $btn='';
+
+                                if ($data->status=="needApproval") {
+                                    # code...
+                                    $btn.= 'Waiting for confirmation';
+                    
+                                } elseif ($data->status=="Rejected") {
+                                    
+                                    $btn.= 'Your Item Rejected';
+                    
+                                } else {
+                                   $editUrl = url('edit/'.$data->id);
+                                   $btn = '<a href="'.$editUrl.'" data-toggle="tooltip" data-original-title="Edit" class="btn-sm fa fa-bars"></a>';
+                                //    $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->user_id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteTodo">Delete</a>';
+                                }
+                                    return $btn;
+                                    
+                            })
+                 ->rawColumns(['action'])
+                 ->make(true);
+        }    
     
     public function store(Request $request)
     {

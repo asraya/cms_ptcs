@@ -149,9 +149,11 @@
                 <tr>
                     <th>No</th>
                     <th>SPT NO</th>
+                    <th>Name Employee</th>
                     <th>Purpose</th>
                     <th>Status</th>   
                     <th>Actions</th>
+                    
                 </tr>
                 </thead>               
             </table>
@@ -179,14 +181,29 @@
         processing: true,
         serverSide: true,
         ajax: "{{ route ('api.spt') }}",
-        columns: [
-            {"data":"emp_id"},
-            {"data":"spt_no"},
-            {"data":"purpose"},
-            {"data":"status"},
-            {data: 'action', name: 'action', orderable: false, searchable: false},
 
-        ],
+        columns: [
+                {data: 'emp_id', name: 'tran_spt.emp_id'},
+                {data: 'spt_no', name: 'tran_spt.spt_no'},
+                {data: 'employee_name', name: 'employee_name'},
+                {data: 'purpose', name: 'tran_spt.purpose'},
+                // {data: 'status', name: 'tran_spt.status'},
+                 {data:  'status',name: 'tran_spt.status', render: function ( data, type, row ) {
+                var text = "";
+                var label = "";
+                if (data == 2){
+                text = "Approved";
+                label = "success";
+                } else 
+                if (data == 3){
+                text = "Rejected";
+                label = "warning";
+                }
+                return "<span class='badge badge-" + label + "'>"+ text + "</span>";
+                }},
+                {data: 'action', name: 'action', orderable: false, searchable: false}
+
+            ],
     });
         $('body').on('click', '.deleteTodo', function () {
  
