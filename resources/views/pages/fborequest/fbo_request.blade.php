@@ -7,9 +7,10 @@
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
-                <h3 class="card-label">HTML Table
+                <h3 class="card-label">Corporate Management Systems
+
                     <!-- <div class="text-muted pt-2 font-size-sm">Datatable initialized from HTML table</div> -->
-                </h3>
+                </h3>              
             </div>
             <div class="card-toolbar">
                 <!--begin::Dropdown-->
@@ -79,7 +80,7 @@
                 </div>
                 <!--end::Dropdown-->
                 <!--begin::Button-->
-                <a href="/add_elearn" class="btn btn-primary font-weight-bolder">
+                <a href="/add_genreq" class="btn btn-primary font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -90,8 +91,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>Create</a>
-                
+                </span>New Record</a>
                 <!--end::Button-->
             </div>
         </div>
@@ -105,7 +105,7 @@
                         <div class="row align-items-center">
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="input-icon">
-                                    <input type="text" class="form-control" placeholder="Search..." id="elearn_search_query"/>
+                                    <input type="text" class="form-control" placeholder="Search..." id="kt_datatable_search_query"/>
                                     <span><i class="flaticon2-search-1 text-muted"></i></span>
                                 </div>
                             </div>
@@ -113,7 +113,7 @@
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
                                     <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
-                                    <select class="form-control" id="elearn_search_status">
+                                    <select class="form-control" id="kt_datatable_search_status">
                                         <option value="">All</option>
                                         <option value="1">Pending</option>
                                         <option value="2">Delivered</option>
@@ -127,7 +127,7 @@
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
                                     <label class="mr-3 mb-0 d-none d-md-block">Type:</label>
-                                    <select class="form-control" id="elearn_search_type">
+                                    <select class="form-control" id="kt_datatable_search_type">
                                         <option value="">All</option>
                                         <option value="1">Online</option>
                                         <option value="2">Retail</option>
@@ -146,16 +146,15 @@
             </div>
             <!--end::Search Form-->
 
-            <table class="table table-bordered table-hover elearn">
+            <table class="table table-bordered table-hover dtgenreq">
                 <thead>
                 <tr>
                     <th>Ticket</th>
-                    <th>Employee Name</th>
-                    <th>Courses Name</th>                 
-                    <th>Date</th>
-                    <th>Status</th>
+                    <th>Request Form</th>
+                    <th>SO Number</th>
+                    <th>PR Number</th>
+                    <th>status</th>
                     <th>Actions</th>
-
                 </tr>
                 </thead>
                
@@ -182,42 +181,62 @@
     <script src="{{ asset('js/pages/crud/datatables/basic/basic.js') }}" type="text/javascript"></script>
     <!-- <script src="{{ asset('js/app.js') }}" type="text/javascript"></script> -->
     <script> 
- var table = $('.elearn').DataTable({
+    var table = $('.dtgenreq').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route ('api.elearn') }}",
+        ajax: "{{ route ('api.fbo') }}",
         columns: [
-   
-
-            {data: 'learn_ticket', name: 'learn_ticket'},
-            {data: 'employee_name', name: 'employee_name'},
-            {data: 'employee_name', name: 'employee_name'},
-            {data: 'learn_register', name: 'learn_register'},
-            // {data: 'learn_approval', name: 'learn_approval'},
-            {data:  'learn_approval',name: 'tran_elearning.learn_approval', render: function ( data, type, row ) {
+                {data: 'fbo_ticket', name: 'tran_fbo.fbo_ticket'},
+                {data: 'employee_name', name: 'employee_name'},
+                {data: 'so_number', name: 'tran_fbo.so_number'},
+                {data: 'pr_number', name: 'tran_fbo.pr_number'},
+                // {data: 'fbo_status', name: 'tran_fbo.fbo_status'},
+                {data:  'fbo_status',name: 'tran_fbo.fbo_status', render: function ( data, type, row ) {
                 var text = "";
                 var label = "";
                 if (data == 1){
-                text = "APPROVE";
+                text = "MTO REVIEW";
                 label = "success";
                 } else 
                 if (data == 2){
-                text = "REJECT";
-                label = "danger";
+                text = "FBO REQUEST";
+                label = "success";
                 }
                 if (data == 3){
-                text = "REG PROCESS";
+                text = "REJECT REVIEW";
                 label = "success";
                 }
                 if (data == 4){
-                text = "COMPLETED";
+                text = "PM APPROVAL";
                 label = "success";
-                }               
+                }
+                if (data == 5){
+                text = "PROCURMENT";
+                label = "success";
+                }   
+                if (data == 6){
+                text = "FBO REJECTED";
+                label = "success";
+                }   
+                if (data == 7){
+                text = "FBO PROCESS";
+                label = "success";
+                }   
+                if (data == 8){
+                text = "FBO RELEASE";
+                label = "success";
+                }   
+                if (data == 9){
+                text = "PO PROCESS";
+                label = "success";
+                }              
                 return "<span class='badge badge-" + label + "'>"+ text + "</span>";
                 }},
-            {data: 'action', name: 'action', orderable: false, searchable: false},
 
-        ],
+                {data: 'action', name: 'action', orderable: false, searchable: false}
+
+            ],
+        
     });
         $('body').on('click', '.deleteTodo', function () {
  
@@ -228,7 +247,7 @@
        type: "get",
        url: "{{ url('delete-user') }}"+'/'+user_id,
        success: function (data) {
-       var oTable = $('#elearn').dataTable(); 
+       var oTable = $('#kt_datatable').dataTable(); 
        oTable.fnDraw(false);
        },
        error: function (data) {

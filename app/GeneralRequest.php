@@ -14,7 +14,7 @@ class GeneralRequest extends Model
         return [
             'code' => [
                 'format' => 'SO.?', // Format kode yang akan digunakan.
-                'length' => 5 // Jumlah digit yang akan digunakan sebagai nomor urut
+                'length' => 10 // Jumlah digit yang akan digunakan sebagai nomor urut
             ]
         ];
     }

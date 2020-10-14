@@ -3,23 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Elearn;
+use App\FboRequest;
 use DataTables;
 use Validator,Redirect,Response;
 
-class ElearnController extends Controller
-{
-    public function datatables()
+class FboRequestController extends Controller
+
     {
-        $data = Elearn::query()
+        public function fbodatatables()
+        {
+        $data = FboRequest::query()
         ->select([
-            'tran_elearning.learn_ticket as learn_ticket',
-            'tran_elearning.learn_approval as learn_approval',
-            'tran_elearning.learn_register as learn_register',
+            'tran_fbo.fbo_ticket as fbo_ticket',
+            'tran_fbo.so_number as so_number',
+            'tran_fbo.pr_number as pr_number',
+            'tran_fbo.fbo_status as fbo_status',
             'tbl_users.user_firstname',
             'tbl_users.user_lastname'
         ])
-        ->leftJoin('tbl_users', 'tran_elearning.emp_id', '=', 'tbl_users.emp_id');   
+        ->leftJoin('tbl_users', 'tran_fbo.emp_id', '=', 'tbl_users.emp_id');   
         
         return Datatables::of($data)
         ->addColumn('employee_name', function($data){

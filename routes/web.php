@@ -44,10 +44,19 @@ Route::get('/add_spt', 'PagesController@add_spt');
 Route::get('/stationary', 'PagesController@stationarydatatables');
 Route::get('/add_stationary', 'PagesController@add_stationary');
 
+Route::post('/add_genreq/increasecart/{id}', 'GeneralRequestController@increasecart');
+Route::post('/add_genreq/decreasecart/{id}', 'GeneralRequestController@decreasecart');
+Route::get('/add_genreq', 'GeneralRequestController@index');
+Route::post('/add_genreq/addstationary/{id}', 'GeneralRequestController@addStationaryCart');
+
+
+
 Route::get('/general_request', 'PagesController@general_requestdatatables');
-Route::get('/add_genreq', 'GeneralRequestController@create');
+// Route::get('/add_genreq', 'GeneralRequestController@create');
 
 Route::get('/souvenir', 'PagesController@souvenirdatatables');
+
+Route::get('/fbo', 'PagesController@fbodatatables');
 
 
 

@@ -61,14 +61,14 @@ return [
             'title' => 'FBO Request',
             'root' => true,
             'icon' => 'media/svg/icons/Home/Library.svg',
-            'page' => 'builder',
+            'page' => 'fbo',
             'visible' => 'preview',
         ],
         [
             'title' => 'Helpdesk Request',
             'root' => true,
             'icon' => 'media/svg/icons/Home/Library.svg',
-            'page' => '/it_helpdesk',
+            'page' => 'it_helpdesk',
             'visible' => 'preview',
         ],
         // [

@@ -73,7 +73,11 @@ class PagesController extends Controller
         $page_title = 'List IT Stoct';
         return view('pages.listitstock.data_list', compact('page_title'));
     }
-
+    public function fbodatatables()
+    {
+        $page_title = 'Fbo Request';
+        return view('pages.fborequest.fbo_request', compact('page_title'));
+    }
     public function itdatatables()
     {
         $page_title = 'it helpdesk';
