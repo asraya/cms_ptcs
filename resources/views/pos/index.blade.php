@@ -8,10 +8,10 @@
         <div class="col-md-8">
             <div class="card" style="min-height:85vh">
                 <div class="card-header bg-white">
-                    <form action="{{ url('/add_genreq') }}" method="get">
+                    <form action="{{ url('/transcation') }}" method="get">
                         <div class="row">
                             <div class="col">
-                                <h4 class="font-weight-bold">stationarys</h4>
+                                <h4 class="font-weight-bold">Products</h4>
                             </div>
                             <div class="col text-right">
                                 <select name="" id="" class="form-control from-control-sm" style="font-size: 12px">
@@ -22,37 +22,27 @@
                             </div>
                             <div class="col"><input type="text" name="search"
                                     class="form-control form-control-sm col-sm-12 float-right"
-                                    placeholder="Search stationary..." onblur="this.form.submit()"></div>
+                                    placeholder="Search Product..." onblur="this.form.submit()"></div>
                             <div class="col-sm-3"><button type="submit"
-                                    class="btn btn-primary btn-sm float-right btn-block">Cari stationary</button></div>
+                                    class="btn btn-primary btn-sm float-right btn-block">Cari Product</button></div>
                         </div>
                     </form>
                 </div>
                 <div class="card-body">
-                <div class="form-group">
-                <label for="name" class="col-sm-2 control-label">List</label>
-                <select class="form-control form-control-solid form-control-lg" name="stationary" id="stationary" data-parsley-required="true">
-                 @foreach ($stationary as $st) 
-                    {
-                 <option value="{{ $st }}">{{ $st }}</option>
-                    }
-          @endforeach
-        </select>
-            </div>
                     <div class="row">
-                        @foreach ($stationarys as $stationary)
+                        @foreach ($products as $product)
                         <div style="width: 16.66%;border:1px solid rgb(243, 243, 243)" class="mb-4">
-                            <div class="stationaryCard">
+                            <div class="productCard">
                                 <div class="view overlay">
-                                    <form action="{{url('/transcation/addstationary', $stationary->id_item)}}" method="POST">
+                                    <form action="{{url('/transcation/addproduct', $product->id_item)}}" method="POST">
                                         @csrf
-                                        @if($stationary->qty == 0)
-                                        <img class="card-img-top gambar" src="{{ $stationary->image }}"
+                                        @if($product->stock_item == 0)
+                                        <img class="card-img-top gambar" src="{{ $product->image }}"
                                             alt="Card image cap">
                                         <button class="btn btn-primary btn-sm cart-btn disabled"><i
                                                 class="fas fa-cart-plus"></i></button>
                                         @else
-                                        <img class="card-img-top gambar" src="{{ $stationary->image }}"
+                                        <img class="card-img-top gambar" src="{{ $product->image }}"
                                             alt="Card image cap" style="cursor: pointer"
                                             onclick="this.closest('form').submit();return false;">
                                         <button type="submit" class="btn btn-primary btn-sm cart-btn"><i
@@ -63,8 +53,8 @@
                                 <div class="card-body">
                                     <label class="card-text text-center font-weight-bold"
                                         style="text-transform: capitalize;">
-                                        {{ Str::words($stationary->price,4) }} ({{$stationary->qty}}) </label>
-                                    <p class="card-text text-center">Rp. {{ number_format($stationary->price,2,',','.') }}
+                                        {{ Str::words($product->name_stat,4) }} ({{$product->stock_item}}) </label>
+                                    <p class="card-text text-center">Rp. {{ number_format($product->price_stat,2,',','.') }}
                                     </p>
                                 </div>
                             </div>
@@ -72,7 +62,7 @@
                         @endforeach
                     </div>
                 </div>
-                <div>{{ $stationarys->links() }}</div>
+                <div>{{ $products->links() }}</div>
             </div>
         </div>
         <div class="col-sm-4">
@@ -97,8 +87,8 @@
                             <thead>
                                 <tr>
                                     <th width="10%">No</th>
-                                    <th width="30%">Nama stationary</th>
-                                    <th width="30%">Qty</th>
+                                    <th width="30%">Nama Product</th>
+                                    <th width="30%">stock_item</th>
                                     <th width="30%" class="text-right">Sub Total</th>
                                 </tr>
                             </thead>
@@ -109,14 +99,14 @@
                                 @forelse($cart_data as $index=>$item)
                                 <tr>
                                     <td>
-                                        <form action="{{url('/transcation/increasecart',$item['id_item'])}}"
+                                        <form action="{{url('/transcation/removeproduct',$item['id_item'])}}"
                                             method="POST">
                                             @csrf
                                             {{$no++}} <br><a onclick="this.closest('form').submit();return false;"><i
                                                     class="fas fa-trash" style="color: rgb(134, 134, 134)"></i></a>
                                         </form>
                                     </td>
-                                    <td>{{Str::words($item['name'],3)}} <br>Rp.
+                                    <td>{{Str::words($item['name_stat'],3)}} <br>Rp.
                                         {{ number_format($item['pricesingle'],2,',','.') }}
                                     </td>
                                     <td class="font-weight-bold">
@@ -127,7 +117,7 @@
                                                 style="display: inline;padding:0.4rem 0.6rem!important"><i
                                                     class="fas fa-minus"></i></button>
                                         </form>
-                                        <a style="display: inline">{{$item['qty']}}</a>
+                                        <a style="display: inline">{{$item['stock_item']}}</a>
                                         <form action="{{url('/transcation/increasecart', $item['id_item'])}}"
                                             method="POST" style='display:inline;'>
                                             @csrf
@@ -136,7 +126,7 @@
                                                     class="fas fa-plus"></i></button>
                                         </form>
                                     </td>
-                                    <td class="text-right">Rp. {{ number_format($item['price'],2,',','.') }}</td>
+                                    <td class="text-right">Rp. {{ number_format($item['price_stat'],2,',','.') }}</td>
                                 </tr>
                                 @empty
                                 <tr>
@@ -255,7 +245,7 @@
     @if(Session::has('error'))
     <script>
         toastr.error(
-            'Telah mencapai jumlah maximum stationary | Silahkan tambah stock stationary terlebih dahulu untuk menambahkan'
+            'Telah mencapai jumlah maximum Product | Silahkan tambah stock Product terlebih dahulu untuk menambahkan'
         )
 
     </script>
@@ -264,7 +254,7 @@
     @if(Session::has('errorTransaksi'))
     <script>
         toastr.error(
-            'Transaksi tidak valid | perhatikan jumlah pembayaran | cek jumlah stationary'
+            'Transaksi tidak valid | perhatikan jumlah pembayaran | cek jumlah product'
         )
 
     </script>
@@ -377,12 +367,12 @@
 
         }
 
-        .stationaryCard {
+        .productCard {
             cursor: pointer;
 
         }
 
-        .stationaryCard:hover {
+        .productCard:hover {
             border: solid 1px rgb(172, 172, 172);
 
         }

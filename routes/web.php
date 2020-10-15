@@ -44,10 +44,10 @@ Route::get('/add_spt', 'PagesController@add_spt');
 Route::get('/stationary', 'PagesController@stationarydatatables');
 Route::get('/add_stationary', 'PagesController@add_stationary');
 
-Route::post('/add_genreq/increasecart/{id}', 'GeneralRequestController@increasecart');
-Route::post('/add_genreq/decreasecart/{id}', 'GeneralRequestController@decreasecart');
-Route::get('/add_genreq', 'GeneralRequestController@index');
-Route::post('/add_genreq/addstationary/{id}', 'GeneralRequestController@addStationaryCart');
+Route::post('/add_genreq/increasecart/{id}', 'TransactionController@increasecart');
+Route::post('/add_genreq/decreasecart/{id}', 'TransactionController@decreasecart');
+Route::get('/add_genreq', 'TransactionController@index');
+Route::post('/add_genreq/addstationary/{id}', 'TransactionController@addStationaryCart');
 
 
 
@@ -118,4 +118,15 @@ Route::post('/sendemail/send', 'SendEmailController@send');
 // Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('/products','ProductController');
+//sorry kalau ada typo penggunaan bahasa inggris krn saya orang indonesia yang mencoba belajar b.inggris
+Route::get('/transcation', 'TransactionController@index');
+Route::post('/transcation/addproduct/{id_item}', 'TransactionController@addProductCart');
+Route::post('/transcation/removeproduct/{id}', 'TransactionController@removeProductCart');
+Route::post('/transcation/clear', 'TransactionController@clear');
+Route::post('/transcation/increasecart/{id}', 'TransactionController@increasecart');
+Route::post('/transcation/decreasecart/{id}', 'TransactionController@decreasecart');
+Route::post('/transcation/bayar','TransactionController@bayar');
+Route::get('/transcation/history','TransactionController@history');
+Route::get('/transcation/laporan/{id}','TransactionController@laporan');
 });

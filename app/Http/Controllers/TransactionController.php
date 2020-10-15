@@ -1,32 +1,30 @@
 <?php
 
 namespace App\Http\Controllers;
-
+//© 2020 Copyright: Tahu Coding
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
-use Illuminate\Support\Facades\Auth;
-use DataTables;
-use Validator,Redirect,Response;
-use App\GeneralRequest;
-use App\Souvenir;
+use App\Product;
+use App\HistoryProduct;
+use App\ProductTranscation;
+//sorry kalau ada typo dalam penamaan dalam bahasa inggris 
+use App\Transcation;
 use App\Stationary;
-use App\User;
-use App\Tbl_users;
-use Darryldecode\Cart\CartCondition;
+use Auth;
 use DB;
-use Session;
+use Darryldecode\Cart\CartCondition;
+
+//import dulu packagenya biar bs dipake
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 
-class GeneralRequestController extends Controller
+
+class TransactionController extends Controller
 {
     public function index(){    
              
-        //Stationary
-        $stationarys = Stationary::when(request('search'), function($query){
+        //product
+        $products = Product::when(request('search'), function($query){
                         return $query->where('name_stat','like','%'.request('search').'%');
                     })
-                    // ->orderBy('created_at','desc')
                     ->paginate(12);
 
 
@@ -38,7 +36,7 @@ class GeneralRequestController extends Controller
         }
 
         $condition = new \Darryldecode\Cart\CartCondition(array(
-                'name' => 'pajak',
+                'name_stat' => 'pajak',
                 'type' => 'tax', //tipenya apa
                 'target' => 'total', //target kondisi ini apply ke mana (total, subtotal)
                 'value' => $tax, //contoh -12% or -10 or +10 etc
@@ -55,16 +53,15 @@ class GeneralRequestController extends Controller
         else{
             foreach($items as $row) {
                 $cart[] = [
-                    'id_item' => $row->id_item,
-                    'name' => $row->name,
-                    'qty' => $row->quantity,
-                    'pricesingle' => $row->price,
-                    'price' => $row->price,
-                    // 'created_at' => $row->attributes['created_at'],
+                    'id_item' => $row->id,
+                    'name_stat' => $row->name_stat,
+                    'stock_item' => $row->quantity,
+                    'pricesingle' => $row->price_stat,
+                    'price_stat' => $row->getPriceSum(),
                 ];           
             }
             
-            $cart_data = collect($cart)->sortBy('created_at');
+            $cart_data = collect($cart);
 
         }
         
@@ -74,80 +71,31 @@ class GeneralRequestController extends Controller
 
         $new_condition = \Cart::session(Auth()->id())->getCondition('pajak');
         $pajak = $new_condition->getCalculatedValue($sub_total); 
-        $stationary = DB::table('para_stationary')->pluck("name_stat","id_item");
 
         $data_total = [
             'sub_total' => $sub_total,
             'total' => $total,
             'tax' => $pajak
         ];
-        return view('pages.generalrequest.create', compact('stationary', 'stationarys','cart_data','data_total'));
-        // return view('pages.generalrequest.create',compact('stationary'));
+
+        //kembangin biar no reload make ajax
+        //saran bagi yg mau kembangin bisa pake jquery atau .js native untuk manggil ajax jangan lupa product, cart item dan total dipisah
+        //btw saya lg mager bikin beginian.. jadi sayas serahkan sama kalian ya (yang penting konsep dan fungsi aplikasi dah kelar 100%)
+
+        //kembangin jadi SPA make react.js atau vue.js (tapi bagusnya backend sama frontend dipisah | backend cuma sebagai penyedia token sama restfull api aja)
+        //kalau make SPA kayaknya agak sulit deh krn ini package default nyimpan cartnya disession, tapi kalau gak salah didokumentasinya
+        //bilang kalau ini package bisa store datanya di database 
+        return view('pos.index', compact('products','cart_data','data_total'));
     }
-    //tanpajoin
-    // public function general_requestdatatables()
-    // {        
-    //     return datatables ( GeneralRequest::all())
-    //     ->addIndexColumn()
-    //             ->addColumn('action', function($data){
-                       
-    //                    $editUrl = url('edit/'.$data->id);
-    //                    $btn = '<a href="'.$editUrl.'" data-toggle="tooltip" data-original-title="Edit" class="btn-sm fa fa-bars"></a>';
-    //                 //    $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->user_id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteTodo">Delete</a>';
-    
-    //                     return $btn;
-                        
-    //             })
-    //  ->rawColumns(['action'])
-    //  ->make(true);
-    // }
-        public function general_requestdatatables(){
-        $data = GeneralRequest::query()
-                ->select([
-                    'tran_general.gen_id as gen_id',
-                    'tran_general.gen_ticket as gen_ticket',
-                    'tran_general.gen_date_req as gen_date_req',
-                    'tbl_users.user_firstname',
-                    'tbl_users.user_lastname'
-                ])
-                ->leftJoin('tbl_users', 'tran_general.emp_id', '=', 'tbl_users.emp_id');   
-                
-                return Datatables::of($data)
-                ->addColumn('employee_name', function($data){
-                    return $data->user_firstname . " " . $data->user_lastname;
-                })
-                
-                ->addIndexColumn()                
-                            ->addColumn('action', function($data){
-                                   
-                                   $editUrl = url('edit/'.$data->id);
-                                   $btn = '<a href="'.$editUrl.'" data-toggle="tooltip" data-original-title="Edit" class="btn-sm fa fa-bars"></a>';
-                                //    $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->user_id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteTodo">Delete</a>';
-                
-                                    return $btn;
-                                    
-                            })
-                 ->rawColumns(['action'])
-                 ->make(true);
-        }    
-    //     public function create()
-    // {
-    //     $stationary = DB::table('para_stationary')->pluck("name_stat","id_item");
-    //     return view('pages.generalrequest.create',compact('stationary'));
-    // }
-    // public function create()
-    // {
-    //   $stationary = DB::table('para_stationary')->pluck("name_stat","id_item");
-    //   return view('pages.generalrequest.create',compact('stationary'));
-    // }
-    public function addStationaryCart($id){
-        $stationary = Stationary::find($id);      
-                
+
+    public function addProductCart($id){
+        $product = Product::find($id);      
+          
         $cart = \Cart::session(Auth()->id())->getContent();        
-        $cek_itemId = $cart->whereIn('id', $id);  
+        $cek_itemId = $cart->whereIn('id_item', $id);  
       
         if($cek_itemId->isNotEmpty()){
-            if($stationary->qty == $cek_itemId[$id]->quantity){
+            if($product->stock_item == $cek_itemId[$id]->quantity){
                 return redirect()->back()->with('error','jumlah item kurang');
             }else{
                 \Cart::session(Auth()->id())->update($id, array(
@@ -155,13 +103,13 @@ class GeneralRequestController extends Controller
                 ));
             }            
         }else{
+            // dd($cart);
              \Cart::session(Auth()->id())->add(array(
-            'id' => $id,
-            'name' => $stationary['name'],
-            'price' => $stationary['price'],
+            'id_item' => $id,
+            'name_stat' => $product->name_stat,
+            'price_stat' => $product->price_stat,
             'quantity' => 1, 
             'attributes' => array(
-                'created_at' => date('Y-m-d H:i:s')
             )          
         ));
         
@@ -170,7 +118,7 @@ class GeneralRequestController extends Controller
         return redirect()->back();
     }
 
-    public function removeStationaryCart($id){
+    public function removeProductCart($id){
         \Cart::session(Auth()->id())->remove($id);     
                          
         return redirect()->back();
@@ -198,21 +146,21 @@ class GeneralRequestController extends Controller
             });
 
             foreach($filterCart as $cart){
-                $Stationary = Stationary::find($cart['id']);
+                $product = Product::find($cart['id']);
                 
-                if($Stationary->qty == 0){
+                if($product->stock_item == 0){
                     return redirect()->back()->with('errorTransaksi','jumlah pembayaran gak valid');  
                 }
 
-                HistoryStationary::create([
-                    'Stationary_id' => $cart['id'],
+                HistoryProduct::create([
+                    'product_id' => $cart['id'],
                     'user_id' => Auth::id(),
-                    'qty' => $Stationary->qty,
+                    'stock_item' => $product->stock_item,
                     'qtyChange' => -$cart['quantity'],
                     'tipe' => 'decrease from transaction'
                 ]);
                 
-                $Stationary->decrement('qty',$cart['quantity']);
+                $product->decrement('stock_item',$cart['quantity']);
             }
             
             $id = IdGenerator::generate(['table' => 'transcations', 'length' => 10, 'prefix' =>'INV-', 'field' => 'invoices_number']);
@@ -226,10 +174,10 @@ class GeneralRequestController extends Controller
 
             foreach($filterCart as $cart){    
 
-                StationaryTranscation::create([
-                    'Stationary_id' => $cart['id'],
+                ProductTranscation::create([
+                    'product_id' => $cart['id'],
                     'invoices_number' => $id,
-                    'qty' => $cart['quantity'],
+                    'stock_item' => $cart['quantity'],
                 ]);                
             }
 
@@ -252,7 +200,7 @@ class GeneralRequestController extends Controller
     }
 
     public function decreasecart($id){
-        $Stationary = Stationary::find($id);      
+        $product = Product::find($id);      
                 
         $cart = \Cart::session(Auth()->id())->getContent();        
         $cek_itemId = $cart->whereIn('id', $id); 
@@ -272,12 +220,12 @@ class GeneralRequestController extends Controller
 
 
     public function increasecart($id){
-        $Stationary = Stationary::find($id);     
+        $product = Product::find($id);     
         
         $cart = \Cart::session(Auth()->id())->getContent();        
         $cek_itemId = $cart->whereIn('id', $id); 
 
-        if($Stationary->qty == $cek_itemId[$id]->quantity){
+        if($product->stock_item == $cek_itemId[$id]->quantity){
             return redirect()->back()->with('error','jumlah item kurang');
         }else{
             \Cart::session(Auth()->id())->update($id, array(
@@ -291,14 +239,15 @@ class GeneralRequestController extends Controller
     }
 
     public function history(){
-        $history = Transcation::orderBy('created_at','desc')->paginate(10);
+        $history = Transcation::orderBy('desc')->paginate(10);
         return view('pos.history',compact('history'));
     }
 
     public function laporan($id){
-        $transaksi = Transcation::with('stationaryTranscation')->find($id);
+        $transaksi = Transcation::with('productTranscation')->find($id);
         return view('laporan.transaksi',compact('transaksi'));
     }
 
     
 }
+//© 2020 Copyright: Tahu Coding
