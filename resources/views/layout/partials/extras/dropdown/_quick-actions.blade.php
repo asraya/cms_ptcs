@@ -13,7 +13,7 @@
             </h4>
         <!-- <a class="btn btn-light-primary font-weight-bolder btn-sm" href="{{ route('logout') }}">Logout</a> -->
     </div>
-    <a class="nav-link font-weight-bolder" href="{{url('transcation')}}">Point Of Sales Laravel                          
+    <a class="nav-link font-weight-bolder" href="{!! route('sales.index') !!}">Point Of Sales Laravel                          
 
 @endif
 

@@ -165,6 +165,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Alfa6661\AutoNumber\AutoNumberServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -195,6 +196,7 @@ return [
 
     'aliases' => [
         'Form' => Collective\Html\FormFacade::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
         'Html' => Collective\Html\HtmlFacade::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,

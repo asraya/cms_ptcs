@@ -17,6 +17,170 @@ Route::get('/', function() {
 });
 
 Auth::routes();
+Route::group(array('middleware' => 'auth'), function()
+{
+
+    Route::get('/customer', [
+        'as'	=>	'dashboard',
+        'uses' 	=>	'CustomerController@show'
+    ]);
+
+});
+
+
+// Order Routes
+
+Route::group(array('middleware' => 'auth'), function ()
+{
+    Route::post('/orderProduct', [
+        'as'	=>	'product.order',
+        'uses' 	=>	'OrderController@productOrder'
+    ]);
+
+    Route::post('/payment', [
+        'as'	=>	'product.payment',
+        'uses' 	=>	'OrderController@payment'
+    ]);
+
+    Route::get('/remove/product/{id}', [
+        'as'	=>	'product.remove',
+        'uses' 	=>	'OrderController@remove'
+    ]);
+
+});
+
+
+// Invoice Routes
+
+Route::group(array('middleware' => 'auth'), function ()
+{
+    Route::get('/showInvoice/{id}', [
+        'as'	=>	'invoice.show',
+        'uses' 	=>	'InvoiceController@show'
+    ]);
+
+
+    Route::get('/pdfview/{id}', [
+        'as'	=>	'pdfview',
+        'uses' 	=>	'InvoiceController@pdf'
+    ]);
+
+});
+
+
+
+// Profile Routes
+
+Route::group(array('middleware' => 'auth'), function ()
+{
+    Route::get('/dash/{id}', [
+        'as'	=>	'dash',
+        'uses' 	=>	'ProfileController@show'
+    ]);
+
+    Route::get('/edit_profile', [
+        'as'	=>	'editProfile',
+        'uses' 	=>	'ProfileController@update'
+    ]);
+
+    Route::post('/edit/{id}', [
+        'as'	=>	'profile.update',
+        'uses' 	=>	'ProfileController@edit'
+    ]);
+
+
+});
+
+
+// customer Routes
+
+Route::group(array('middleware' => 'auth'), function ()
+{
+    Route::get('/customers', [
+        'as'	=>	'customers.index',
+        'uses' 	=>	'CustomerController@index'
+    ]);
+
+    Route::get('/addcustomers', [
+        'as'	=>	'customers.add',
+        'uses' 	=>	'CustomerController@create'
+    ]);
+
+    Route::post('/addcustomers', [
+        'as'	=>	'customers.store',
+        'uses' 	=>	'CustomerController@store'
+    ]);
+
+
+});
+
+
+// Product Routes
+
+Route::group(array('middleware' => 'auth'), function ()
+{
+    Route::get('/product', [
+        'as'	=>	'product.index',
+        'uses' 	=>	'ProductController@index'
+    ]);
+
+    Route::post('/product', [
+        'as'	=>	'product.store',
+        'uses' 	=>	'ProductController@store'
+    ]);
+
+    Route::get('/update/product/{id}', [
+        'as'	=>	'product.update',
+        'uses' 	=>	'ProductController@update'
+    ]);
+
+    Route::post('/update/product/{id}', [
+        'as'	=>	'product.edit',
+        'uses' 	=>	'ProductController@edit'
+    ]);
+
+    Route::get('/product/delete/{id}', [
+        'as'	=>	'product.delete',
+        'uses' 	=>	'ProductController@destroy'
+    ]);
+
+
+});
+
+
+// Sell Routes
+
+Route::group(array('middleware' => 'auth'), function ()
+{
+    Route::get('/sales', [
+        'as'	=>	'sales.index',
+        'uses' 	=>	'SaleController@index'
+    ]);
+
+    Route::post('/cart', [
+        'as'	=>	'sale.store',
+        'uses' 	=>	'SaleController@store'
+    ]);
+
+    Route::get('/update/product/{id}', [
+        'as'	=>	'product.update',
+        'uses' 	=>	'ProductController@update'
+    ]);
+
+    Route::post('/sale/delete/{id}', [
+        'as'	=>	'sale.delete',
+        'uses' 	=>	'SaleController@destroy'
+    ]);
+
+    Route::get('/product/delete/{id}', [
+        'as'	=>	'product.delete',
+        'uses' 	=>	'ProductController@destroy'
+    ]);
+
+
+});
+
+
     Route::group(['middleware' => 'auth'], function() {
    Route::get('logout', 'AuthController@logout')->name('logout');
    Route::resource('roles','RoleController');
@@ -44,10 +208,10 @@ Route::get('/add_spt', 'PagesController@add_spt');
 Route::get('/stationary', 'PagesController@stationarydatatables');
 Route::get('/add_stationary', 'PagesController@add_stationary');
 
-Route::post('/add_genreq/increasecart/{id}', 'TransactionController@increasecart');
-Route::post('/add_genreq/decreasecart/{id}', 'TransactionController@decreasecart');
-Route::get('/add_genreq', 'TransactionController@index');
-Route::post('/add_genreq/addstationary/{id}', 'TransactionController@addStationaryCart');
+Route::post('/add_genreq/increasecart/{id}', 'GeneralRequestController@increasecart');
+Route::post('/add_genreq/decreasecart/{id}', 'GeneralRequestController@decreasecart');
+Route::get('/add_genreq', 'GeneralRequestController@index');
+Route::post('/add_genreq/addstationary/{id}', 'GeneralRequestController@addStationaryCart');
 
 
 
@@ -118,15 +282,6 @@ Route::post('/sendemail/send', 'SendEmailController@send');
 // Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('/products','ProductController');
-//sorry kalau ada typo penggunaan bahasa inggris krn saya orang indonesia yang mencoba belajar b.inggris
-Route::get('/transcation', 'TransactionController@index');
-Route::post('/transcation/addproduct/{id_item}', 'TransactionController@addProductCart');
-Route::post('/transcation/removeproduct/{id}', 'TransactionController@removeProductCart');
-Route::post('/transcation/clear', 'TransactionController@clear');
-Route::post('/transcation/increasecart/{id}', 'TransactionController@increasecart');
-Route::post('/transcation/decreasecart/{id}', 'TransactionController@decreasecart');
-Route::post('/transcation/bayar','TransactionController@bayar');
-Route::get('/transcation/history','TransactionController@history');
-Route::get('/transcation/laporan/{id}','TransactionController@laporan');
+
+
 });

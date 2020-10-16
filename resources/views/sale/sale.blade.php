@@ -1,9 +1,7 @@
-{{-- Extends layout --}}
-@extends('layout.default')
-
-{{-- Content --}}
+@extends('layout.dash1')
 @section('content')
-  <!-- Page Content Start -->
+
+    <!-- Page Content Start -->
     <!-- ================== -->
     <div class="main-grid">
         <div class="agile-grids">
@@ -15,7 +13,7 @@
             </div>
 
             <div class="form-body">
-                <form class="form-horizontal" method="POST" action="{{ route('product.order') }}">
+                <form class="form-horizontal" method="POST" action="/cart">
                     {{csrf_field()}}
                     <div class="form-group">
                         <div class="col-sm-7">
@@ -52,34 +50,26 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach(\Cart::content() as $sale)
-                            <tr>
-                                <td class="text-center"><strong>{!! $sale->name !!}</strong></td>
-                                <td class="text-center"><strong>{!! $sale->options->generic_name !!}</strong></td>
-                                <td class="text-center"><strong>{!! $sale->options->category !!}</strong></td>
-                                <td class="text-center"><strong>{!! $sale->price !!}</strong></td>
-                                <td class="text-center"><strong>{!! $sale->qty !!}</strong></td>
-                                <td class="text-center"><strong>{!! $sale->subtotal !!}</strong></td>
-                                <td class="text-center"><strong>{!! $sale->options->profit !!}</strong></td>
-                                <td class="text-center">
-                                    <a class="btn btn-danger" href="{{ route('product.remove',$sale->rowId) }}">Cancel</a>
-                                </td>
-                            </tr>
-                         @endforeach
+                        {{--@foreach($products as $product)--}}
+                        <tr>
+                            <td class="text-center"><strong>{!! $sale->brand_name !!}</strong></td>
+                            <td class="text-center"><strong>{!! $sale->generic_name !!}</strong></td>
+                            <td class="text-center"><strong>{!! $sale->category !!}</strong></td>
+                            <td class="text-center"><strong>{!! $sale->sell_price !!}</strong></td>
+                            <td class="text-center"><strong>{!! $sale->quantity !!}</strong></td>
+                            <td class="text-center"><strong>{!! $sale->total !!}</strong></td>
+                            <td class="text-center"><strong>{!! $sale->profit !!}</strong></td>
+                            <td class="text-center">
+                                <a class="btn btn-danger" href="{{ route('customers.add',$sale->id) }}">Cancel</a>
+                            </td>
+                        </tr>
+                        {{-- @endforeach--}}
                         </tbody>
                     </table>
-                    <div class="row">
-                        <div class="col-md-7">
-                        </div>
-                        <div class="col-md-5">
-                            <h3>Total ammount : {{ \Cart::subtotal() }}</h3>
-                        </div>
-                    </div>
                 </div>
-                <br>
-              <button class="btn btn-primary" type="submit" data-toggle="modal" data-target="#myModal_product">Save</button>
+                <button class="btn btn-primary" type="submit" data-toggle="modal" data-target="#myModal_product">Save</button>
 
-               <!-- begin:modal Add product -->
+                <!-- begin:modal Add product -->
                 <div id="myModal_product" class="modal fade" role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content" >
@@ -93,15 +83,17 @@
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
                                     </div>
+                                    {{--<h3 class="modal-title">Cash</h3>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>--}}
                                 </div>
                             </center>
                             <div class="modal-body" >
-                                <form class="form-horizontal" method="POST" action="/payment">
+                                <form class="form-horizontal" method="POST" action="/cash/{{$sale->id}}">
                                     {{csrf_field()}}
                                     <div class="form-group">
                                         <label for="inputEmail3" class="col-sm-2 control-label">Customer Name</label>
                                         <div class="col-sm-9">
-                                            <input type="text" name="name" class="form-control" id="name" placeholder="Enter Customer Name" required>
+                                            <input type="text" name="name" class="form-control" id="name" placeholder="Enter Brand Name" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -111,7 +103,7 @@
                                         </div>
                                     </div>
                                     <br>
-                                    <input class="btn btn-primary" type="submit" value="Save">
+                                    <input class="btn btn-primary" type="submit" value="Submit">
                                 </form>
                             </div>
                         </div>
@@ -140,3 +132,8 @@
         text-align: center;
     }
 </style>
+
+
+
+
+
