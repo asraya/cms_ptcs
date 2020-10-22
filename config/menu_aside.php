@@ -137,6 +137,13 @@ return [
             'page' => 'general_request',
             'visible' => 'preview',
         ],
+        [
+            'title' => 'master barang',
+            'root' => true,
+            'icon' => 'media/svg/icons/Home/Library.svg',
+            'page' => 'barang',
+            'visible' => 'preview',
+        ],
         // [
         //     'title' => 'General Request',
         //     'bullet' => 'dot',

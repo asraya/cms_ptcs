@@ -21,7 +21,7 @@
                         <div class="col-sm-7">
                             <select id="inputState" class="form-control" name="product">
                                 @foreach($products as $product)
-                                    <option value="{{$product->id}}">{{$product->brand_name}}</option>
+                                    <option value="{{$product->id}}">{{$product->name_stat}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -54,7 +54,7 @@
                         <tbody>
                         @foreach(\Cart::content() as $sale)
                             <tr>
-                                <td class="text-center"><strong>{!! $sale->name !!}</strong></td>
+                                <td class="text-center"><strong>{!! $sale->name_stat !!}</strong></td>
                                 <td class="text-center"><strong>{!! $sale->options->generic_name !!}</strong></td>
                                 <td class="text-center"><strong>{!! $sale->options->category !!}</strong></td>
                                 <td class="text-center"><strong>{!! $sale->price !!}</strong></td>

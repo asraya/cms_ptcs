@@ -10,7 +10,12 @@ use App\User;
 use Spatie\Permission\Models\Role;
 use DB;
 use Hash;
-
+use Brian2694\Toastr\Facades\Toastr;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
 {

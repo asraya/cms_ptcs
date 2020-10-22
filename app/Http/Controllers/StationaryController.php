@@ -32,5 +32,11 @@ class StationaryController extends Controller
          ->rawColumns(['action'])
          ->make(true);
         }
+        public function datatable_barang() {
+            $data = Stationary::select('barang.*')
+             ->where('barang.active', '!=', 0);
         
+            return Datatables::of($data)
+                ->make(true);		
+        }      
     }

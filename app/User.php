@@ -14,7 +14,7 @@ class User extends Authenticatable
 
                             //ini table users bawaan laravel untuk login
 
-    protected $primaryKey = 'user_id';
+    // protected $primaryKey = 'user_id';
 
     /**
      * The attributes that are mass assignable.
@@ -55,5 +55,8 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\tbl_users');
     }
-  
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

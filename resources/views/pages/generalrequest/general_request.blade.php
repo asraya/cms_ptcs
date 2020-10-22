@@ -178,6 +178,7 @@
                     <th>Request Form</th>
                     <!-- <th>Type Request</th> -->
                     <th>Date</th>
+                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -213,6 +214,7 @@
                 {data: 'gen_ticket', name: 'tran_general.gen_ticket'},
                 {data: 'employee_name', name: 'employee_name'},
                 {data: 'gen_date_req', name: 'tran_general.gen_date_req'},
+                {data: 'gen_status', name: 'tran_general.gen_status'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
 
             ],

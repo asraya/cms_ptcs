@@ -50,6 +50,24 @@
         @foreach(config('layout.resources.js') as $script)
             <script src="{{ asset($script) }}" type="text/javascript"></script>
         @endforeach
+<!-- jQuery -->
+<script src="{{ asset('assets/backend/plugins/jquery/jquery.min.js') }}"></script>
+<!-- Bootstrap -->
+<!-- AdminLTE -->
+
+<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+{!! Toastr::message() !!}
+
+<script>
+	@if($errors->any())
+	@foreach($errors->all() as $error)
+	toastr.error('{{ $error }}', 'Error!!', {
+		closeButton:true,
+		progressBar:true,
+	});
+	@endforeach
+	@endif
+</script>
 
         {{-- Includable JS --}}
         @yield('scripts')
