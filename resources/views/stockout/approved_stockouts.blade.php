@@ -4,7 +4,7 @@
 
 @push('css')
     <!-- DataTables -->
-    <link rel="stylesheet" href="{{ asset('assets/backend/plugins/datatables/dataTables.bootstrap4.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/plugins/datatables/dataTables.bootstrap4.css') }}">
 @endpush
 
 @section('content')
@@ -99,12 +99,12 @@
 @push('js')
 
     <!-- DataTables -->
-    <script src="{{ asset('assets/backend/plugins/datatables/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('assets/backend/plugins/datatables/dataTables.bootstrap4.js') }}"></script>
+    <script src="{{ asset('backend/plugins/datatables/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('backend/plugins/datatables/dataTables.bootstrap4.js') }}"></script>
     <!-- SlimScroll -->
-    <script src="{{ asset('assets/backend/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
+    <script src="{{ asset('backend/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
     <!-- FastClick -->
-    <script src="{{ asset('assets/backend/plugins/fastclick/fastclick.js') }}"></script>
+    <script src="{{ asset('backend/plugins/fastclick/fastclick.js') }}"></script>
 
     <!-- Sweet Alert Js -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.29.1/dist/sweetalert2.all.min.js"></script>

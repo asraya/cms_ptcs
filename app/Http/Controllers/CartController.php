@@ -42,7 +42,7 @@ class CartController extends Controller
         $add = Cart::add(['id' => $id, 'name' => $name, 'qty' => $qty, 'price' => $price, 'weight' => 1 ]);
         if ($add)
         {
-            Toastr::success('Product successfully added to cart', 'Success');
+            Toastr::success('Product successfully added to list', 'Success');
             return redirect()->back();
 
         } else {
@@ -67,7 +67,7 @@ class CartController extends Controller
         $qty = $request->input('qty');
         Cart::update($rowId, $qty);
 
-        Toastr::success('Cart Updated Successfully', 'Success');
+        Toastr::success('List Updated Successfully', 'Success');
         return redirect()->back();
     }
 

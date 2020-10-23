@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class PagesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $page_title = 'Dashboard';
@@ -62,6 +67,14 @@ class PagesController extends Controller
         $page_description = 'This is elearn test page';
         return view('pages.elearn.data_learn', compact('page_title', 'page_description'));
     }
+      //pending
+      public function pending_stockout()
+      {
+        $users = Auth::user()->id;     
+
+          $page_title = 'test';
+          return view('stockout.pending_stockouts', compact('page_title', 'users'));
+      }
     public function roles()
     {
         $page_title = 'roles';

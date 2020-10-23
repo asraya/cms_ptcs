@@ -10,6 +10,8 @@ use Brian2694\Toastr\Facades\Toastr;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMail;
 
 class InvoiceController extends Controller
 {
@@ -18,11 +20,18 @@ class InvoiceController extends Controller
         $inputs = $request->except('_token');
         $rules = [
           'user_id' => 'required | integer',
+          'email'  =>  'required|email',
+          'user_name'  =>  'required',
+
         ];
         $customMessages = [
             'user_id.required' => 'Select a User first!.',
-            'user_id.integer' => 'Invalid User!.'
+            'user_id.integer' => 'Invalid User!.',
+            'email' => 'Invalid email!.',
+            'user_name' => 'Invalid email!.'
+
         ];
+        Mail::to('asep.rayana@ymail.com')->send(new SendMail($inputs, $rules, $customMessages));
         $validator = Validator::make($inputs, $rules, $customMessages);
         if ($validator->fails())
         {

@@ -10,10 +10,15 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Auth;
+use DataTables;
 
 class StockOutController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function show($id)
     {
         $stockout = Historystock::with('user')->where('id', $id)->first();
@@ -27,9 +32,32 @@ class StockOutController extends Controller
 
     public function pending_stockout()
     {
-        $pendings = Historystock::latest()->with('user')->where('stockout_status', 'pending')->get();
-        return view('stockout.pending_stockouts', compact('pendings'));
+        // $pendings = Historystock::latest()->with('user')->where('stockout_status', 'pending')->get();
+        // return view('stockout.pending_stockouts', compact('pendings'));
+        $users = Auth::user()->id;        
+        return DataTables::of(Historystock::where('user_id',$users))
+        ->addColumn('action',function($stockout){
+            $x='';
+            if ($stockout->stockout_status=="needApproval") {
+                # code...
+                $x.= 'Waiting for confirmation';
+
+            } elseif ($stockout->stockout_status=="Rejected") {
+                
+                $x.= 'Your Item Rejected';
+
+            } else {
+                # code...
+                $x.= '<a class="btn btn-sm btn-warning" href="'.route("stockout.show", $stockout->id).'">Edit</a>
+                <button class="btn-delete btn-sm btn-danger" data-remote="/stockout/' . $stockout->id . '">Delete</button>';
+            }
+            return $x;
+            })
+        ->make(true);
     }
+
+        
+    
 
     public function approved_stockout()
     {

@@ -41,10 +41,18 @@
                                 
                                 <div class="card-body">
                                 <div class="form-group">
-            <label>User ID</label>
-               <input type="text" name="user_id"  class="form-control form-control-solid form-control-lg" value="{{ Auth::user()->id }}" readonly/>
-            </div>
-            </div>
+                                <label>User ID</label>
+                                <input type="text" name="user_id"  class="form-control form-control-solid form-control-lg" value="{{ Auth::user()->id }}" readonly/>
+                                </div>
+                                <div class="form-group">
+                                <label>User email</label>
+                                <input type="text" name="email"  class="form-control form-control-solid form-control-lg" value="{{ Auth::user()->email }}" readonly/>
+                                </div>
+                                <div class="form-group">
+                                <label>User</label>
+                                <input type="text" name="user_name"  class="form-control form-control-solid form-control-lg" value="{{ Auth::user()->user_name }}" readonly/>
+                                </div>
+                                </div>
                                              
                             </form>
                         </div>

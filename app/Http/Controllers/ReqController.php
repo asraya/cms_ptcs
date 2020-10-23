@@ -22,6 +22,9 @@ class ReqController extends Controller
         $products = Product::with('category')->get();
         $users = User::all();
         $cart_products = Cart::content();
+
+
+        
         return view('add_genreq.index', compact('products', 'users', 'cart_products'));
     }
 

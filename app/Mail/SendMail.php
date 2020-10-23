@@ -6,19 +6,21 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use App\User;
+
 
 class SendMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $data;
+    public $stockout ;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($stockout )
     {
-        $this->data = $data;
+        $this->stockout  = $stockout ;
     }
 
     /**
@@ -28,7 +30,8 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->from('asep.rayana@ptcs.co.id')->subject('New')->view('dynamic_email_template')->with('data', $this->data);
+        
+        return $this->from('asep.rayana@ptcs.co.id')->subject('New')->view('dynamic_email_template')->with('stockout ', $this->stockout );
     }
 }
 
