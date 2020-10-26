@@ -59,8 +59,7 @@
                                 <div class="col-sm-4 invoice-col">
                                     To
                                     <address>
-                                        <strong>{{ $stockout->user->user_name }}</strong><br>
-                                      
+                                        <strong>{{ $stockout->user->user_name }}</strong><br>                                      
                                         Email: {{ $stockout->user->email }}
                                     </address>
                                 </div>
@@ -69,7 +68,7 @@
                                     <b>Invoice #IMS-{{ $stockout->created_at->format('Ymd') }}{{ $stockout->id }}</b><br><br>
                                     <b>stockout ID:</b> {{ str_pad($stockout->id,9,"0",STR_PAD_LEFT) }}<br>
                                     <b>stockout Status:</b> <span class="badge {{ $stockout->stockout_status == 'approved' ? 'badge-success' : 'badge-warning'  }}">{{ $stockout->stockout_status }}</span><br>
-                                    <b>Account:</b> {{ $stockout->user->emp_id }}
+                                    <b>Account:</b> {{ $stockout->user->id }}
                                 </div>
                                 <!-- /.col -->
                             </div>
@@ -157,11 +156,13 @@
                                             <i class="fa fa-print"></i> Print
                                         </a>
                                     @endif
+                                    @can('role-approved')
                                     @if($stockout->stockout_status === 'pending')
                                         <a href="{{ route('stockout.confirm', $stockout->id) }}" class="btn btn-success float-right">
                                             <i class="fa fa-credit-card"></i>
                                             Approved
                                         </a>
+                                    @endcan
                                     @endif
                                     @if($stockout->stockout_status === 'approved')
                                         <a href="{{ route('stockout.download', $stockout->id) }}" target="_blank" class="btn btn-primary float-right" style="margin-right: 5px;">

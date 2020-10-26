@@ -88,7 +88,8 @@ Route::get('stockout-print/{stockout_id}', 'InvoiceController@stockout_print')->
 Route::post('invoice-final', 'InvoiceController@final_invoice')->name('invoice.final_invoice');
 
 Route::get('stockout/show/{id}', 'StockOutController@show')->name('stockout.show');
-Route::get('stockout/pending', 'StockOutController@pending_stockout')->name('stockout.pending');
+Route::get('stockout/pending', 'StockOutController@index')->name('stockout.pending');
+Route::get('/pending')->name('api.pending_stockout')->uses('StockOutController@pending_stockout');
 
 Route::get('stockout/approved', 'StockOutController@approved_stockout')->name('stockout.approved');
 Route::get('stockout/confirm/{id}', 'StockOutController@stockout_confirm')->name('stockout.confirm');

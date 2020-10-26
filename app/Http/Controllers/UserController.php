@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use DB;
 use Hash;
 use Brian2694\Toastr\Facades\Toastr;
@@ -19,7 +20,13 @@ use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
 {
-    
+    function __construct()
+    {
+         $this->middleware('permission:users-list|users-create|users-edit|users-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:users-create', ['only' => ['create','store']]);
+         $this->middleware('permission:users-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:users-delete', ['only' => ['destroy']]);
+    }
     public function index(Request $request)
     {
         $data = User::orderBy('id','DESC')->paginate(5);
@@ -77,9 +84,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($user_id)
+    public function show($id)
     {
-        $user = User::find($user_id);
+        $user = User::find($id);
         return view('users.show',compact('user'));
     }
 
@@ -90,9 +97,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($user_id)
+    public function edit($id)
     {
-        $user = User::find($user_id);
+        $user = User::find($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
 
@@ -108,11 +115,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $user_id)
+    public function update(Request $request, $id)
     {
         $this->validate($request, [
             // 'name' => 'required',
-            // 'email' => 'required|email|unique:users,email,'.$user_id,
+            // 'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'same:confirm-password',
             'roles' => 'required',
             'emp_id' => 'required'
@@ -127,9 +134,9 @@ class UserController extends Controller
         // }
 
 
-        $user = User::find($user_id);
+        $user = User::find($id);
         $user->update($input);
-        DB::table('model_has_roles')->where('model_id',$user_id)->delete();
+        DB::table('model_has_roles')->where('model_id',$id)->delete();
 
 
         $user->assignRole($request->input('roles'));

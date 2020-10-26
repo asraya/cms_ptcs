@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\User;
 
 use App\Expense;
 use App\Historystock;
@@ -28,13 +29,22 @@ class StockOutController extends Controller
         $company = Setting::latest()->first();
         return view('stockout.stockout_confirmation', compact('stockout_details', 'stockout', 'company'));
     }
-
+    
+    public function index()
+    {
+    //   $users = Auth::user()->id;
+    //   dd($users);
+        $page_title = 'test';
+        return view('stockout.pending_stockouts', compact('page_title'));
+    }
 
     public function pending_stockout()
     {
+        // echo "test";
         // $pendings = Historystock::latest()->with('user')->where('stockout_status', 'pending')->get();
         // return view('stockout.pending_stockouts', compact('pendings'));
-        $users = Auth::user()->id;        
+        $users = Auth::user()->id;
+        
         return DataTables::of(Historystock::where('user_id',$users))
         ->addColumn('action',function($stockout){
             $x='';

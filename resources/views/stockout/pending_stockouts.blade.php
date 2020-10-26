@@ -149,8 +149,9 @@
 
                                     <thead>
                                     <tr>
-                                        <th>user_id</th>
-                                      
+                                        <th>ID</th>
+                                        <th>Date</th>                      
+                                        <th>Status</th>                            
                                         <th>Actions</th>
                                     </tr>
                                     </thead>
@@ -181,15 +182,47 @@
     var table = $('.test').DataTable({
            processing: true,
            serverSide: true,
-           ajax: "{{ url ('/stockout/pending') }}",
-           columns: [
-      
-   
-               {data: 'user_id', name: 'user_id'},
+           ajax: "{{ route ('api.pending_stockout') }}",
+               columns: [  
+               {data: 'user_id', name: 'historystocks.user_id'},
+               {data: 'created_at', name: 'historystockscreated_at'},
+            //    {data: 'stockout_status', name: 'stockout_status'},
+               {data:  'stockout_status',name: 'stockout_status', render: function ( data, type, row ) {
+                var text = "";
+                var label = "";
+                if (data == 'approved'){
+                text = "Approved";
+                label = "success";
+                } else 
+                if (data == 'pending'){
+                text = "Pending";
+                label = "warning";
+                }
+                return "<span class='badge badge-" + label + "'>"+ text + "</span>";
+                }},
                {data: 'action', name: 'action', orderable: false, searchable: false},
    
-           ],
-       });
-   </script>
-   @endsection
+            ],
+    });
+        $('body').on('click', '.deleteTodo', function () {
+ 
+ var user_id = $(this).data("id");
+ if(confirm("Are You sure want to delete !"))
+ {
+   $.ajax({
+       type: "get",
+       url: "{{ url('delete-user') }}"+'/'+user_id,
+       success: function (data) {
+       var oTable = $('#test').dataTable(); 
+       oTable.fnDraw(false);
+       },
+       error: function (data) {
+           console.log('Error:', data);
+       }
+   });
+}
+    });
+</script>
+@endsection
+
    
