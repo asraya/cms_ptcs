@@ -21,6 +21,7 @@
         "laravelcollective/html": "^6.2",
         "olimortimer/laravelshoppingcart": "^4.0",
         "spatie/laravel-permission": "^3.17",
+        "tymon/jwt-auth": "^1.0",
         "yajra/laravel-datatables-oracle": "^9.11"
     },
     "require-dev": {

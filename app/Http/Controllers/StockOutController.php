@@ -34,8 +34,9 @@ class StockOutController extends Controller
     {
         // $pendings = Historystock::latest()->with('user')->where('stockout_status', 'pending')->get();
         // return view('stockout.pending_stockouts', compact('pendings'));
-        $users = Auth::user()->id;        
+        $users = Auth::user()->id;
         return DataTables::of(Historystock::where('user_id',$users))
+
         ->addColumn('action',function($stockout){
             $x='';
             if ($stockout->stockout_status=="needApproval") {
@@ -52,10 +53,50 @@ class StockOutController extends Controller
                 <button class="btn-delete btn-sm btn-danger" data-remote="/stockout/' . $stockout->id . '">Delete</button>';
             }
             return $x;
+
             })
         ->make(true);
     }
+    public function index()
+    {
+        
+            // $pendings = Historystock::latest()->with('user')->where('stockout_status', 'pending')->get();
+            // return view('stockout.pending_stockouts', compact('pendings'));
+            $users = Auth::user()->id;
+            return DataTables::of(Historystock::where('user_id',$users))
+            ->addColumn('action',function($stockout){
+                $x='';
+                if ($stockout->stockout_status=="needApproval") {
+                    # code...
+                    $x.= 'Waiting for confirmation';
+    
+                } elseif ($stockout->stockout_status=="Rejected") {
+                    
+                    $x.= 'Your Item Rejected';
+    
+                } else {
+                    # code...
+                    $x.= '<a class="btn btn-sm btn-warning" href="'.route("stockout.show", $stockout->id).'">Edit</a>
+                    <button class="btn-delete btn-sm btn-danger" data-remote="/stockout/' . $stockout->id . '">Delete</button>';
+                }
+                return $x;
 
+
+                })
+            ->make(true);
+               
+            // $userEmail = Auth::user()->email;
+            // $inventories = Inventory::where('email',$userEmail)->paginate(5);
+            // $inventories = Inventory::latest()->paginate(5);
+            // return view('inventory.index', compact('inventories'))
+            //     ->with('i',(request()->input('page',1)-1)*5);
+            # code...
+            # code...
+        }
+        
+        //  
+         
+    
         
     
 

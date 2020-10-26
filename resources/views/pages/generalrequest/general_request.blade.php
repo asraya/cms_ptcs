@@ -171,7 +171,7 @@
             </div>
             <!--end::Search Form-->
 
-            <table class="table table-bordered table-hover dtgenreq">
+            <table class="table table-bordered table-hover atc">
                 <thead>
                 <tr>
                     <th>Ticket</th>
@@ -206,15 +206,14 @@
     <script src="{{ asset('js/pages/crud/datatables/basic/basic.js') }}" type="text/javascript"></script>
     <!-- <script src="{{ asset('js/app.js') }}" type="text/javascript"></script> -->
     <script> 
-    var table = $('.dtgenreq').DataTable({
+
+    var table = $('.atc').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route ('api.general_request') }}",
+        ajax: "{{ route ('api.pending_stockout') }}",
         columns: [
-                {data: 'gen_ticket', name: 'tran_general.gen_ticket'},
-                {data: 'employee_name', name: 'employee_name'},
-                {data: 'gen_date_req', name: 'tran_general.gen_date_req'},
-                {data: 'gen_status', name: 'tran_general.gen_status'},
+                {data: 'user_id', name: 'user_id'},
+         
                 {data: 'action', name: 'action', orderable: false, searchable: false}
 
             ],
