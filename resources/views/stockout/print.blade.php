@@ -132,7 +132,7 @@
                                         <td class="text-right">{{ $stockout->sub_total, 2 }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Tax (21%)</th>
+                                        <th>Tax (0%)</th>
                                         <td class="text-right">{{ $stockout->vat, 2 }}</td>
                                     </tr>
                                     <tr>

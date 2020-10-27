@@ -179,6 +179,10 @@
                                 <label for="inputCity">Total</label>
                                 <input type="text" value="{{ Cart::total() }}"name="pay" class="form-control form-control-solid form-control-lg" readonly >
                             </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputCity">Ep</label>
+<input type="text" name="emp_id"  class="form-control form-control-solid form-control-lg" value="{{ Auth::user()->emp_id }}" readonly/>
+                            </div>
                         </div>
                     </div>
                     <input type="hidden" name="user_id" value="{{ $user->id }}">

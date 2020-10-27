@@ -150,7 +150,7 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Date</th>                      
+                                        <th>Name</th>    
                                         <th>Status</th>                            
                                         <th>Actions</th>
                                     </tr>
@@ -184,10 +184,9 @@
            serverSide: true,
            ajax: "{{ route ('api.pending_stockout') }}",
                columns: [  
-               {data: 'user_id', name: 'historystocks.user_id'},
-               {data: 'created_at', name: 'historystockscreated_at'},
-            //    {data: 'stockout_status', name: 'stockout_status'},
-               {data:  'stockout_status',name: 'stockout_status', render: function ( data, type, row ) {
+                {data: 'emp_id', name: 'historystocks.emp_id'},
+               {data: 'employee_name', name: 'tbl_users.employee_name'},
+               {data:  'stockout_status',name: 'historystocks.stockout_status', render: function ( data, type, row ) {
                 var text = "";
                 var label = "";
                 if (data == 'approved'){

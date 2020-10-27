@@ -134,7 +134,7 @@
                                                 <td class="text-right">{{ number_format($stockout->sub_total, 2) }}</td>
                                             </tr>
                                             <tr>
-                                                <th>Tax (21%)</th>
+                                                <th>Tax (0%)</th>
                                                 <td class="text-right">{{ number_format($stockout->vat, 2) }}</td>
                                             </tr>
                                             <tr>
@@ -169,9 +169,7 @@
                                             <i class="fa fa-download"></i> Generate PDF
                                         </a>
                                     @endif
-                                </div>
-                                cek
-                                http://localhost:8000/stockout/approved
+                                </div>                    
                             </div>
                         </div>
                         <!-- /.invoice -->
