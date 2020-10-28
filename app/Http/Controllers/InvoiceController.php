@@ -94,7 +94,6 @@ class InvoiceController extends Controller
         $stockout = new Historystock();
         $stockout->user_id = $request->input('user_id');
         $stockout->emp_id = $request->input('emp_id');
-
         $stockout->payment_status = $request->input('payment_status');
         $stockout->pay = $pay;
         $stockout->stockout_date = date('Y-m-d');

@@ -8,12 +8,15 @@ use DataTables;
 use Validator,Redirect,Response;
 use App\User;
 use auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMail;
 
 class SptRequestController extends Controller
 {
   
     public function datatables()
     {        
+        $users = Auth::user()->emp_id;
         $data = Spt::query()
         ->select([
           
@@ -23,9 +26,9 @@ class SptRequestController extends Controller
             'tran_spt.status as status',
             'tbl_users.user_firstname',
             'tbl_users.user_lastname'
-        ])
-        ->leftJoin('tbl_users', 'tran_spt.emp_id', '=', 'tbl_users.emp_id');   
-        
+        ])      
+        ->leftJoin('tbl_users', 'tran_spt.emp_id', '=', 'tbl_users.emp_id')
+        ->where('tran_spt.emp_id', $users); 
         return Datatables::of($data)
                 ->addColumn('employee_name', function($data){
                     return $data->user_firstname . " " . $data->user_lastname;
@@ -53,16 +56,29 @@ class SptRequestController extends Controller
                  ->rawColumns(['action'])
                  ->make(true);
         }    
+        public function send(Request $request)
+        {
+         $this->validate($request, [
+            'emp_id' => 'required',
+            'position' => 'required',
+            'purpose' => 'required',
+            'spt_start' => 'required',
+            'spt_end' => 'required',
+         ]);
     
-    public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|email',
-        ]);
-        $show = User::create($validatedData);   
-        return redirect('/user')->with('success', 'User Case is successfully saved');
-    }
+            $data = array(
+                'emp_id' =>  $request->emp_id,
+                'position'  =>  $request->position,
+                'purpose'  =>  $request->purpose,
+                'spt_start'  =>  $request->spt_start,
+                'spt_end' =>  $request->spt_end,             
+            );
+    
+         Mail::to('asep.rayana@ymail.com')->send(new SendMail($data));
+         return back()->with('success');
+    
+        }
+  
 
     public function edit(Request $request, $id)
     {       

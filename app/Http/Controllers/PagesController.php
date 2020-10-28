@@ -30,7 +30,7 @@ class PagesController extends Controller
     //spt
     public function spt_request()
     {
-        $page_title = 'Liat Spt request';
+        $page_title = 'Spt request';
         // $page_description = 'This is spt_request test page';
         return view('pages.spt.spt_request', compact('page_title'));
     }
@@ -63,7 +63,7 @@ class PagesController extends Controller
     //elearn
      public function elearn()
     {
-        $page_title = 'Liat elearn';
+        $page_title = 'elearn';
         $page_description = 'This is elearn test page';
         return view('pages.elearn.data_learn', compact('page_title', 'page_description'));
     }

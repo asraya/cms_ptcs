@@ -21,7 +21,7 @@ class StockOutController extends Controller
     }
     public function show($id)
     {
-        $stockout = Historystock::with('user')->where('id', $id)->first();
+        $stockout = Historystock::with('user')->where('emp_id', $id)->first();
         $stockout_details = HistorystockDetail::with('product')->where('stockout_id', $id)->get();
         $company = Setting::latest()->first();
         return view('stockout.stockout_confirmation', compact('stockout_details', 'stockout', 'company'));
@@ -35,9 +35,9 @@ class StockOutController extends Controller
 
     public function pending_stockout()
     {
-                $users = Auth::user()->emp_id;
-
+        $users = Auth::user()->emp_id;                    
         $data = DB::table('historystocks')
+        
         ->select([   
           
             'historystocks.emp_id as emp_id',
@@ -46,11 +46,25 @@ class StockOutController extends Controller
             'tbl_users.user_lastname'
         ])
         ->leftJoin('tbl_users', 'historystocks.emp_id', '=', 'tbl_users.emp_id')
-        ->where('historystocks.emp_id', $users); 
-        return DataTables::queryBuilder($data)
+        ->where('historystocks.emp_id', $users);
+        
+        return DataTables::of($data)
         ->addColumn('employee_name', function($data){
+
                     return $data->user_firstname . " " . $data->user_lastname;
                 })
+                ->addColumn('action', function ($stockout) {
+            $button = '<a class="btn btn-sm btn-info" href="' . route('stockout.show', $stockout->emp_id) . '" >Show <i class="fa fa-eye"></i></a>';
+            if (\Auth::user()->can('user-edit')) {
+                $button .= '&nbsp;&nbsp;&nbsp;<a class="btn btn-sm btn-primary" href="' . route('users.edit', $stockout->emp_id) . '" >Edit <i class="fa fa-edit"></i></a>';
+            }
+            if (\Auth::user()->can('user-delete')) {
+                $button .= '&nbsp;&nbsp;&nbsp;<a id="' . $stockout->id . '" class="delete btn btn-sm btn-danger" href="#" >Delete <i class="fa fa-trash"></i></a>';
+            }
+            return $button;
+        })
+        ->rawColumns(['action'])
+        // ->make(true);  
                 ->make(true);
             }
        

@@ -39,6 +39,7 @@ Route::get('/listitstock', 'PagesController@listdatatables');
 Route::get('/spt_request', 'PagesController@spt_request');
 Route::get('/spt')->name('api.spt')->uses('SptRequestController@datatables');
 Route::get('/add_spt', 'PagesController@add_spt');
+Route::post('/add_spt/send', 'SptRequestController@send');
 
 
 Route::get('/fbo', 'PagesController@fbodatatables');
