@@ -47,6 +47,7 @@
                                     From
                                     <address>
                                         <strong>{{ $user->user_name }}</strong><br>
+                                        {{ $user->user_id }}<br>
                                         {{ $user->emp_id }}<br>
                                         Email: {{ $user->email }}
                                     </address>
@@ -115,7 +116,7 @@
                                                 <td class="text-right">{{ Cart::subtotal() }}</td>
                                             </tr>
                                             <tr>
-                                                <th>Tax (21%)</th>
+                                                <th>Tax (0%)</th>
                                                 <td class="text-right">{{ Cart::tax() }}</td>
                                             </tr>
                                             <tr>

@@ -66,41 +66,6 @@
             {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!}
         </div>
     </div>
-
-    tbl_users
-   
-   
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>first_name:</strong>
-            {!! Form::text('user_firstname', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>last_name:</strong>
-            {!! Form::text('user_lastname', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
-        </div>
-    </div>
-  
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>user_division:</strong>
-            {!! Form::text('user_division', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>user_email:</strong>
-            {!! Form::text('user_email', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>emp_id:</strong>
-            {!! Form::text('emp_id', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
-        </div>
-    </div>
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>

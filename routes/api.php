@@ -29,7 +29,7 @@ Route::get('/ga_helpdesk')->name('api.ga_helpdesk')->uses('HelpdeskRequestContro
 
 Route::get('/elearn')->name('api.elearn')->uses('ElearnController@datatables');
 
-Route::get('/stockout/pending')->name('api.pending_stockout')->uses('StockOutController@pending_stockout');
+//Route::get('/stockout/pending_data')->name('api.pending_stockout')->uses('StockOutController@pending_stockout');
 
 
 Route::get('/stationary')->name('api.stationary')->uses('StationaryController@stationarydatatables');

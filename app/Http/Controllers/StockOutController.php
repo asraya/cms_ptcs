@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\User;
 
 use App\Expense;
 use App\Historystock;
@@ -28,13 +29,22 @@ class StockOutController extends Controller
         $company = Setting::latest()->first();
         return view('stockout.stockout_confirmation', compact('stockout_details', 'stockout', 'company'));
     }
-
+    
+    public function index()
+    {
+    //   $users = Auth::user()->id;
+    //   dd($users);
+        $page_title = 'test';
+        return view('stockout.pending_stockouts', compact('page_title'));
+    }
 
     public function pending_stockout()
     {
+        // echo "test";
         // $pendings = Historystock::latest()->with('user')->where('stockout_status', 'pending')->get();
         // return view('stockout.pending_stockouts', compact('pendings'));
         $users = Auth::user()->id;
+        
         return DataTables::of(Historystock::where('user_id',$users))
 
         ->addColumn('action',function($stockout){
@@ -57,42 +67,42 @@ class StockOutController extends Controller
             })
         ->make(true);
     }
-    public function index()
-    {
+    // public function index()
+    // {
         
-            // $pendings = Historystock::latest()->with('user')->where('stockout_status', 'pending')->get();
-            // return view('stockout.pending_stockouts', compact('pendings'));
-            $users = Auth::user()->id;
-            return DataTables::of(Historystock::where('user_id',$users))
-            ->addColumn('action',function($stockout){
-                $x='';
-                if ($stockout->stockout_status=="needApproval") {
-                    # code...
-                    $x.= 'Waiting for confirmation';
+    //         // $pendings = Historystock::latest()->with('user')->where('stockout_status', 'pending')->get();
+    //         // return view('stockout.pending_stockouts', compact('pendings'));
+    //         $users = Auth::user()->id;
+    //         return DataTables::of(Historystock::where('user_id',$users))
+    //         ->addColumn('action',function($stockout){
+    //             $x='';
+    //             if ($stockout->stockout_status=="needApproval") {
+    //                 # code...
+    //                 $x.= 'Waiting for confirmation';
     
-                } elseif ($stockout->stockout_status=="Rejected") {
+    //             } elseif ($stockout->stockout_status=="Rejected") {
                     
-                    $x.= 'Your Item Rejected';
+    //                 $x.= 'Your Item Rejected';
     
-                } else {
-                    # code...
-                    $x.= '<a class="btn btn-sm btn-warning" href="'.route("stockout.show", $stockout->id).'">Edit</a>
-                    <button class="btn-delete btn-sm btn-danger" data-remote="/stockout/' . $stockout->id . '">Delete</button>';
-                }
-                return $x;
+    //             } else {
+    //                 # code...
+    //                 $x.= '<a class="btn btn-sm btn-warning" href="'.route("stockout.show", $stockout->id).'">Edit</a>
+    //                 <button class="btn-delete btn-sm btn-danger" data-remote="/stockout/' . $stockout->id . '">Delete</button>';
+    //             }
+    //             return $x;
 
 
-                })
-            ->make(true);
+    //             })
+    //         ->make(true);
                
-            // $userEmail = Auth::user()->email;
-            // $inventories = Inventory::where('email',$userEmail)->paginate(5);
-            // $inventories = Inventory::latest()->paginate(5);
-            // return view('inventory.index', compact('inventories'))
-            //     ->with('i',(request()->input('page',1)-1)*5);
-            # code...
-            # code...
-        }
+    //         // $userEmail = Auth::user()->email;
+    //         // $inventories = Inventory::where('email',$userEmail)->paginate(5);
+    //         // $inventories = Inventory::latest()->paginate(5);
+    //         // return view('inventory.index', compact('inventories'))
+    //         //     ->with('i',(request()->input('page',1)-1)*5);
+    //         # code...
+    //         # code...
+    //     }
         
         //  
          

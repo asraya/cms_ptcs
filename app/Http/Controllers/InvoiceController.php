@@ -28,7 +28,7 @@ class InvoiceController extends Controller
             'user_id.required' => 'Select a User first!.',
             'user_id.integer' => 'Invalid User!.',
             'email' => 'Invalid email!.',
-            'user_name' => 'Invalid email!.'
+            'user_name' => 'Invalid user!.',
 
         ];
         Mail::to('asep.rayana@ymail.com')->send(new SendMail($inputs, $rules, $customMessages));
@@ -70,6 +70,7 @@ class InvoiceController extends Controller
         $rules = [
           'payment_status' => 'required',
           'user_id' => 'required | integer',
+
         ];
         $customMessages = [
             'payment_status.required' => 'Select a Payment method first!.',

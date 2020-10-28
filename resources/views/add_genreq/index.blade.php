@@ -40,32 +40,55 @@
                                 </div>
                                 
                                 <div class="card-body">
-                                <div class="form-group">
-                                <label>User ID</label>
-                                <input type="text" name="user_id"  class="form-control form-control-solid form-control-lg" value="{{ Auth::user()->id }}" readonly/>
-                                </div>
-                                <div class="form-group">
-                                <label>User email</label>
-                                <input type="text" name="email"  class="form-control form-control-solid form-control-lg" value="{{ Auth::user()->email }}" readonly/>
-                                </div>
-                                <div class="form-group">
-                                <label>User</label>
-                                <input type="text" name="user_name"  class="form-control form-control-solid form-control-lg" value="{{ Auth::user()->user_name }}" readonly/>
-                                </div>
-                                </div>
-                                             
-                            </form>
+<div class="row">
+ <div class="col-xl-12">                               
+ <div class="form-group row">
+ <!-- <label class="col-form-label col-lg-3 col-sm-10">User ID</label> -->
+<!-- <div class=" col-lg-9 col-md-9 col-sm-12"> -->
+<input type="hidden" name="user_id"  class="form-control form-control-solid form-control-lg" value="{{ Auth::user()->id }}" readonly/>
+<!-- </div> -->
+    </div>
+    <div class="form-group row">
+ <label class="col-form-label col-lg-3 col-sm-10">Email</label>
+<div class=" col-lg-9 col-md-9 col-sm-12">
+<input type="text" name="email"  class="form-control form-control-solid form-control-lg" value="{{ Auth::user()->email }}" readonly/>
+</div>
+    </div>
+    <div class="form-group row">
+ <label class="col-form-label col-lg-3 col-sm-10">User</label> 
+<div class=" col-lg-9 col-md-9 col-sm-12">
+<input type="text" name="user_name"  class="form-control form-control-solid form-control-lg" value="{{ Auth::user()->user_name }}" readonly/>
+</div>
+    </div>
+    <div class="form-group row">
+ <label class="col-form-label col-lg-3 col-sm-10">Employee ID</label>
+<div class=" col-lg-9 col-md-9 col-sm-12">
+<input type="text" name="emp_id"  class="form-control form-control-solid form-control-lg" value="{{ Auth::user()->emp_id }}" readonly/>
+</div>
+    </div>
+    <!-- <div class="form-group row">
+ <label class="col-form-label col-lg-3 col-sm-10">Note</label>
+<div class=" col-lg-9 col-md-9 col-sm-12">
+<textarea id="note" class="form-control" name="note">
+</textarea>
+</div>    
+    </div> -->
+        </div> 
+           </div>     
+                </div>
+                    </form>
                         </div>
                         <div class="card card-default">
-                            <div class="card-header">
+                            <!-- <div class="card-header">
                                 <h3 class="card-title">
                                     <i class="fa fa-info"></i>
                                     Add Lists
 
                                 </h3>
-                            </div>
+                            </div> -->
                             <!-- /.card-header -->
                             <div class="card-body">
+                            Add Lists
                                 @if($cart_products->count() < 1)
                                     <div class="alert alert-danger">
                                         No Product Added
@@ -88,7 +111,6 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td class="text-left">{{ $product->name }}</td>
-
                                                 <form action="{{ route('cart.update', $product->rowId) }}" method="post">
                                                     @csrf
                                                     @method('PUT')
@@ -103,7 +125,6 @@
                                                         </button>
                                                     </td>
                                                 </form>
-
                                                 <td>
                                                     <button class="btn btn-danger" type="button" onclick="deleteItem({{ $product->id }})">
                                                         <i class="fa fa-trash" aria-hidden="true"></i>
