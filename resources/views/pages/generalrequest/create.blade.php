@@ -11,7 +11,7 @@
 
             <!-- blank-page -->
             <div class="table-heading">
-                <h2>{{--{!! $user->name !!}'s--}} Point Of Sale Sales</h2>
+                <h2>{{--{!! $user->name !!}'s--}}</h2>
             </div>
 
             <div class="form-body">

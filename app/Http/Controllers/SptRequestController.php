@@ -56,29 +56,78 @@ class SptRequestController extends Controller
                  ->rawColumns(['action'])
                  ->make(true);
         }    
+        public function index()
+        {
+         return view('pages/spt/spt_request');
+        }
         public function send(Request $request)
         {
-         $this->validate($request, [
-            'emp_id' => 'required',
-            'position' => 'required',
-            'purpose' => 'required',
-            'spt_start' => 'required',
-            'spt_end' => 'required',
-         ]);
-    
-            $data = array(
-                'emp_id' =>  $request->emp_id,
-                'position'  =>  $request->position,
-                'purpose'  =>  $request->purpose,
-                'spt_start'  =>  $request->spt_start,
-                'spt_end' =>  $request->spt_end,             
-            );
-    
-         Mail::to('asep.rayana@ymail.com')->send(new SendMail($data));
-         return back()->with('success');
-    
+            $request->validate([
+                'spt_no' => 'required',
+                'requester_id' => 'required',
+                'emp_id' => 'required',
+                'position' => 'required',
+                'destination' => 'required',
+                'purpose' => 'required',
+                'spt_start' => 'required',
+                'spt_end' => 'required',
+
+            ]);
+            $contact = new Spt([
+                'spt_no' => $request->get('spt_no'),
+                'requester_id' => $request->get('requester_id'),
+                'emp_id' => $request->get('emp_id'),
+                'position' => $request->get('position'),
+                'destination' => $request->get('destination'),
+                'purpose' => $request->get('purpose'),
+                'spt_start' => $request->get('spt_start'),
+                'spt_end' => $request->get('spt_end'),
+                'status' => $request->get('status'),
+
+
+            ]);
+            Mail::to('asep.rayana@ymail.com')->send(new SendMail($contact));
+            $contact->save();
+            return redirect('/spt_request')->with('success', 'Spt saved!');
+
         }
-  
+        // public function send(Request $request)
+        // {
+        //     $inputs = $request->except('_token');
+        //     $rules = [
+        //         'spt_id' => 'required',
+        //         'spt_no' => 'required',
+        //         'requester_id' => 'required',
+        //         'emp_id' => 'required',
+        //         'position' => 'required',
+        //         'destination' => 'required',
+        //         'purpose' => 'required',
+        //         'spt_start' => 'required',
+        //         'spt_end' => 'required',
+    
+        //     ];
+        //     $customMessages = [
+        //         'spt_id' => 'required',
+        //         'spt_no' => 'required',
+        //         'requester_id' => 'required',
+        //         'emp_id' => 'required',
+        //         'position' => 'required',
+        //         'destination' => 'required',
+        //         'purpose' => 'required',
+        //         'spt_start' => 'required',
+        //         'spt_end' => 'required',
+    
+        //     ];
+        //     Mail::to('asep.rayana@ymail.com')->send(new SendMail($inputs, $rules, $customMessages));
+        //     $validator = Validator::make($inputs, $rules, $customMessages);
+        //     if ($validator->fails())
+        //     {
+        //         return redirect()->back()->withErrors($validator)->withInput();
+        //     }
+    
+        //     return back()->with('success', 'Thanks for contacting us!');
+
+        // }
 
     public function edit(Request $request, $id)
     {       

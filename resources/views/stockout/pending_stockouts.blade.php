@@ -176,18 +176,14 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Name</th>    
+                                        <th>Request Form</th>    
                                         <th>Status</th>                            
                                         <th>Actions</th>
                                     </tr>
-                                    </thead>
-               
-               </table>
-   
-           </div>
-   
-       </div>
-   
+                                    </thead>               
+               </table>   
+           </div>   
+       </div>   
    @endsection
    
    {{-- Styles Section --}}
@@ -211,7 +207,7 @@
            ajax: "{{ route ('api.pending_stockout') }}",
                columns: [  
                 {data: 'emp_id', name: 'historystocks.emp_id'},
-               {data: 'employee_name', name: 'tbl_users.employee_name'},
+               {data: 'employee_name', employee_name: 'tbl_users.employee_name'},
                {data:  'stockout_status',name: 'historystocks.stockout_status', render: function ( data, type, row ) {
                 var text = "";
                 var label = "";

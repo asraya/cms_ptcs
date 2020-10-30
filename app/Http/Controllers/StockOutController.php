@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\User;
 
+use App\User;
 use App\Expense;
 use App\Historystock;
 use App\HistorystockDetail;
@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 use DataTables;
+
 class StockOutController extends Controller
 {
     public function __construct()
@@ -50,10 +51,11 @@ class StockOutController extends Controller
         
         return DataTables::of($data)
         ->addColumn('employee_name', function($data){
-
                     return $data->user_firstname . " " . $data->user_lastname;
                 })
                 ->addColumn('action', function ($stockout) {
+             
+
             $button = '<a class="btn btn-sm btn-info" href="' . route('stockout.show', $stockout->emp_id) . '" >Show <i class="fa fa-eye"></i></a>';
             if (\Auth::user()->can('user-edit')) {
                 $button .= '&nbsp;&nbsp;&nbsp;<a class="btn btn-sm btn-primary" href="' . route('users.edit', $stockout->emp_id) . '" >Edit <i class="fa fa-edit"></i></a>';

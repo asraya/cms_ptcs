@@ -3,14 +3,23 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Alfa6661\AutoNumber\AutoNumberTrait;
 use Spatie\Permission\Traits\HasRoles;
 
 class Spt extends Model
 {
-    use AutoNumberTrait;
     protected $table = 'tran_spt';
-
+    protected $primaryKey = 'spt_id';
+    protected $fillable = [
+        'spt_no',
+        'requester_id',
+        'emp_id',
+        'position',
+        'destination',
+        'purpose',
+        'spt_start',
+        'spt_end',
+    ];
+   
     /**
      * Return the autonumber configuration array for this model.
      *
@@ -20,17 +29,7 @@ class Spt extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function getAutoNumberOptions()
-    {
-        return [
-            'code' => [
-                'format' => function () {
-                    return date('Y.m.d') . '/INV/?';
-                },
-                'length' => 5
-            ]
-        ];
-    }
+  
     public function data()
     {
         return $this->belongsTo('App\UserModel');

@@ -30,6 +30,7 @@ Route::get('/profile', 'ProfileController@index')->name('profile');
 
 Route::get('/it_helpdesk')->name('api.it_helpdesk')->uses('HelpdeskRequestController@itdatatables');
 Route::get('/it_helpdesk', 'PagesController@itdatatables');
+Route::get('/it_helpdesk/create', 'HelpdeskRequestController@create')->name('it_helpdesk.create');
 
 Route::get('/ga_helpdesk')->name('api.ga_helpdesk')->uses('HelpdeskRequestController@itdatatables');
 Route::get('/ga_helpdesk', 'PagesController@gadatatables');

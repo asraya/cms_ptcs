@@ -21,7 +21,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>GA Helpdesk</a>
+                </span>IT Helpdesk</a>
             </div>
             <div class="card-toolbar">
                 <!--begin::Dropdown-->
@@ -91,7 +91,7 @@
                 </div>
                 <!--end::Dropdown-->
                 <!--begin::Button-->
-                <a href="/add_user" class="btn btn-primary font-weight-bolder">
+                <a href="/add_user" class="btn btn-danger font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -102,7 +102,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>New Record</a>
+                </span>Create</a>
                 <!--end::Button-->
             </div>
         </div>
@@ -206,47 +206,47 @@
                 var label = "";
                 if (data == 1){
                 text = "CAR, PARKING AND FIXTURES";
-                label = "success";
+                label = "danger";
                 } else 
                 if (data == 2){
                 text = "ELECTRICITY";
-                label = "success";
+                label = "danger";
                 }
                 if (data == 3){
                 text = "ELECTRONICS";
-                label = "success";
+                label = "danger";
                 }
                 if (data == 4){
                 text = "FURNITURE AND FIXTURES";
-                label = "success";
+                label = "danger";
                 }
                 if (data == 5){
                 text = "AIR CONDITIONER";
-                label = "success";
+                label = "danger";
                 }
                 if (data == 6){
                 text = "WORKSPACE FIT OUT";
-                label = "success";
+                label = "danger";
                 }
                 if (data == 7){
                 text = "SAFETY";
-                label = "success";
+                label = "danger";
                 }
                 if (data == 8){
                 text = "SANITATION";
-                label = "success";
+                label = "danger";
                 }
                 if (data == 9){
                 text = "TELEPHONE LINE AND GSM";
-                label = "success";
+                label = "danger";
                 }
                 if (data == 10){
                 text = "TOOLKITS AND MACHINERY";
-                label = "success";
+                label = "danger";
                 }
                 if (data == 11){
                 text = "OTHER";
-                label = "success";
+                label = "danger";
                 }
                 return "<span class='badge badge-" + label + "'>"+ text + "</span>";
                 }},
@@ -257,11 +257,11 @@
                 var label = "";
                 if (data == 1){
                 text = "Check";
-                label = "warning";
+                label = "primary";
                 } else 
                 if (data == 0){
                 text = "X";
-                label = "warning";
+                label = "danger";
                 }              
                 return "<span class='badge badge-" + label + "'>"+ text + "</span>";
                 }},
@@ -274,19 +274,19 @@
                 var label = "";
                 if (data == 0){
                 text = "Waiting";
-                label = "warning";
+                label = "primary";
                 } else 
                 if (data == 1){
                 text = "On Process";
-                label = "warning";
+                label = "primary";
                 }
                 if (data == 3){
                 text = "Solving";
-                label = "warning";
+                label = "primary";
                 }
                 if (data == 4){
                 text = "Closing";
-                label = "warning";
+                label = "primary";
                 }
                 return "<span class='badge badge-" + label + "'>"+ text + "</span>";
                 }},
