@@ -152,9 +152,10 @@
     <!--payment modal -->
     <form action="{{ route('invoice.final_invoice') }}" method="post">
         @csrf
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
+        <div class="modal fade" id="exampleModalCenter" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">
                             Invoice of {{ $user->user_name }}
@@ -178,6 +179,12 @@
                             <div class="form-group col-md-6">
                                 <label for="inputCity">Total</label>
                                 <input type="text" value="{{ Cart::total() }}"name="pay" class="form-control form-control-solid form-control-lg" readonly >
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputCity">Ep</label>
+                                    <input type="text" name="emp_id" 
+                                            class="form-control form-control-solid form-control-lg" 
+                                            value="{{ Auth::user()->emp_id }}" readonly/>
                             </div>
                         </div>
                     </div>

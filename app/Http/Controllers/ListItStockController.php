@@ -21,9 +21,9 @@ class ListItStockController extends Controller
             ->addIndexColumn()
                     ->addColumn('action', function($data){
                            
-                           $editUrl = url('edit/'.$data->user_id);
+                           $editUrl = url('edit/'.$data ->user_id);
                            $btn = '<a href="'.$editUrl.'" data-toggle="tooltip" data-original-title="Edit" class="btn-sm fa fa-bars"></a>';
-                        //    $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->user_id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteTodo">Delete</a>';
+                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->user_id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteTodo">Delete</a>';
         
                             return $btn;
                             
@@ -31,5 +31,10 @@ class ListItStockController extends Controller
          ->rawColumns(['action'])
          ->make(true);
          
+        }
+        public function create()
+        {
+            $roles = Role::pluck('name','name')->all();
+            return view('pages.listitstock.create',compact('roles'));
         }
     }

@@ -33,7 +33,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'api_token'
     ];
 
     /**
@@ -58,5 +58,9 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+    public function cart()
+    {
+        return $this->belongsToMany(Stationary::class, 'para_stationary')->withPivot('stock_item');
     }
 }

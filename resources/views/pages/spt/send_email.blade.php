@@ -1,56 +1,67 @@
-{{-- Extends layout --}}
-@extends('layout.default')
-
-{{-- Content --}}
-@section('content')
-
-<div class="card">
- <div class="card-body">
-
-			<div class="row">
-				<div class="col-xl-3"></div>
-				<div class="col-xl-7">
-					<!--begin::Input-->
-   <h3 align="center">send mail</h3><br />
-   @if (count($errors) > 0)
-    <div class="alert alert-danger">
-     <button type="button" class="close" data-dismiss="alert">×</button>
-     <ul>
-      @foreach ($errors->all() as $error)
-       <li>{{ $error }}</li>
-      @endforeach
-     </ul>
-    </div>
-   @endif
-   @if ($message = Session::get('success'))
-   <div class="alert alert-success alert-block">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-           <strong>{{ $message }}</strong>
-   </div>
-   @endif
-   <form method="post" action="{{url('sendemail/send')}}">
-    {{ csrf_field() }}
-    <div class="form-group">
-     <label>Enter Your Name</label>
-     <input type="text" name="name" class="form-control" value="" />
-    </div>
-    <div class="form-group">
-     <label>Enter Your Email</label>
-     <input type="text" name="email" class="form-control" value="" />
-    </div>
-    <div class="form-group">
-     <label>Enter Your Message</label>
-     <textarea name="message" class="form-control"></textarea>
-    </div>
-    <div class="form-group">
-     <input type="submit" name="send" class="btn btn-info" value="Send" />
-    </div>
-   </form>
-   
-  </div>
- </body>
- </div>
- </div>
- </div>
-
- @endsection
+	
+<html>
+	<head></head>
+	<body>
+		<form>
+		<table id="tampilan">
+<tr>
+<td width="25%"><label for="alamat">Data Penerima</label></td>
+<td>
+<input type="radio" name="alamat" value="sama" class="detail"> Sama dengan data Pembeli
+ 
+</td>
+<td width="40%">
+<input type="radio" name="alamat" value="berbeda" class="detail">Data berbeda
+</td>
+</tr>
+ 
+<tr>
+<td>
+</td>
+<td>
+</td>
+ 
+<td>
+<div id="form-input">
+ 
+<p>Nama<br />
+<input type="text" name="nama"></p>
+<p>Telpon/HP<br />
+<input type="text" name="telpon"></p>
+<p>Email<br />
+<input type="text" name="email"></p>
+ 
+</div>
+</td>
+ 
+</tr>
+</table>
+		</form>
+		<!-- tambahkan jquery-->
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$(":radio.rad").click(function(){
+					$("#form1, #form2").hide()
+					if($(this).val() == "1"){
+						$("#form1").show();
+					}else{
+						$("#form2").show();
+					}
+				});
+			});
+		</script>
+                <script>
+$(document).ready(function(){
+$("#form-input").css("display","none"); //Menghilangkan form-input ketika pertama kali dijalankan
+$(".detail").click(function(){ //Memberikan even ketika class detail di klik (class detail ialah class radio button)
+if ($("input[name='alamat']:checked").val() == "berbeda" ) { //Jika radio button "berbeda" dipilih maka tampilkan form-inputan
+$("#form-input").slideDown("fast"); //Efek Slide Down (Menampilkan Form Input)
+} else {
+$("#form-input").slideUp("fast"); //Efek Slide Up (Menghilangkan Form Input)
+}
+});
+});
+</script>
+	</body>
+</html>

@@ -25,13 +25,13 @@ return [
             'page' => '/users',
             'visible' => 'preview',
         ],
-        [
-            'title' => 'Role Permissions',
-            'root' => true,
-            'icon' => 'media/svg/icons/Home/Library.svg',
-            'page' => '/roles',
-            'visible' => 'preview',
-        ],  
+        // [
+        //     'title' => 'Role Permissions',
+        //     'root' => true,
+        //     'icon' => 'media/svg/icons/Home/Library.svg',
+        //     'page' => '/roles',
+        //     'visible' => 'preview',
+        // ],  
         [
             'title' => 'send mail',
             'root' => true,

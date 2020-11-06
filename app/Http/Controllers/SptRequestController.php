@@ -8,12 +8,20 @@ use DataTables;
 use Validator,Redirect,Response;
 use App\User;
 use auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMail;
 
 class SptRequestController extends Controller
 {
-  
+    public function index()
+    {
+          $page_title = 'test';
+        return view('pages.spt.spt_request', compact('page_title'));
+    }
+
     public function datatables()
     {        
+        $users = Auth::user()->emp_id;
         $data = Spt::query()
         ->select([
           
@@ -23,46 +31,112 @@ class SptRequestController extends Controller
             'tran_spt.status as status',
             'tbl_users.user_firstname',
             'tbl_users.user_lastname'
-        ])
-        ->leftJoin('tbl_users', 'tran_spt.emp_id', '=', 'tbl_users.emp_id');   
-        
+        ])      
+        ->leftJoin('tbl_users', 'tran_spt.emp_id', '=', 'tbl_users.emp_id')
+        ->where('tran_spt.emp_id', $users); 
         return Datatables::of($data)
                 ->addColumn('employee_name', function($data){
                     return $data->user_firstname . " " . $data->user_lastname;
                 })
                 ->addIndexColumn()                
-                            ->addColumn('action', function($data){
-                                $btn='';
+                ->addColumn('action', function($data){
+                    $btn='';
 
-                                if ($data->status=="needApproval") {
-                                    # code...
-                                    $btn.= 'Waiting for confirmation';
+                    if ($data->status=="needApproval") {
+                        # code...
+                        $btn.= 'Waiting for confirmation';
+        
+                    } elseif ($data->status=="Rejected") {
+                        
+                        $btn.= 'Your Item Rejected';
+        
+                    } else {
+                       $editUrl = url('edit/'.$data->id);
+                       $btn = '<a href="'.$editUrl.'" data-toggle="tooltip" data-original-title="Edit" class="btn-sm fa fa-bars"></a>';
+                    //    $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->user_id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteTodo">Delete</a>';
+                    }
+                        return $btn;
+                        
+                })
+     ->rawColumns(['action'])
+     ->make(true);
+}    
+               
+
+                    public function show($id)
+                    {
+                        $spt = Spt::with('user')->where('id', $id)->first();
+                        return view('pages.spt.spt_request', compact('spt'));
+                    }
                     
-                                } elseif ($data->status=="Rejected") {
-                                    
-                                    $btn.= 'Your Item Rejected';
-                    
-                                } else {
-                                   $editUrl = url('edit/'.$data->id);
-                                   $btn = '<a href="'.$editUrl.'" data-toggle="tooltip" data-original-title="Edit" class="btn-sm fa fa-bars"></a>';
-                                //    $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->user_id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteTodo">Delete</a>';
-                                }
-                                    return $btn;
-                                    
-                            })
-                 ->rawColumns(['action'])
-                 ->make(true);
-        }    
+        public function send(Request $request)
+        {
+            $request->validate([
+                'spt_no' => 'required',
+                'requester_id' => 'required',
+                'emp_id' => 'required',
+                'position' => 'required',
+                'destination' => 'required',
+                'purpose' => 'required',
+                'spt_start' => 'required',
+                'spt_end' => 'required',
+
+            ]);
+            $contact = new Spt([
+                'spt_no' => $request->get('spt_no'),
+                'requester_id' => $request->get('requester_id'),
+                'emp_id' => $request->get('emp_id'),
+                'position' => $request->get('position'),
+                'destination' => $request->get('destination'),
+                'purpose' => $request->get('purpose'),
+                'spt_start' => $request->get('spt_start'),
+                'spt_end' => $request->get('spt_end'),
+                'status' => $request->get('status'),
+
+
+            ]);
+            Mail::to('asep.rayana@ymail.com')->send(new SendMail($contact));
+            $contact->save();
+            return redirect('/spt_request')->with('success', 'Spt saved!');
+
+        }
+        // public function send(Request $request)
+        // {
+        //     $inputs = $request->except('_token');
+        //     $rules = [
+        //         'spt_id' => 'required',
+        //         'spt_no' => 'required',
+        //         'requester_id' => 'required',
+        //         'emp_id' => 'required',
+        //         'position' => 'required',
+        //         'destination' => 'required',
+        //         'purpose' => 'required',
+        //         'spt_start' => 'required',
+        //         'spt_end' => 'required',
     
-    public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|email',
-        ]);
-        $show = User::create($validatedData);   
-        return redirect('/user')->with('success', 'User Case is successfully saved');
-    }
+        //     ];
+        //     $customMessages = [
+        //         'spt_id' => 'required',
+        //         'spt_no' => 'required',
+        //         'requester_id' => 'required',
+        //         'emp_id' => 'required',
+        //         'position' => 'required',
+        //         'destination' => 'required',
+        //         'purpose' => 'required',
+        //         'spt_start' => 'required',
+        //         'spt_end' => 'required',
+    
+        //     ];
+        //     Mail::to('asep.rayana@ymail.com')->send(new SendMail($inputs, $rules, $customMessages));
+        //     $validator = Validator::make($inputs, $rules, $customMessages);
+        //     if ($validator->fails())
+        //     {
+        //         return redirect()->back()->withErrors($validator)->withInput();
+        //     }
+    
+        //     return back()->with('success', 'Thanks for contacting us!');
+
+        // }
 
     public function edit(Request $request, $id)
     {       

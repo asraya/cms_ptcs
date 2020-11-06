@@ -16,6 +16,16 @@ use App\User;
 
 class HelpdeskRequestController extends Controller
 {
+    public function create()
+    {
+        $roles = Role::pluck('name','name')->all();
+        return view('pages.helpdesk.it.create',compact('roles'));
+    }
+    public function ga_create()
+    {
+        $roles = Role::pluck('name','name')->all();
+        return view('pages.helpdesk.ga.create',compact('roles'));
+    }
     public function itdatatables()
     {
         $data = IThelpdesk::query()

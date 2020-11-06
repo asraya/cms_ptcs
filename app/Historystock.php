@@ -10,10 +10,15 @@ class Historystock extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function role()
+    {
+        return $this->hasMany(Roles::class);
+    }
 
     public function order_details()
     {
         return $this->hasMany(HistorystockDetail::class);
     }
+    
 
 }

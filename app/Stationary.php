@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Stationary extends Model
 {
         protected $guarded = [];
+		protected $hidden = ['created_at'];
 
     protected $table = 'para_stationary';
-    protected $primaryKey = 'id_item';
     public function user_modify()
 	{
 		return $this->belongsTo('App\Model\User', 'user_modified');

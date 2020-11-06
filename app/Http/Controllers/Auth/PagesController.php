@@ -26,7 +26,7 @@ class PagesController extends Controller
     //spt
     public function spt_request()
     {
-        $page_title = 'Liat Spt request';
+        $page_title = 'Spt request';
         // $page_description = 'This is spt_request test page';
         return view('pages.spt.spt_request', compact('page_title'));
     }
@@ -59,7 +59,7 @@ class PagesController extends Controller
     //elearn
      public function elearn()
     {
-        $page_title = 'Liat elearn';
+        $page_title = 'elearn';
         $page_description = 'This is elearn test page';
         return view('pages.elearn.data_learn', compact('page_title', 'page_description'));
     }
@@ -67,20 +67,19 @@ class PagesController extends Controller
       
       public function pending_stockout()
       {
-
           $page_title = 'test';
           return view('stockout.pending_stockouts', compact('page_title'));
       }
     public function roles()
     {
         $page_title = 'roles';
-        $page_description = 'This is spt_request test page';
+        $page_description = 'This is roles test page';
         return view('pages.roles.index', compact('page_title', 'page_description'));
     }
     public function listdatatables()
     {
         $page_title = 'List IT Stoct';
-        return view('pages.listitstock.data_list', compact('page_title'));
+        return view('pages.listitstock.index', compact('page_title'));
     }
     public function fbodatatables()
     {

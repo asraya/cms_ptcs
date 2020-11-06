@@ -91,7 +91,7 @@
                 </div>
                 <!--end::Dropdown-->
                 <!--begin::Button-->
-                <a href="/add_user" class="btn btn-primary font-weight-bolder">
+                <a href="{{ route('it_helpdesk.create') }}"class="btn btn-danger font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -102,7 +102,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>New Record</a>
+                </span>Create</a>
                 <!--end::Button-->
             </div>
         </div>
@@ -206,31 +206,31 @@
                 var label = "";
                 if (data == 1){
                 text = "COMPANY APLICATION";
-                label = "success";
+                label = "danger";
                 } else 
                 if (data == 2){
                 text = "PRINCIPAL APLICATION";
-                label = "success";
+                label = "danger";
                 }
                 if (data == 3){
                 text = "EMAIL";
-                label = "success";
+                label = "danger";
                 }
                 if (data == 4){
                 text = "HARDWARE";
-                label = "success";
+                label = "danger";
                 }
                 if (data == 5){
                 text = "CONNECTION";
-                label = "success";
+                label = "danger";
                 }
                 if (data == 6){
                 text = "STANDARD SOFTWARE";
-                label = "success";
+                label = "danger";
                 }
                 if (data == 7){
                 text = "OTHER";
-                label = "success";
+                label = "danger";
                 }
                 return "<span class='badge badge-" + label + "'>"+ text + "</span>";
                 }},
@@ -241,11 +241,11 @@
                 var label = "";
                 if (data == 1){
                 text = "Check";
-                label = "warning";
+                label = "primary";
                 } else 
                 if (data == 0){
                 text = "X";
-                label = "warning";
+                label = "danger";
                 }              
                 return "<span class='badge badge-" + label + "'>"+ text + "</span>";
                 }},
@@ -259,19 +259,19 @@
                 var label = "";
                 if (data == 0){
                 text = "Waiting";
-                label = "warning";
+                label = "primary";
                 } else 
                 if (data == 1){
                 text = "On Process";
-                label = "warning";
+                label = "primary";
                 }
                 if (data == 3){
                 text = "Solving";
-                label = "warning";
+                label = "primary";
                 }
                 if (data == 4){
                 text = "Closing";
-                label = "warning";
+                label = "primary";
                 }
                 return "<span class='badge badge-" + label + "'>"+ text + "</span>";
                 }},
