@@ -88,7 +88,7 @@ Route::post('invoice-final', 'InvoiceController@final_invoice')->name('invoice.f
 Route::resource('stockout/pending','StockOutController');
 
 Route::get('stockout/show/{id}', 'StockOutController@show')->name('stockout.show');
-Route::get('general_request', 'StockOutController@index')->name('stockout.pending');
+Route::get('stockout/pending', 'StockOutController@index')->name('stockout.pending');
 Route::get('/pending')->name('api.pending_stockout')->uses('StockOutController@pending_stockout');
 
 Route::get('stockout/approved', 'StockOutController@approved_stockout')->name('stockout.approved');

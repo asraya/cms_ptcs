@@ -62,6 +62,8 @@ class StockOutController extends Controller
         if($who_login->hasRole(['User', 'Sekretaris'])){
             $data->where('historystocks.emp_id', $users)
             ->orwhere('id', '1', $users1);
+        }elseif($who_login->hasRole(['GA', 'HRD'])){
+            
         }
 
         if($filter_status){

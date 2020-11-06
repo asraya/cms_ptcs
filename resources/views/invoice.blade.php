@@ -134,7 +134,7 @@
                             <div class="row no-print">
                                 <div class="col-12">
                                     <a href="{{ route('invoice.print', $user->id) }}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
-                                    <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-success float-right"><i class="fa fa-credit-card"></i>
+                                    <button type="button" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-success float-right"><i class="fa fa-credit-card"></i>
                                         Submit
                                     </button>
                                 </div>
