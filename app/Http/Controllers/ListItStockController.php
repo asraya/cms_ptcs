@@ -12,6 +12,7 @@ use DB;
 use Session;
 use App\ListItStock;
 use App\User;
+
 class ListItStockController extends Controller
 {
     

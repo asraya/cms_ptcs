@@ -40,7 +40,6 @@ class StockOutController extends Controller
 
     public function pending_stockout()
     {
-        $users1 = Role::with('user');
         $users = Auth::user()->emp_id;
         $data = DB::table('historystocks')
         
@@ -56,8 +55,7 @@ class StockOutController extends Controller
         ])
         
         ->leftJoin('tbl_users', 'historystocks.emp_id', '=', 'tbl_users.emp_id')
-        ->where('historystocks.emp_id', $users)
-        ->orwhere('id', '1', $users1)->get();
+        ->where('historystocks.emp_id', $users);
 
         return DataTables::of($data)
         
