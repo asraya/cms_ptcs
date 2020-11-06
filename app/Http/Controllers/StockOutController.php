@@ -42,6 +42,9 @@ class StockOutController extends Controller
     {
         $users1 = Role::with('user');
         $users = Auth::user()->emp_id;
+        $who_login = User::find(Auth::user()->id);
+        //dd($who_login);
+        //dd($who_login->getRoleNames()[0]);
         $data = DB::table('historystocks')
         
         ->select([   
@@ -55,9 +58,16 @@ class StockOutController extends Controller
 
         ])
         
-        ->leftJoin('tbl_users', 'historystocks.emp_id', '=', 'tbl_users.emp_id')
-        ->where('historystocks.emp_id', $users)
-        ->orwhere('id', '1', $users1)->get();
+        ->leftJoin('tbl_users', 'historystocks.emp_id', '=', 'tbl_users.emp_id');
+        if($who_login->hasRole(['User', 'Sekretaris'])){
+            $data->where('historystocks.emp_id', $users)
+            ->orwhere('id', '1', $users1);
+        }
+
+        if($filter_status){
+            $data->where('status', $status);
+        }
+        $data->get();
 
         return DataTables::of($data)
         
@@ -144,16 +154,25 @@ class StockOutController extends Controller
 
 
         $stockout = Historystock::findOrFail($id);
+        //dd($stockout);
         $stockout->stockout_status = 'approved';
         // Stationary::where(['id'=>1])->decrement('stock_item', $id);
-      
-
+        $stockout_details = HistorystockDetail::with('product')->where('stockout_id', $id)->get();
+        
         $stockout->save();   
 
+        DB::enableQueryLog();
+        foreach($stockout_details as $details){
 
-        $stockout = Stationary::findOrFail(1);
-        $stockout = Stationary::where('id', $stockout->id);
-        $stockout->decrement('stock_item', 1);
+            //dd($details->product_id);
+            $stockout_item = Stationary::findOrFail(1);
+            $stockout_item = Stationary::where('id', $details->product_id);
+            $stockout_item->decrement('stock_item', $details->quantity);
+        }
+        dd(DB::getQueryLog());
+
+
+        
         
 
 
