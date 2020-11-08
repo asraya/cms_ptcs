@@ -24,7 +24,7 @@
 					<!--begin::Input-->
                     
                     <div class="form-group row">
-            <label class="col-form-label col-lg-3 col-sm-12">Employee ID</label>
+            <label class="col-form-label col-lg-3 col-sm-12">ID Stationary</label>
             <div class=" col-lg-9 col-md-9 col-sm-12">
                <input type="text" name="emp_id" class="form-control form-control-solid form-control-lg"  placeholder="Enter your Employee ID"/>
             </div>
@@ -32,28 +32,28 @@
 
                     
         <div class="form-group row">
-            <label class="col-form-label col-lg-3 col-sm-12">Name</label>
+            <label class="col-form-label col-lg-3 col-sm-12">Name Stationary</label>
             <div class=" col-lg-9 col-md-9 col-sm-12">
                <input type="text" name="name"  class="form-control form-control-solid form-control-lg" value="{{ Auth::user()->name }}" readonly/>
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-lg-3 col-sm-12">Jabatan</label>
+            <label class="col-form-label col-lg-3 col-sm-12">Stock</label>
             <div class=" col-lg-9 col-md-9 col-sm-12">
                <input type="text" name="jabatan"  class="form-control form-control-solid form-control-lg" placeholder="Enter your Jabatan"/>
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-lg-3 col-sm-12">Tujuan</label>
+            <label class="col-form-label col-lg-3 col-sm-12">Limit Request</label>
             <div class=" col-lg-9 col-md-9 col-sm-12">
                <input type="text" name="tujuan"  class="form-control form-control-solid form-control-lg" value="PT Control Systems Arena Para Nusa"/>
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-lg-3 col-sm-12">Keperluan</label>
+            <label class="col-form-label col-lg-3 col-sm-12">Unit</label>
             <div class=" col-lg-9 col-md-9 col-sm-12">
                <textarea name="keperluan"  class="form-control form-control-solid form-control-lg">
                
@@ -62,12 +62,12 @@
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-lg-2 col-sm-7">From</label>
+            <label class="col-form-label col-lg-2 col-sm-7">Price Stationary</label>
             <div class=" col-lg-4 col-md-5 col-sm-9">
                <input type="date" name="start"  class="form-control form-control-solid form-control-lg"/>
             </div>
         
-            <label class="col-form-label col-lg-1 col-sm-7">To:</label>
+            <label class="col-form-label col-lg-1 col-sm-7">Status:</label>
             <div class=" col-lg-4 col-md-5 col-sm-9">
                <input type="date" name="end"  class="form-control form-control-solid form-control-lg"/>
             </div>

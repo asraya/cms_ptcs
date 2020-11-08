@@ -136,7 +136,34 @@
                                     <span><i class="flaticon2-search-1 text-muted"></i></span>
                                 </div>
                             </div>
-
+                            <div class="col-xs-12 col-sm-1" style="margin-top:7px;">
+                                Status 
+                            </div>
+                            <div class="col-xs-12 col-sm-5">
+                                <select name="status" class="form-control">
+                                    <?php
+                                        $selected = "";
+                                        if ($status == "0"){
+                                            $selected = "selected";
+                                        }
+                                    ?>
+                                    <option value="0" <?=$selected;?>>All</option>
+                                    <?php
+                                        $selected = "";
+                                        if ($status === "order"){
+                                            $selected = "selected";
+                                        }
+                                    ?>
+                                    <option value="order" <?=$selected;?>>Order</option>
+                                    <?php
+                                        $selected = "";
+                                        if ($status === "received"){
+                                            $selected = "selected";
+                                        }
+                                    ?>
+                                    <option value="received" <?=$selected;?>>Received</option>
+                                </select>
+                            </div>
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
                                     <label class="mr-3 mb-0 d-none d-md-block">Status:</label>

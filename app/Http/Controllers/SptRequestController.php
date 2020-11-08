@@ -22,6 +22,8 @@ class SptRequestController extends Controller
     public function datatables()
     {        
         $users = Auth::user()->emp_id;
+        $who_login = User::find(Auth::user()->id);
+
         $data = Spt::query()
         ->select([
           
@@ -32,8 +34,13 @@ class SptRequestController extends Controller
             'tbl_users.user_firstname',
             'tbl_users.user_lastname'
         ])      
-        ->leftJoin('tbl_users', 'tran_spt.emp_id', '=', 'tbl_users.emp_id')
-        ->where('tran_spt.emp_id', $users); 
+        ->leftJoin('tbl_users', 'tran_spt.emp_id', '=', 'tbl_users.emp_id');
+        if($who_login->hasRole(['User', 'Sekretaris'])){
+            $data->where('tran_spt.emp_id', $users);
+            // ->orwhere('id', '1', $users1);
+        }elseif($who_login->hasRole(['GA', 'HRD'])){
+            
+        }        
         return Datatables::of($data)
                 ->addColumn('employee_name', function($data){
                     return $data->user_firstname . " " . $data->user_lastname;
