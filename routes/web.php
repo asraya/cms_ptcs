@@ -24,7 +24,7 @@ Auth::routes();
 
 
 Route::get('/elearn', 'PagesController@elearn');
-Route::get('elearn/{id}', 'ElearnController@edit');
+Route::get('elearn/{id}', 'ElearnController@show');
 // Route::get('/role', 'PagesController@role');
 Route::get('/profile', 'ProfileController@index')->name('profile');
 
@@ -89,6 +89,9 @@ Route::resource('stockout/pending','StockOutController');
 
 Route::get('stockout/show/{id}', 'StockOutController@show')->name('stockout.show');
 Route::get('general_request', 'StockOutController@index')->name('stockout.pending');
+Route::get('general_request/{id}', 'StockOutController@edit');
+// Route::get('elearn/{id}', 'ElearnController@show');
+
 Route::get('/pending')->name('api.pending_stockout')->uses('StockOutController@pending_stockout');
 
 Route::get('stockout/approved', 'StockOutController@approved_stockout')->name('stockout.approved');

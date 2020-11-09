@@ -4,43 +4,24 @@
 {{-- Content --}}
 @section('content')
 
-    {{-- Dashboard 1 --}}
-
-    <div class="row">
-        <div class="col-lg-6 col-xxl-4">
-            @include('pages.widgets._widget-1', ['class' => 'card-stretch gutter-b'])
+<!--Begin::Row-->
+<div class="row">
+    <div class="col-xl-4">
+        <!--begin::Stats Widget 4-->
+ <div class="card card-custom card-stretch gutter-b">
+    <!--begin::Body-->
+    <div class="card-body d-flex align-items-center py-0 mt-8">
+        <div class="d-flex flex-column flex-grow-1 py-2 py-lg-5">
+            <a href="#" class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-2 text-hover-primary">Account</a>
+            <span class="font-weight-bold text-muted  font-size-lg">{{ Auth::user()->user_name }}</span>
         </div>
+        <img alt="Logo" src="{{ asset('media/svg/avatars/029-boy-11.svg') }}"/>
 
-        <div class="col-lg-6 col-xxl-4">
-            @include('pages.widgets._widget-2', ['class' => 'card-stretch gutter-b'])
-        </div>
-
-        <div class="col-lg-6 col-xxl-4">
-            @include('pages.widgets._widget-3', ['class' => 'card-stretch card-stretch-half gutter-b'])
-            @include('pages.widgets._widget-4', ['class' => 'card-stretch card-stretch-half gutter-b'])
-        </div>
-
-        <div class="col-lg-6 col-xxl-4 order-1 order-xxl-1">
-            @include('pages.widgets._widget-5', ['class' => 'card-stretch gutter-b'])
-        </div>
-
-        <div class="col-xxl-8 order-2 order-xxl-1">
-            @include('pages.widgets._widget-6', ['class' => 'card-stretch gutter-b'])
-        </div>
-
-        <div class="col-lg-6 col-xxl-4 order-1 order-xxl-2">
-            @include('pages.widgets._widget-7', ['class' => 'card-stretch gutter-b'])
-        </div>
-
-        <div class="col-lg-6 col-xxl-4 order-1 order-xxl-2">
-            @include('pages.widgets._widget-8', ['class' => 'card-stretch gutter-b'])
-        </div>
-
-        <div class="col-lg-12 col-xxl-4 order-1 order-xxl-2">
-            @include('pages.widgets._widget-9', ['class' => 'card-stretch gutter-b'])
-        </div>
     </div>
-
+    <!--end::Body-->
+ </div>
+    </div>
+    </div>
 @endsection
 
 {{-- Scripts Section --}}

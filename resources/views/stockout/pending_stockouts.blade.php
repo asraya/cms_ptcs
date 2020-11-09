@@ -139,31 +139,7 @@
                             <div class="col-xs-12 col-sm-1" style="margin-top:7px;">
                                 Status 
                             </div>
-                            <div class="col-xs-12 col-sm-5">
-                                <select name="status" class="form-control">
-                                    <?php
-                                        $selected = "";
-                                        if ($status == "0"){
-                                            $selected = "selected";
-                                        }
-                                    ?>
-                                    <option value="0" <?=$selected;?>>All</option>
-                                    <?php
-                                        $selected = "";
-                                        if ($status === "order"){
-                                            $selected = "selected";
-                                        }
-                                    ?>
-                                    <option value="order" <?=$selected;?>>Order</option>
-                                    <?php
-                                        $selected = "";
-                                        if ($status === "received"){
-                                            $selected = "selected";
-                                        }
-                                    ?>
-                                    <option value="received" <?=$selected;?>>Received</option>
-                                </select>
-                            </div>
+                          
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
                                     <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
@@ -211,6 +187,41 @@
                                     </thead>               
                </table>   
            </div>   
+           </div>
+        <div class="modal fade" id="exampleModalCenter" data-backdrop="static" tabindex="-1" 
+        role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modelHeading"></h4>
+                <button type=button data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+            </div>
+            <div class="modal-body">
+                <form id="StockoutForm" name="StockoutForm" class="form-horizontal">
+                   <input type="hidden" name="id" id="id">
+                    <div class="form-group row">                    
+                    <label class="col-xl-3 col-lg-3 col-form-label text-right">employee ID</label>
+                    <div class="col-lg-9 col-xl-6">
+                    <input class="form-control form-control-lg form-control-solid" id="emp_id" name="emp_id" placeholder="Enter Name" value="" maxlength="50" required="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label text-right">Status</label>
+                    <div class="col-lg-9 col-xl-6">
+                            <input class="form-control form-control-lg form-control-solid" id="stockout_status" name="stockout_status" placeholder="Enter Name" value="" maxlength="50" required="">
+                        </div>
+                    </div>
+                    
+                     <!-- <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Save changes </button> -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
        </div>
 
        
@@ -229,6 +240,9 @@
    
        {{-- page scripts --}}
        <script src="{{ asset('js/pages/crud/datatables/basic/basic.js') }}" type="text/javascript"></script>
+
+       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" type="text/javascript"></script>
+
        <!-- <script src="{{ asset('js/app.js') }}" type="text/javascript"></script> -->
        <script> 
     var table = $('.test').DataTable({
@@ -257,6 +271,67 @@
             ],
     });
     
+    $('#createNewCustomer').click(function () {
+        $('#saveBtn').val("create-Customer");
+        $('#id').val('');
+        $('#StockoutForm').trigger("reset");
+        $('#modelHeading').html("Create New Customer");
+        $('#exampleModalCenter').modal('show');
+    });
+    $('body').on('click', '.editStockout', function () {
+      var id = $(this).data('id');
+      $.get("" + 'general_request' +'/'+ id , function (data) {
+          
+          $('#modelHeading').html("Show");
+          $('#saveBtn').val("edit-user");
+          $('#exampleModalCenter').modal('show');
+          $('#id').val(data.id);
+          $('#emp_id').val(data.emp_id);
+          $('#stockout_status').val(data.stockout_status);
+
+      })
+   });
+   $('#saveBtn').click(function (e) {
+        e.preventDefault();
+        $(this).html('Sending..');
+
+        $.ajax({
+          data: $('#StockoutForm').serialize(),
+          url: "",
+          type: "POST",
+          dataType: 'json',
+          success: function (data) {
+
+              $('#StockoutForm').trigger("reset");
+              $('#exampleModalCenter').modal('hide');
+              table.draw();
+
+          },
+          error: function (data) {
+              console.log('Error:', data);
+              $('#saveBtn').html('Save Changes');
+          }
+      });
+    });
+
+    $('body').on('click', '.deleteCustomer', function () {
+
+        var id = $(this).data("id");
+        confirm("Are You sure want to delete !");
+
+        $.ajax({
+            type: "DELETE",
+            url: ""+'/'+id,
+            success: function (data) {
+                table.draw();
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+        });
+    });
+
+
         $('body').on('click', '.deleteTodo', function () {
  
  var user_id = $(this).data("id");
@@ -266,7 +341,7 @@
        type: "get",
        url: "{{ url('delete-user') }}"+'/'+user_id,
        success: function (data) {
-       var oTable = $('#test').dataTable(); 
+       var oTable = $('#elearn').dataTable(); 
        oTable.fnDraw(false);
        },
        error: function (data) {
@@ -277,5 +352,3 @@
     });
 </script>
 @endsection
-
-   

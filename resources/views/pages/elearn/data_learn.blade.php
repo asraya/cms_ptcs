@@ -91,7 +91,8 @@
                     </svg>
                     <!--end::Svg Icon-->
                 </span>Create</a>
-                
+                <a class="btn btn-success" href="javascript:void(0)" id="createNewCustomer"> Create New Customer</a>
+
                 <!--end::Button-->
             </div>
         </div>
@@ -162,7 +163,34 @@
             </table>
 
         </div>
+        <div class="modal fade" id="exampleModalCenter" data-backdrop="static" tabindex="-1" 
+        role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modelHeading"></h4>
+            </div>
+            <div class="modal-body">
+                <form id="ElearnForm" name="ElearnForm" class="form-horizontal">
+                   <input type="text" name="learn_id" id="learn_id">
+                    <div class="form-group">
+                        <label for="emp_id" class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="emp_id" name="emp_id" placeholder="Enter Name" value="" maxlength="50" required="">
+                        </div>
+                    </div>
 
+                
+
+                    <div class="col-sm-offset-2 col-sm-10">
+                     <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Save changes
+                     </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
     </div>
 
 @endsection
@@ -180,6 +208,8 @@
 
     {{-- page scripts --}}
     <script src="{{ asset('js/pages/crud/datatables/basic/basic.js') }}" type="text/javascript"></script>
+ 
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <!-- <script src="{{ asset('js/app.js') }}" type="text/javascript"></script> -->
     <script> 
  var table = $('.elearn').DataTable({
@@ -219,6 +249,65 @@
 
         ],
     });
+    $('#createNewCustomer').click(function () {
+        $('#saveBtn').val("create-Customer");
+        $('#id').val('');
+        $('#ElearnForm').trigger("reset");
+        $('#modelHeading').html("Create New Customer");
+        $('#exampleModalCenter').modal('show');
+    });
+    $('body').on('click', '.editCustomer', function () {
+      var emp_id = $(this).data('emp_id');
+      $.get("" + 'elearn' +'/'+ emp_id , function (data) {
+          $('#modelHeading').html("Edit Customer");
+          $('#saveBtn').val("edit-user");
+          $('#exampleModalCenter').modal('show');
+          $('#learn_id').val(data.learn_id);
+          $('#emp_id').val(data.emp_id);
+          $('#learn_approval').val(data.learn_approval);
+      })
+   });
+   $('#saveBtn').click(function (e) {
+        e.preventDefault();
+        $(this).html('Sending..');
+
+        $.ajax({
+          data: $('#ElearnForm').serialize(),
+          url: "",
+          type: "POST",
+          dataType: 'json',
+          success: function (data) {
+
+              $('#ElearnForm').trigger("reset");
+              $('#exampleModalCenter').modal('hide');
+              table.draw();
+
+          },
+          error: function (data) {
+              console.log('Error:', data);
+              $('#saveBtn').html('Save Changes');
+          }
+      });
+    });
+
+    $('body').on('click', '.deleteCustomer', function () {
+
+        var id = $(this).data("id");
+        confirm("Are You sure want to delete !");
+
+        $.ajax({
+            type: "DELETE",
+            url: ""+'/'+id,
+            success: function (data) {
+                table.draw();
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+        });
+    });
+
+
         $('body').on('click', '.deleteTodo', function () {
  
  var user_id = $(this).data("id");

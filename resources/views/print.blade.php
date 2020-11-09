@@ -112,10 +112,7 @@
                                         <th style="width:50%">Subtotal:</th>
                                         <td class="text-right">{{ Cart::subtotal() }}</td>
                                     </tr>
-                                    <tr>
-                                        <th>Tax (0%)</th>
-                                        <td class="text-right">{{ Cart::tax() }}</td>
-                                    </tr>
+                                   
                                     <tr>
                                         <th>Total:</th>
                                         <td class="text-right">{{ Cart::total() }}</td>

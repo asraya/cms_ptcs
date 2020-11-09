@@ -28,10 +28,9 @@ class ElearnController extends Controller
         ->addIndexColumn()
                 ->addColumn('action', function($data){
                        
-                       $editUrl = url('edit/'.$data->id);
-                       $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="{{ $id }}" data-original-title="Edit" class="edit btn btn-success edit-user">
-                       Edit
-                   </a>';
+                       $editUrl = url('edit/'.$data->emp_id);
+                       $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->emp_id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editCustomer">Edit</a>';
+
                      
                        $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteTodo">Delete</a>';
                         return $btn;
@@ -41,10 +40,8 @@ class ElearnController extends Controller
      ->make(true);
     }
     public function edit($id)
-{   
-    $where = array('id' => $id);
-    $user  = Elearn::where($where)->first();
- 
-    return Response::json($user);
-}
+    {
+        $Elearn = Elearn::find($id);
+        return response()->json($Elearn);
+    }
 }

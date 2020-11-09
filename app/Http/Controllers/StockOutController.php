@@ -41,11 +41,7 @@ class StockOutController extends Controller
     public function pending_stockout()
     {
         // $users1 = Role::with('user');
-        if (isset($_GET['status']) && $_GET['status']!=""){
-			$status = $_GET['status'];
-		}else{
-			$status = 0;
-		}        $users = Auth::user()->emp_id;
+       $users = Auth::user()->emp_id;
         $who_login = User::find(Auth::user()->id);
         //dd($who_login);
         //dd($who_login->getRoleNames()[0]);
@@ -82,18 +78,17 @@ class StockOutController extends Controller
                 })
                 ->addColumn('action', function ($stockout) {
              
-
+            // $button = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$stockout->id.'" data-original-title="Edit"  class="btn-sm fa fa-bars editStockout"></a>'; 
             $button = '<a class="btn btn-sm btn-info" href="' . route('stockout.show', $stockout->id) . '" >Show <i class="fa fa-eye"></i></a>';
             if (\Auth::user()->can('user-edit')) {
-                $button .= '&nbsp;&nbsp;&nbsp;<a class="btn btn-sm btn-primary" href="' . route('users.edit', $stockout->id) . '" >Edit <i class="fa fa-edit"></i></a>';
+                $button = '&nbsp;&nbsp;&nbsp;<a class="btn btn-sm btn-primary" href="' . route('users.edit', $stockout->id) . '" >Edit <i class="fa fa-edit"></i></a>';
             }
             if (\Auth::user()->can('user-delete')) {
-                $button .= '&nbsp;&nbsp;&nbsp;<a id="' . $stockout->id . '" class="delete btn btn-sm btn-danger" href="#" >Delete <i class="fa fa-trash"></i></a>';
+                $button = '&nbsp;&nbsp;&nbsp;<a id="' . $stockout->id . '" class="delete btn btn-sm btn-danger" href="#" >Delete <i class="fa fa-trash"></i></a>';
             }
             return $button;
         })
         ->rawColumns(['action'])
-        // ->make(true);  
                 ->make(true);
             }
        
@@ -146,7 +141,16 @@ class StockOutController extends Controller
         // })
         // ->rawColumns(['action'])
         // ->make(true);    
-    
+        public function edit($id)
+        {
+            $stockout = Historystock::find($id);
+         
+            
+            $stockout->save();  
+
+            return response()->json($stockout);
+            
+        }
     public function approved_stockout()
     {
         $approveds = Historystock::latest()->with('user')->where('stockout_status', 'approved')->get();
