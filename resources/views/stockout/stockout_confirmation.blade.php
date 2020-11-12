@@ -92,11 +92,29 @@
                                             @foreach($stockout_details as $stockout_detail)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
+
                                                     <td>{{ $stockout_detail->product->name_stat }}</td>
                                                     <td>{{ $stockout_detail->product->id }}</td>
-                                                    <td>{{ $stockout_detail->quantity }}</td>
+                                                    <!-- <td>{{ $stockout_detail->quantity }}</td> -->
+                                                    <td><input type="number" name="quantity" class="form-control" value="{{ $stockout_detail->quantity }}"><td>
+
                                                     <td>{{ $unit_cost = $stockout_detail->unit_cost, 2}}</td>
                                                     <td>{{ $unit_cost * $stockout_detail->quantity, 2}}</td>
+
+                                                    <form action="{{ route('stockout.update', $stockout_detail->rowId) }}" method="post">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <td>
+                                                    </td>
+                                                 
+                                                    <td>
+                                                        <button type="submit" class="btn btn-sm btn-primary">
+                                                            <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                                        </button>
+                                                    </td>
+                                                </form>
+
+
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -151,9 +169,14 @@
                             <!-- this row will not appear when printing -->
                             <div class="row no-print">
                                 <div class="col-12">
-                                    @if($stockout->stockout_status === 'approved')
+                                    @if($stockout->stockout_status === 'WAITING PROCESS ADMIN')
                                         <a href="{{ route('invoice.stockout_print', $stockout->id) }}" target="_blank" class="btn btn-default">
                                             <i class="fa fa-print"></i> Print
+                                        </a>
+                                    @endif
+                                    @if($stockout->stockout_status === 'pending')
+                                        <a href="{{ route('req.edit', $stockout->id) }}" target="_blank" class="btn btn-default">
+                                            <i class="fa fa-pencil"></i> edit
                                         </a>
                                     @endif
                                     @can('role-approved')
@@ -164,12 +187,22 @@
                                         </a>
                                     @endcan
                                     @endif
+
+                                    @can('role-approved-ga')
                                     @if($stockout->stockout_status === 'approved')
+                                        <a href="{{ route('stockout.confirmGa', $stockout->id) }}" class="btn btn-success float-right">
+                                            <i class="fa fa-credit-card"></i>
+                                            PROCESS
+                                        </a>
+                                    @endcan
+                                    @endif
+
+                                    @if($stockout->stockout_status === 'WAITING PROCESS ADMIN')
                                         <a href="{{ route('stockout.download', $stockout->id) }}" target="_blank" class="btn btn-primary float-right" style="margin-right: 5px;">
                                             <i class="fa fa-download"></i> Generate PDF
                                         </a>
                                     @endif
-                                </div>                    
+                                </div>     
                             </div>
                         </div>
                         <!-- /.invoice -->

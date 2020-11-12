@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Storage;
 use Auth;
 use DataTables;
 use Illuminate\Http\Request;
-
+use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Validator;
 class StockOutController extends Controller
 {
     public function __construct()
@@ -55,14 +56,12 @@ class StockOutController extends Controller
             'tbl_users.user_firstname',
             'tbl_users.user_lastname',
             'tbl_users.user_id',
-
-        ])
-        
+        ])        
         ->leftJoin('tbl_users', 'historystocks.emp_id', '=', 'tbl_users.emp_id');
         if($who_login->hasRole(['User', 'Sekretaris'])){
             $data->where('historystocks.emp_id', $users);
             // ->orwhere('id', '1', $users1);
-        }elseif($who_login->hasRole(['GA', 'HRD'])){
+        }elseif($who_login->hasRole(['HRD'])){
             
         }
 
@@ -78,14 +77,15 @@ class StockOutController extends Controller
                 })
                 ->addColumn('action', function ($stockout) {
              
-            // $button = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$stockout->id.'" data-original-title="Edit"  class="btn-sm fa fa-bars editStockout"></a>'; 
-            $button = '<a class="btn btn-sm btn-info" href="' . route('stockout.show', $stockout->id) . '" >Show <i class="fa fa-eye"></i></a>';
-            if (\Auth::user()->can('user-edit')) {
-                $button = '&nbsp;&nbsp;&nbsp;<a class="btn btn-sm btn-primary" href="' . route('users.edit', $stockout->id) . '" >Edit <i class="fa fa-edit"></i></a>';
+            $button = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$stockout->id.'" data-original-title="Edit"  class="btn-sm fa fa-bars editStockout"></a>'; 
+            // $button = '<a class="btn btn-sm btn-info" href="' . route('stockout.show', $stockout->id) . '" >Show <i class="fa fa-eye"></i></a>';
+            if (\Auth::user()->can('role-show-req-stationary')) {
+                $button = '&nbsp;&nbsp;&nbsp;<a class="btn btn-sm btn-primary" href="' . route('stockout.show', $stockout->id) . '" >Edit <i class="fa fa-edit"></i></a>';
             }
-            if (\Auth::user()->can('user-delete')) {
+            elseif(\Auth::user()->can('users-delete')) {
                 $button = '&nbsp;&nbsp;&nbsp;<a id="' . $stockout->id . '" class="delete btn btn-sm btn-danger" href="#" >Delete <i class="fa fa-trash"></i></a>';
             }
+            
             return $button;
         })
         ->rawColumns(['action'])
@@ -140,14 +140,12 @@ class StockOutController extends Controller
         //     return $button;
         // })
         // ->rawColumns(['action'])
-        // ->make(true);    
+        // ->make(true);   
+
         public function edit($id)
         {
-            $stockout = Historystock::find($id);
-         
-            
-            $stockout->save();  
-
+            $stockout = Historystock::find($id);      
+            $stockout->save();
             return response()->json($stockout);
             
         }
@@ -157,11 +155,28 @@ class StockOutController extends Controller
         return view('stockout.approved_stockouts', compact('approveds'));
     }
 
+    public function update(Request $request, $rowId)
+    {
+        $qty = $request->input('qty');
+        Cart::update($rowId, $qty);
+
+        Toastr::success('List Updated Successfully', 'Success');
+        return redirect('/pegawai');
+    }
+
+    public function stockout_confirm_ga($id)
+    {
+        $stockout = Historystock::findOrFail($id);
+        $stockout->stockout_status = 'WAITING PROCESS ADMIN';
+        $stockout_details = HistorystockDetail::with('product')->where('stockout_id', $id)->get();        
+        $stockout->save();  
+        Toastr::success('stockout has been PROCESS!', 'Success');
+        return redirect()->back();
+    }
+    
+
     public function stockout_confirm($id)
 {
-   
-
-
 
         $stockout = Historystock::findOrFail($id);
         //dd($stockout);

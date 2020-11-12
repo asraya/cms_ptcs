@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use Faker\Factory as Faker;
 
 class UsersTableSeeder extends Seeder
 {
@@ -22,12 +23,18 @@ class UsersTableSeeder extends Seeder
 
     //     ]);
     // }
-public function run()
-{
-$array = ['emp_id' => 'CS1129', 'user_name'=>'Handi','email'=>'handi.irawan@ptcs.co.id','password'=>bcrypt('CS1129'), 'status' => true , 'api_token' => Str::random(60),
-
-];
-    
-    \App\User::create($array);
-}
+    public function run()
+    {
+        $faker = Faker::create();
+        foreach(range(0,731) as $i){
+            DB::table('users')->insert([
+                'emp_id'  => true,
+                'user_name' => $faker->name,
+                'email' => $faker->email,
+                'password' => bcrypt('123456'),
+                'status' => true,
+                'api_token' => Str::random(60)
+            ]);
+        }
+    }
 }

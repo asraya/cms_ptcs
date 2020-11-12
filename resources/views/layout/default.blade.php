@@ -5,14 +5,14 @@
         <meta charset="utf-8"/>
 
         {{-- Title Section --}}
-        <title>{{ config('app.name') }} | @yield('title', $page_title ?? '')</title>
+        <title>cms ptcs</title>
 
         {{-- Meta Data --}}
         <meta name="description" content="@yield('page_description', $page_description ?? '')"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
         {{-- Favicon --}}
-        <link rel="shortcut icon" href="{{ asset('media/logos/favicon.ico') }}" />
+        <link rel="shortcut icon" href="{{ asset('media/logos/ptcs.png') }}"/>
 
         {{-- Fonts --}}
         {{ Metronic::getGoogleFontsInclude() }}
@@ -71,7 +71,8 @@
 
         {{-- Includable JS --}}
         @yield('scripts')
-
+        
+      
     </body>
 </html>
 

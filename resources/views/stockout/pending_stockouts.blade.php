@@ -257,8 +257,12 @@
                 var text = "";
                 var label = "";
                 if (data == 'approved'){
-                text = "Approved";
+                text = "WAITING PROCESS ADMIN";
                 label = "success";
+                } else 
+                if (data == 'WAITING PROCESS ADMIN'){
+                text = "Done Process";
+                label = "danger";                
                 } else 
                 if (data == 'pending'){
                 text = "Pending";

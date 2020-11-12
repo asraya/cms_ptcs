@@ -41,5 +41,8 @@ class LoginController extends Controller
     {
         return 'user_name';
     }
-    
+    public function setPasswordAttribute($password)
+{
+    $this->attributes['password'] = \Hash::make($password);
+}
 }

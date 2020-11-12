@@ -23,7 +23,7 @@ class CartController extends Controller
     {
         $inputs = $request->except('_token');
         $rules = [
-          'id' => 'required | integer',
+          'id' => 'required',
           'name' => 'required',
           'qty' => 'required',
           'price' => 'required',

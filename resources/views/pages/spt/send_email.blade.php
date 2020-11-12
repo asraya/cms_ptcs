@@ -1,67 +1,29 @@
-	
+<!DOCTYPE html>
 <html>
-	<head></head>
-	<body>
-		<form>
-		<table id="tampilan">
-<tr>
-<td width="25%"><label for="alamat">Data Penerima</label></td>
-<td>
-<input type="radio" name="alamat" value="sama" class="detail"> Sama dengan data Pembeli
- 
-</td>
-<td width="40%">
-<input type="radio" name="alamat" value="berbeda" class="detail">Data berbeda
-</td>
-</tr>
- 
-<tr>
-<td>
-</td>
-<td>
-</td>
- 
-<td>
-<div id="form-input">
- 
-<p>Nama<br />
-<input type="text" name="nama"></p>
-<p>Telpon/HP<br />
-<input type="text" name="telpon"></p>
-<p>Email<br />
-<input type="text" name="email"></p>
- 
-</div>
-</td>
- 
-</tr>
-</table>
-		</form>
-		<!-- tambahkan jquery-->
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-		<script type="text/javascript">
-			$(function(){
-				$(":radio.rad").click(function(){
-					$("#form1, #form2").hide()
-					if($(this).val() == "1"){
-						$("#form1").show();
-					}else{
-						$("#form2").show();
-					}
-				});
-			});
-		</script>
-                <script>
-$(document).ready(function(){
-$("#form-input").css("display","none"); //Menghilangkan form-input ketika pertama kali dijalankan
-$(".detail").click(function(){ //Memberikan even ketika class detail di klik (class detail ialah class radio button)
-if ($("input[name='alamat']:checked").val() == "berbeda" ) { //Jika radio button "berbeda" dipilih maka tampilkan form-inputan
-$("#form-input").slideDown("fast"); //Efek Slide Down (Menampilkan Form Input)
-} else {
-$("#form-input").slideUp("fast"); //Efek Slide Up (Menghilangkan Form Input)
+<head>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+</head>
+<body>
+<select id="selectBox" onchange="changeFunc();">
+<option value="MCA">MCA</option>
+<option value="MBA">MBA</option>
+<option value="not_listed">Not Listed</option>
+</select>
+<input name="dd_number" placeholder="Add New" class="form-control" type="text" style="display: none" id="textboxes">
+
+<script type="text/javascript">
+function changeFunc() {
+var selectBox = document.getElementById("selectBox");
+var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+if (selectedValue=="not_listed"){
+$('#textboxes').show();
+
 }
-});
-});
+else {
+alert("Error");
+$('#textboxes').hide();
+}
+}
 </script>
-	</body>
+</body>
 </html>

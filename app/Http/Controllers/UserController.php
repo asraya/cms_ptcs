@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
+use Hashids\Hashids;
 
 class UserController extends Controller
 {
@@ -29,8 +30,10 @@ class UserController extends Controller
     }
     public function index(Request $request)
     {
+        $hashids = new Hashids();
+
         $data = User::orderBy('id','DESC')->paginate(10);
-        return view('users.index',compact('data'))
+        return view('users.index',compact('data', 'hashids'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
@@ -127,11 +130,11 @@ class UserController extends Controller
 
 
         $input = $request->all();
-        // if(!empty($input['password'])){ 
-        //     $input['password'] = Hash::make($input['password']);
-        // }else{
-        //     $input = array_except($input,array('password'));    
-        // }
+        if(!empty($input['password'])){ 
+            $input['password'] = Hash::make($input['password']);
+        }else{
+            $input = array_except($input,array('password'));    
+        }
 
 
         $user = User::find($id);

@@ -5,13 +5,12 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Historystock;
 use App\HistorystockDetail;
-use App\Stationary;
+use App\Souvenir;
 use Brian2694\Toastr\Facades\Toastr;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
-
-class ReqController extends Controller
+class ReqController2 extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,13 +19,13 @@ class ReqController extends Controller
      */
     public function index()
     {
-        $products = Stationary::get();
+        $products = Souvenir::get();
         $users = User::all();
         $cart_products = Cart::content();
 
 
         
-        return view('add_genreq.index', compact('products', 'users', 'cart_products'));
+        return view('add_genreq2.index', compact('products', 'users', 'cart_products'));
     }
 
     /**
@@ -35,7 +34,7 @@ class ReqController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
-    {
+    {   
         //
     }
 
@@ -67,19 +66,9 @@ class ReqController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-     
     public function edit($id)
     {
-        $user = HistorystockDetail::find($id);
-        $userss = User::all();
-        $cart_products = Cart::content();
-
-        
-        
-
-
-        return view('add_genreq.edit',compact('user', 'userss', 'cart_products'));
+        //
     }
 
     /**
@@ -89,23 +78,10 @@ class ReqController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-       public function update(Request $request, $id)
+    public function update(Request $request, $id)
     {
-        $this->validate($request, [
-    
-            'quantity' => 'required',
-        ]);
-
-        $role = HistorystockDetail::find($id);
-        $role->quantity = $request->input('quantity');
-        Cart::edit($rowId, $qty);
-
-        $role->save();      
-
-        return redirect()->route('req.index')
-        ->with('success','User updated successfully');
+        //
     }
-
 
     /**
      * Remove the specified resource from storage.

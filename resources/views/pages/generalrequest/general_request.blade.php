@@ -212,8 +212,7 @@
         serverSide: true,
         ajax: "{{ route ('api.pending_stockout') }}",
         columns: [
-                {data: 'user_id', name: 'user_id'},
-         
+                {data: 'user_id', name: 'user_id'},         
                 {data: 'action', name: 'action', orderable: false, searchable: false}
 
             ],

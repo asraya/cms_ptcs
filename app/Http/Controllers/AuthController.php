@@ -25,32 +25,32 @@ class AuthController extends Controller
     {
         if (Auth::check()) { // true sekalian session field di users nanti bisa dipanggil via Auth
             //Login Success
-            return redirect()->route('home');
+            return redirect()->route('login');
         }
-        return view('login');
+        // return view('login');
     }
  
     public function login(Request $request)
     {
-        $rules = [
-            'user_name'                 => 'required|string',
-            'password'              => 'required|string'
-        ];
+    //     $rules = [
+    //         'user_name'                 => 'required|string',
+    //         'password'              => 'required|string'
+    //     ];
  
-        $messages = [
-            'email.required'        => 'Email wajib diisi',
-            'email.email'           => 'Email tidak valid',
-            'password.required'     => 'password wajib diisi',
-            'password.string'       => 'password harus berupa string',
-            'user_name.required'     => 'user_name wajib diisi',
-            'user_name.string'       => 'user_name harus berupa string'
-        ];
+    //     $messages = [
+    //         'email.required'        => 'Email wajib diisi',
+    //         'email.email'           => 'Email tidak valid',
+    //         'password.required'     => 'password wajib diisi',
+    //         'password.string'       => 'password harus berupa string',
+    //         'user_name.required'     => 'user_name wajib diisi',
+    //         'user_name.string'       => 'user_name harus berupa string'
+    //     ];
  
-        $validator = Validator::make($request->all(), $rules, $messages);
+    //     $validator = Validator::make($request->all(), $rules, $messages);
  
-        if($validator->fails()){
-            return redirect()->back()->withErrors($validator)->withInput($request->all);
-        }
+    //     if($validator->fails()){
+    //         return redirect()->back()->withErrors($validator)->withInput($request->all);
+    //     }
  
         $data = [
             'user_name'     => $request->input('user_name'),

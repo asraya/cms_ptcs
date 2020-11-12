@@ -73,7 +73,6 @@ Route::get('/stationary', 'PagesController@stationarydatatables');
 Route::get('/add_stationary', 'PagesController@add_stationary');
 
 
-Route::get('/add_genreq', 'ReqController@index');
 
 
 // Route::get('/general_request', 'PagesController@general_requestdatatables');
@@ -87,6 +86,13 @@ Route::get('stockout-print/{stockout_id}', 'InvoiceController@stockout_print')->
 Route::post('invoice-final', 'InvoiceController@final_invoice')->name('invoice.final_invoice');
 Route::resource('stockout/pending','StockOutController');
 
+
+Route::get('/add_genreq', 'ReqController@index');
+Route::get('/add_genreq/edit/{id}', 'ReqController@edit')->name('req.edit');
+Route::get('/add_genreq2', 'ReqController2@index');
+
+Route::put('stockout/update/', 'StockOutController@update')->name('stockout.update');
+
 Route::get('stockout/show/{id}', 'StockOutController@show')->name('stockout.show');
 Route::get('general_request', 'StockOutController@index')->name('stockout.pending');
 Route::get('general_request/{id}', 'StockOutController@edit');
@@ -96,18 +102,15 @@ Route::get('/pending')->name('api.pending_stockout')->uses('StockOutController@p
 
 Route::get('stockout/approved', 'StockOutController@approved_stockout')->name('stockout.approved');
 Route::get('stockout/confirm/{id}', 'StockOutController@stockout_confirm')->name('stockout.confirm');
+Route::get('stockout/confirmGa/{id}', 'StockOutController@stockout_confirm_ga')->name('stockout.confirmGa');
+
 Route::delete('stockout/delete/{id}', 'StockOutController@destroy')->name('stockout.destroy');
 Route::get('stockout/download/{id}', 'StockOutController@download')->name('stockout.download');
 
-Route::resource('cart', 'CartController');
 
 Route::post('invoice', 'InvoiceController@create')->name('invoice.create');
 Route::get('print/{customer_id}', 'InvoiceController@print')->name('invoice.print');
 Route::get('stockout-print/{stockout_id}', 'InvoiceController@stockout_print')->name('invoice.stockout_print');
 Route::post('invoice-final', 'InvoiceController@final_invoice')->name('invoice.final_invoice');
 
-Route::get('/calendar', 'HomeController@calendarIndex');
-    Route::get('/calendar/all', 'HomeController@allCalendar');
-    Route::get('/calendar/delete/{id}', 'HomeController@deleteCalendar');
-    Route::post('/calendar/add', 'HomeController@storeCalendar');
 });

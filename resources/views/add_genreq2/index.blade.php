@@ -26,7 +26,7 @@
                                 @csrf
                                 <div class="card-header">
                                     <h3 class="card-title">
-                                    CREATE GENERAL REQUEST
+                                    CREATE GENERAL
                                         <span>
                                             <button type="submit" class="btn btn-sm btn-danger float-md-right ml-3">Create Invoice</button>
                                         </span>
@@ -72,23 +72,29 @@
     <label class="col-form-label col-lg-3 col-sm-10">Purpose</label>
     <select class="col-lg-9 col-md-9 col-sm-12" id="selectBox" onchange="changeFunc();">
 <option value="PurposeType">Purpose Type:</option>
-<option value="Office">Office</option>
+<option value="Training">Training</option>
 <option value="Project">Project</option>
 </select>
     </div> 
         </div>
         </div>
-
+<div class="form-group row">
+<div class="col-lg-9 col-md-9 col-sm-12">
+<input class="form-control form-control-lg" name="dd_number5" type="file" style="display: none" id="textboxes5">
+</div>
+</div>
 
 <div class="form-group row">
 <div class="col-lg-9 col-md-9 col-sm-12">
-<input class="form-control form-control-lg" name="dd_number3" placeholder="SO Number" type="text" style="display: none" id="textboxes3">
+<input class="form-control form-control-lg" name="dd_number1" placeholder="Company Name" type="text" style="display: none" id="textboxes1">
+<input class="form-control form-control-lg" name="dd_number3" placeholder="Project Name" type="text" style="display: none" id="textboxes3">
 
 </div>
 </div>
 <div class="form-group row">
 <div class="col-lg-9 col-md-9 col-sm-12">
-<input class="form-control form-control-lg" name="dd_number2" placeholder="Manager Approver" type="text" style="display: none" id="textboxes2">
+<input class="form-control form-control-lg" name="dd_number2" placeholder="Tranning Subject	" type="text" style="display: none" id="textboxes2">
+<input class="form-control form-control-lg" name="dd_number4" placeholder="SO Number" type="text" style="display: none" id="textboxes4">
 
 </div>
 </div>
@@ -171,17 +177,17 @@
                             <!-- /.card-body -->
                         </div>
                     </div>
-                      <!-- <select name="name_stat">
+                      <!-- <select name="name_merc">
     @foreach($products as $product)
-        <option value="{{ $product->id }}">{{ $product->name_stat}}</option>
+        <option value="{{ $product->id }}">{{ $product->name_merc}}</option>
     @endforeach 
 </select> -->
                     <div class="col-md-6">
                         <!-- general form elements -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Item Stationary</h3> 
-                                <a href="/add_genreq2" class="btn btn-danger font-weight-bolder">
+                                <h3 class="card-title">Souvenir</h3> 
+                                <a href="/stationary" class="btn btn-danger font-weight-bolder">
                   <span class="svg-icon svg-icon-md">
                      <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -202,7 +208,6 @@
                                         <th>No</th>
                                         <th>Name</th>
                                         <th>Price</th>
-                                        <th>Unit</th>
                                         <th>Add</th>
                                     </tr>
                                     </thead>
@@ -211,7 +216,6 @@
                                         <th>No</th>
                                         <th>Name</th>
                                         <th>Price</th>
-                                        <th>Unit</th>
                                         <th>Add</th>
                                     </tr>
                                     </tfoot>
@@ -221,15 +225,14 @@
                                         <tr>
                                             <form action="{{ route('cart.store') }}" method="post">
                                                 @csrf
-                                                <input type="hidden" name="id" value="{{ $product->id }}">
-                                                <input type="hidden" name="name" value="{{ $product->name_stat }}">
+                                                <input type="hidden" name="id" value="{{ $product->id_item }}">
+                                                <input type="hidden" name="name" value="{{ $product->name_merc }}">
                                                 <input type="hidden" name="qty" value="1">
-                                                <input type="hidden" name="price" value="{{ $product->price_stat }}">
+                                                <input type="hidden" name="price" value="{{ $product->price_merc }}">
 
                                                 <td>{{ $key + 1 }}</td>
-                                                <td>{{ $product->name_stat }}</td>  
-                                                <td>{{ $product->price_stat, 2 }}</td>
-                                                <td>{{ $product->unit_stat }}</td>
+                                                <td>{{ $product->name_merc }}</td>                                                
+                                                <td>{{ $product->price_merc, 2 }}</td>
                                                 <td>
                                                     <button type="submit" class="btn btn-sm btn-danger   px-2">
                                                         <i class="fa fa-plus" aria-hidden="true"></i>
@@ -262,14 +265,20 @@
 function changeFunc() {
 var selectBox = document.getElementById("selectBox");
 var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-if (selectedValue=="Office"){
+if (selectedValue=="Training"){
+$('#textboxes1').show();
 $('#textboxes2').show();
 $('#textboxes3').hide();
+$('#textboxes4').hide();
+$('#textboxes5').show();
 
 }
 if (selectedValue=="Project"){
+$('#textboxes5').hide();
+$('#textboxes4').show();
 $('#textboxes3').show();
-$('#textboxes2').show();
+$('#textboxes2').hide();
+$('#textboxes1').hide();
 
 }
 
@@ -286,15 +295,8 @@ $('#textboxes2').show();
    @section('styles')
        <link href="{{ asset('plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css"/>
    @endsection
-   
-   @if(Session::has('error'))
-    <script>
-        toastr.error(
-            'Telah mencapai jumlah maximum Product | Silahkan tambah stock Product terlebih dahulu untuk menambahkan'
-        )
 
-    </script>
-    @endif
+   
    {{-- Scripts Section --}}
    @section('scripts')
        {{-- vendors --}}

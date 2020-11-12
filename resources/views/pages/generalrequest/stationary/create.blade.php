@@ -26,7 +26,7 @@
                     <div class="form-group row">
             <label class="col-form-label col-lg-3 col-sm-12">ID Stationary</label>
             <div class=" col-lg-9 col-md-9 col-sm-12">
-               <input type="text" name="emp_id" class="form-control form-control-solid form-control-lg"  placeholder="Enter your Employee ID"/>
+               <input type="text" name="emp_id" class="form-control form-control-solid form-control-lg" placeholder="Enter your Employee ID"/>
             </div>
         </div>
 
@@ -34,44 +34,46 @@
         <div class="form-group row">
             <label class="col-form-label col-lg-3 col-sm-12">Name Stationary</label>
             <div class=" col-lg-9 col-md-9 col-sm-12">
-               <input type="text" name="name"  class="form-control form-control-solid form-control-lg" value="{{ Auth::user()->name }}" readonly/>
+               <input type="text" name="name"  class="form-control form-control-solid form-control-lg" value="" placeholder="Enter your Name Stationary"/>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-lg-3 col-sm-12">Stock</label>
             <div class=" col-lg-9 col-md-9 col-sm-12">
-               <input type="text" name="jabatan"  class="form-control form-control-solid form-control-lg" placeholder="Enter your Jabatan"/>
+               <input type="text" name="jabatan"  class="form-control form-control-solid form-control-lg" placeholder="Enter your Stock"/>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-lg-3 col-sm-12">Limit Request</label>
             <div class=" col-lg-9 col-md-9 col-sm-12">
-               <input type="text" name="tujuan"  class="form-control form-control-solid form-control-lg" value="PT Control Systems Arena Para Nusa"/>
+               <input type="text" name="tujuan"  class="form-control form-control-solid form-control-lg" placeholder="Enter your Limit"/>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-lg-3 col-sm-12">Unit</label>
             <div class=" col-lg-9 col-md-9 col-sm-12">
-               <textarea name="keperluan"  class="form-control form-control-solid form-control-lg">
-               
-            </textarea>
+               <input type="text" name="jabatan"  class="form-control form-control-solid form-control-lg" placeholder="Enter your Unit"/>
+            </div>
+            </div>
+
+            <div class="form-group row">
+            <label class="col-form-label col-lg-3 col-sm-12">Price Stationary</label>
+            <div class=" col-lg-9 col-md-9 col-sm-12">
+               <input type="text" name="jabatan"  class="form-control form-control-solid form-control-lg" placeholder="Enter your Price"/>
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-lg-2 col-sm-7">Price Stationary</label>
-            <div class=" col-lg-4 col-md-5 col-sm-9">
-               <input type="date" name="start"  class="form-control form-control-solid form-control-lg"/>
-            </div>
-        
-            <label class="col-form-label col-lg-1 col-sm-7">Status:</label>
-            <div class=" col-lg-4 col-md-5 col-sm-9">
-               <input type="date" name="end"  class="form-control form-control-solid form-control-lg"/>
+            <label class="col-form-label col-lg-3 col-sm-12">Status</label>
+            <div class=" col-lg-9 col-md-9 col-sm-12">
+                <input type="radio" class="form-radio" name="stsstat" id="0"> <label for="rd1">Available</label>&nbsp;&nbsp;&nbsp;
+                <input type="radio" class="form-radio" name="stsstat" id="1"> <label for="rd2">Not Available</label>
             </div>
         </div>
+
 
 					<!--end::Input-->
 
