@@ -10,6 +10,10 @@ class Historystock extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function tbluser()
+    {
+        return $this->belongsTo(Tbl_users::class);
+    }
     public function role()
     {
         return $this->hasMany(Roles::class);

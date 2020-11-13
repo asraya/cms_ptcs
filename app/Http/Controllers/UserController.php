@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
-use Hashids\Hashids;
 
 class UserController extends Controller
 {
@@ -30,10 +29,9 @@ class UserController extends Controller
     }
     public function index(Request $request)
     {
-        $hashids = new Hashids();
 
         $data = User::orderBy('id','DESC')->paginate(10);
-        return view('users.index',compact('data', 'hashids'))
+        return view('users.index',compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 

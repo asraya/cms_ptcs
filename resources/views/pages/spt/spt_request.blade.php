@@ -173,6 +173,7 @@
     {{-- vendors --}}
     <script src="{{ asset('plugins/custom/datatables/datatables.bundle.js') }}" type="text/javascript"></script>
 
+
     {{-- page scripts --}}
     <script src="{{ asset('js/pages/crud/datatables/basic/basic.js') }}" type="text/javascript"></script>
     <!-- <script src="{{ asset('js/app.js') }}" type="text/javascript"></script> -->
@@ -180,6 +181,19 @@
    var table = $('.spt_data').DataTable({
         processing: true,
         serverSide: true,
+        dom: '<"html5buttons">Blfrtip',
+        language: {
+                buttons: {
+                    colvis : 'show / hide', // label button show / hide
+                    colvisRestore: "Reset Kolom" //lael untuk reset kolom ke default
+                }
+        },
+        
+        buttons : [
+                    {extend: 'colvis', postfixButtons: [ 'colvisRestore' ] },
+                  
+        ],
+
         ajax: "{{ route ('api.spt') }}",
 
         columns: [

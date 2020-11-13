@@ -203,6 +203,8 @@
                                         <th>Name</th>
                                         <th>Price</th>
                                         <th>Unit</th>
+                                        <th>stock</th>
+
                                         <th>Add</th>
                                     </tr>
                                     </thead>
@@ -212,6 +214,8 @@
                                         <th>Name</th>
                                         <th>Price</th>
                                         <th>Unit</th>
+                                        <th>stock</th>
+
                                         <th>Add</th>
                                     </tr>
                                     </tfoot>
@@ -230,6 +234,8 @@
                                                 <td>{{ $product->name_stat }}</td>  
                                                 <td>{{ $product->price_stat, 2 }}</td>
                                                 <td>{{ $product->unit_stat }}</td>
+                                                <td>{{ $product->stock_item }}</td>
+
                                                 <td>
                                                     <button type="submit" class="btn btn-sm btn-danger   px-2">
                                                         <i class="fa fa-plus" aria-hidden="true"></i>

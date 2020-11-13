@@ -136,9 +136,7 @@
                                     <span><i class="flaticon2-search-1 text-muted"></i></span>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-1" style="margin-top:7px;">
-                                Status 
-                            </div>
+                            
                           
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
@@ -179,6 +177,8 @@
 
                                     <thead>
                                     <tr>
+                                    <th>user learder</th>
+
                                         <th>ID</th>
                                         <th>Request Form</th>    
                                         <th>Status</th>                            
@@ -250,7 +250,7 @@
            serverSide: true,
            ajax: "{{ route ('api.pending_stockout') }}",
                columns: [
-                   
+                {data: 'user_leader_id', name: 'tbl_users.user_leader_id'},
                 {data: 'emp_id', name: 'historystocks.emp_id'},
                {data: 'employee_name', employee_name: 'tbl_users.employee_name'},
                {data:  'stockout_status',name: 'historystocks.stockout_status', render: function ( data, type, row ) {
@@ -267,6 +267,11 @@
                 if (data == 'pending'){
                 text = "Pending";
                 label = "warning";
+                } else
+                if (data == 'Approved Manajer Div'){
+                text = "Approved Manajer Div";
+                label = "danger";
+
                 }
                 return "<span class='badge badge-" + label + "'>"+ text + "</span>";
                 }},

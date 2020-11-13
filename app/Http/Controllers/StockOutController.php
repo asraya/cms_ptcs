@@ -27,6 +27,8 @@ class StockOutController extends Controller
     {
         $stockout = Historystock::with('user')->where('id', $id)->first();
         $stockout_details = HistorystockDetail::with('product')->where('stockout_id', $id)->get();
+        $stockout->user_leader_id = Historystock::with('user')->where('user_leader_id', $id)->get();
+
         $company = Setting::latest()->first();
         return view('stockout.stockout_confirmation', compact('stockout_details', 'stockout', 'company'));
     }
@@ -56,9 +58,11 @@ class StockOutController extends Controller
             'tbl_users.user_firstname',
             'tbl_users.user_lastname',
             'tbl_users.user_id',
+            'tbl_users.user_leader_id',
+
         ])        
         ->leftJoin('tbl_users', 'historystocks.emp_id', '=', 'tbl_users.emp_id');
-        if($who_login->hasRole(['User', 'Sekretaris'])){
+        if($who_login->hasRole(['User', 'IT','Sekretaris'])){
             $data->where('historystocks.emp_id', $users);
             // ->orwhere('id', '1', $users1);
         }elseif($who_login->hasRole(['HRD'])){
@@ -71,7 +75,9 @@ class StockOutController extends Controller
         $data->get();
 
         return DataTables::of($data)
+
         
+     
         ->addColumn('employee_name', function($data){
                     return $data->user_firstname . " " . $data->user_lastname;
                 })
@@ -163,6 +169,19 @@ class StockOutController extends Controller
         Toastr::success('List Updated Successfully', 'Success');
         return redirect('/pegawai');
     }
+
+    public function stockout_confirm_mgr($id)
+    {
+        $stockout = Historystock::findOrFail($id);
+        $stockout->user_leader_id = Historystock::with('user')->where('user_leader_id', $id)->get();
+        $stockout->stockout_status = 'Approved Manajer Div';
+
+        $stockout_details = HistorystockDetail::with('user')->where('stockout_id', $id)->get();        
+        $stockout->save();  
+        Toastr::success('stockout has been PROCESS!', 'Success');
+        return redirect()->back();
+    }
+    
 
     public function stockout_confirm_ga($id)
     {

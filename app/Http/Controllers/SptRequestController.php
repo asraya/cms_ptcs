@@ -35,7 +35,7 @@ class SptRequestController extends Controller
             'tbl_users.user_lastname'
         ])      
         ->leftJoin('tbl_users', 'tran_spt.emp_id', '=', 'tbl_users.emp_id');
-        if($who_login->hasRole(['User', 'Sekretaris'])){
+        if($who_login->hasRole(['User','IT', 'Sekretaris'])){
             $data->where('tran_spt.emp_id', $users);
             // ->orwhere('id', '1', $users1);
         }elseif($who_login->hasRole(['GA', 'HRD'])){

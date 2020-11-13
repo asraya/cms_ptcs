@@ -103,6 +103,7 @@ Route::get('/pending')->name('api.pending_stockout')->uses('StockOutController@p
 Route::get('stockout/approved', 'StockOutController@approved_stockout')->name('stockout.approved');
 Route::get('stockout/confirm/{id}', 'StockOutController@stockout_confirm')->name('stockout.confirm');
 Route::get('stockout/confirmGa/{id}', 'StockOutController@stockout_confirm_ga')->name('stockout.confirmGa');
+Route::get('stockout/confirmMgr/{id}', 'StockOutController@stockout_confirm_mgr')->name('stockout.confirmMgr');
 
 Route::delete('stockout/delete/{id}', 'StockOutController@destroy')->name('stockout.destroy');
 Route::get('stockout/download/{id}', 'StockOutController@download')->name('stockout.download');
@@ -113,4 +114,7 @@ Route::get('print/{customer_id}', 'InvoiceController@print')->name('invoice.prin
 Route::get('stockout-print/{stockout_id}', 'InvoiceController@stockout_print')->name('invoice.stockout_print');
 Route::post('invoice-final', 'InvoiceController@final_invoice')->name('invoice.final_invoice');
 
+Route::get('/datatables', 'PagesController@datatables');
+Route::get('/ktdatatables', 'PagesController@ktDatatables');
+Route::get('/select2', 'PagesController@select2');
 });

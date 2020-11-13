@@ -66,8 +66,10 @@
                                 <!-- /.col -->
                                 <div class="col-sm-4 invoice-col">
                                     <b>Invoice #IMS-{{ $stockout->created_at->format('Ymd') }}{{ $stockout->id }}</b><br><br>
-                                    <b>stockout ID:</b> {{ str_pad($stockout->id,9,"0",STR_PAD_LEFT) }}<br>
+                                    <!-- <b>stockout ID:</b> {{ str_pad($stockout->id,9,"0",STR_PAD_LEFT) }}<br> -->
                                     <b>stockout Status:</b> <span class="badge {{ $stockout->stockout_status == 'approved' ? 'badge-success' : 'badge-warning'  }}">{{ $stockout->stockout_status }}</span><br>
+                                    <b>approve leader</b> <span class="badge {{ $stockout->stockout_status == 'approved' ? 'badge-success' : 'badge-warning'  }}">{{ $stockout->user_leader_id }}</span><br>
+
                                     <b>Account:</b> {{ $stockout->user->id }}
                                 </div>
                                 <!-- /.col -->
@@ -184,6 +186,22 @@
                                         <a href="{{ route('stockout.confirm', $stockout->id) }}" class="btn btn-success float-right">
                                             <i class="fa fa-credit-card"></i>
                                             Approved
+                                        </a>
+                                    @endcan
+                                    @endif
+                                    @can('role-approved')
+                                    @if($stockout->stockout_status === 'Approved Manajer Div')
+                                        <a href="{{ route('stockout.confirm', $stockout->id) }}" class="btn btn-success float-right">
+                                            <i class="fa fa-credit-card"></i>
+                                            Approved Admin
+                                        </a>
+                                    @endcan
+                                    @endif
+                                    @can('role-approved-mgr')
+                                    @if($stockout->user_leader_id === Auth::user()->emp_id )
+                                        <a href="{{ route('stockout.confirmMgr', $stockout->id) }}" class="btn btn-success float-right">
+                                            <i class="fa fa-credit-card"></i>
+                                            PROCESS Manager
                                         </a>
                                     @endcan
                                     @endif

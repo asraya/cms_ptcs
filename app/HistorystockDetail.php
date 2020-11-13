@@ -15,5 +15,8 @@ class HistorystockDetail extends Model
     {
         return $this->belongsTo(Historystock::class);
     }
-
+    public function user()
+    {
+        return $this->belongsTo(Historystock::class);
+    }
 }

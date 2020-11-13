@@ -209,7 +209,7 @@
     {{-- page scripts --}}
     <script src="{{ asset('js/pages/crud/datatables/basic/basic.js') }}" type="text/javascript"></script>
  
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> -->
     <!-- <script src="{{ asset('js/app.js') }}" type="text/javascript"></script> -->
     <script> 
  var table = $('.elearn').DataTable({
