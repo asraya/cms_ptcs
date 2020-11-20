@@ -49,6 +49,7 @@
                                         <strong>{{ $user->user_name }}</strong><br>
                                         {{ $user->user_id }}<br>
                                         {{ $user->emp_id }}<br>
+                                        
                                         Email: {{ $user->email }}
                                     </address>
                                    
@@ -68,6 +69,8 @@
                                 <div class="col-sm-4 invoice-col">
                                     <b>Payment Due:</b> {{ Cart::total() }}<br>
                                     <b>Stockout Status:</b> <span class="badge badge-warning">Pending</span><br>
+                                    <b>leader :</b> {{ $user->user_leader_id }}<br>
+
                                 </div>
                                 <!-- /.col -->
                             </div>
@@ -84,6 +87,7 @@
                                             <th>Quantity</th>
                                             <th>Unit Cost</th>
                                             <th>Subtotal</th>
+
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -94,6 +98,7 @@
                                                     <td>{{ $content->qty }}</td>
                                                     <td>{{ $content->price, 2 }}</td>
                                                     <td>{{ $content->subtotal() }}</td>
+
                                                 </tr>
                                             @endforeach
 
@@ -153,7 +158,7 @@
     <form action="{{ route('invoice.final_invoice') }}" method="post">
         @csrf
         <div class="modal fade" id="exampleModalCenter" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
         
                     <div class="modal-header">
@@ -166,27 +171,33 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-12">
+                            <!-- <div class="col-12">
                                 <p class="text-info float-right mb-3">Total : {{ Cart::total() }}</p>
-                            </div>
+                            </div> -->
                         </div>
+                        <div class="form-group col-md-6">
+                                <input type="hidden" value="{{ Cart::total() }}"name="pay" class="form-control form-control-solid form-control-lg" readonly >
+                            </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="inputState">Method</label>
+                                <label for="inputConfirm">Method</label>
                                 <input name="payment_status" value="Confirm Admin" class="form-control form-control-solid form-control-lg" readonly >
                                    
                             </div>
+                         
                             <div class="form-group col-md-6">
-                                <label for="inputCity">Total</label>
-                                <input type="text" value="{{ Cart::total() }}"name="pay" class="form-control form-control-solid form-control-lg" readonly >
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputCity">Ep</label>
+                                <label for="inputemp_id">Employee Id</label>
                                     <input type="text" name="emp_id" 
                                             class="form-control form-control-solid form-control-lg" 
                                             value="{{ Auth::user()->emp_id }}" readonly/>
-                            </div>
-                        </div>
+                            </div> 
+                            <div class="form-group col-md-6">
+                                <label for="inputemp_id">leader id</label>
+                                    <input type="text" name="user_leader_id" 
+                                            class="form-control form-control-solid form-control-lg" 
+                                            value="{{ Auth::user()->user_leader_id }}" readonly/>
+                            </div>                           
+                        </div>                        
                     </div>
                     <input type="hidden" name="user_id" value="{{ $user->id }}">
                     <div class="modal-footer">

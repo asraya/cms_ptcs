@@ -62,6 +62,12 @@
 </div>
     </div>
     <div class="form-group row">
+ <label class="col-form-label col-lg-3 col-sm-10">Lead ID</label>
+<div class="col-lg-9 col-md-9 col-sm-12">
+<input type="text" name="user_leader_id" class="form-control form-control-solid form-control-lg" value="" />
+</div>
+    </div>
+    <div class="form-group row">
  <label class="col-form-label col-lg-3 col-sm-10">Note</label>
 <div class="col-lg-9 col-md-9 col-sm-12">
 <textarea id="note" class="form-control" name="note">
@@ -88,7 +94,15 @@
 </div>
 <div class="form-group row">
 <div class="col-lg-9 col-md-9 col-sm-12">
-<input class="form-control form-control-lg" name="dd_number2" placeholder="Manager Approver" type="text" style="display: none" id="textboxes2">
+
+
+<!-- <input class="form-control form-control-lg" value="{{ Auth::user()->user_leader_id }}" name="user_leader_id" type="text" style="display: none" id="textboxes2" readonly> -->
+
+ <select class="form-control form-control-lg" name="user_leader_id" placeholder="Manager Approver" type="text" style="display: none" id="textboxes2">
+    @foreach($users as $stockout)
+        <option name="user_leader_id" value="{{ Auth::user()->user_leader_id }}">{{ $stockout->user_leader_id}}</option>
+    @endforeach 
+</select>
 
 </div>
 </div>
@@ -204,6 +218,7 @@
                                         <th>Price</th>
                                         <th>Unit</th>
                                         <th>stock</th>
+                                        <th>limit</th>
 
                                         <th>Add</th>
                                     </tr>
@@ -215,6 +230,7 @@
                                         <th>Price</th>
                                         <th>Unit</th>
                                         <th>stock</th>
+                                        <th>limit</th>
 
                                         <th>Add</th>
                                     </tr>
@@ -235,12 +251,26 @@
                                                 <td>{{ $product->price_stat, 2 }}</td>
                                                 <td>{{ $product->unit_stat }}</td>
                                                 <td>{{ $product->stock_item }}</td>
+                                                <td>{{ $product->limit_stat }}</td>
 
                                                 <td>
-                                                    <button type="submit" class="btn btn-sm btn-danger   px-2">
+                                                @if($product->stock_item == 65)
+
+                                                    <button type="submit" class="btn btn-sm btn-danger px-2 disabled">
                                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                                     </button>
+
+                                                    @else
+
+
+                                                    <button type="submit" class="btn btn-sm btn-danger px-2 " >
+                                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                                    </button>
+
+                                                    @endif
+
                                                 </td>
+
                                             </form>
                                         </tr>
                                     @endforeach

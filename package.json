@@ -105,6 +105,7 @@
         "typeahead.js": "^0.11.1",
         "underscore": "^1.8.3",
         "uppy": "^1.7.0",
+        "vue-event-calendar": "^1.5.2",
         "waypoints": "^4.0.1",
         "whatwg-fetch": "^3.0.0",
         "wnumb": "^1.1.0"

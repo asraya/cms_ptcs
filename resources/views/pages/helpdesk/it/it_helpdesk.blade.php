@@ -7,9 +7,9 @@
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
-            <h3 class="card-label">Corporate Management Systems
-                    <!-- <div class="text-muted pt-2 font-size-sm">Datatable initialized from HTML table</div> -->
-                </h3>
+            <!-- <h3 class="card-label">Corporate Management Systems
+                    <div class="text-muted pt-2 font-size-sm">Datatable initialized from HTML table</div>
+                </h3> -->
                 <a href="/ga_helpdesk" class="btn btn-danger font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
@@ -174,7 +174,31 @@
             </table>
 
         </div>
-
+        <div class="modal fade" id="exampleModalCenter" data-backdrop="static" tabindex="-1" 
+        role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modelHeading"></h4>
+                <button type=button data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+            </div>
+            <div class="modal-body">
+                <form id="HelpItForm" name="HelpItForm" class="form-horizontal">
+                   <input type="hidden" name="id" id="id">
+                    <div class="form-group row">                    
+                    <label class="col-xl-3 col-lg-3 col-form-label text-right">employee ID</label>
+                    <div class="col-lg-9 col-xl-6">
+                    <input class="form-control form-control-lg form-control-solid" id="emp_id" name="emp_id" >
+                        </div>
+                    </div>
+                                       
+                     <!-- <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Save changes </button> -->
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
 @endsection
@@ -193,6 +217,8 @@
     {{-- page scripts --}}
     <script src="{{ asset('js/pages/crud/datatables/basic/basic.js') }}" type="text/javascript"></script>
     <!-- <script src="{{ asset('js/app.js') }}" type="text/javascript"></script> -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
     <script> 
     var table = $('.it_helpdesk').DataTable({
         processing: true,
@@ -278,6 +304,64 @@
             {data: 'action', name: 'action', orderable: false, searchable: false},
 
         ],
+    });
+    $('#createNewCustomer').click(function () {
+        $('#saveBtn').val("create-Customer");
+        $('#editHelpIt').val('');
+        $('#HelpItForm').trigger("reset");
+        $('#modelHeading').html("Create New Customer");
+        $('#exampleModalCenter').modal('show');
+    });
+    $('body').on('click', '.editHelpIt', function () {
+      var id = $(this).data('id');
+      $.get("" + 'it_helpdesk' +'/'+ id , function (data) {
+          
+          $('#modelHeading').html("Show");
+          $('#saveBtn').val("edit-user");
+          $('#exampleModalCenter').modal('show');
+          $('#id').val(data.id);
+          $('#emp_id').val(data.emp_id);
+
+      })
+   });
+   $('#saveBtn').click(function (e) {
+        e.preventDefault();
+        $(this).html('Sending..');
+
+        $.ajax({
+          data: $('#HelpItForm').serialize(),
+          url: "",
+          type: "POST",
+          dataType: 'json',
+          success: function (data) {
+
+              $('#HelpItForm').trigger("reset");
+              $('#exampleModalCenter').modal('hide');
+              table.draw();
+
+          },
+          error: function (data) {
+              console.log('Error:', data);
+              $('#saveBtn').html('Save Changes');
+          }
+      });
+    });
+
+    $('body').on('click', '.deleteCustomer', function () {
+
+        var id = $(this).data("id");
+        confirm("Are You sure want to delete !");
+
+        $.ajax({
+            type: "DELETE",
+            url: ""+'/'+id,
+            success: function (data) {
+                table.draw();
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+        });
     });
         $('body').on('click', '.deleteTodo', function () {
  

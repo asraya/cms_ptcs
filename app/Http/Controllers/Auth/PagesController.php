@@ -60,8 +60,8 @@ class PagesController extends Controller
      public function elearn()
     {
         $page_title = 'elearn';
-        $page_description = 'This is elearn test page';
-        return view('pages.elearn.data_learn', compact('page_title', 'page_description'));
+        // $page_description = 'This is elearn test page';
+        return view('pages.elearn.data_learn', compact('page_title'));
     }
       //pending
       

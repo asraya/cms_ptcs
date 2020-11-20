@@ -109,12 +109,14 @@ Route::delete('stockout/delete/{id}', 'StockOutController@destroy')->name('stock
 Route::get('stockout/download/{id}', 'StockOutController@download')->name('stockout.download');
 
 
-Route::post('invoice', 'InvoiceController@create')->name('invoice.create');
-Route::get('print/{customer_id}', 'InvoiceController@print')->name('invoice.print');
-Route::get('stockout-print/{stockout_id}', 'InvoiceController@stockout_print')->name('invoice.stockout_print');
-Route::post('invoice-final', 'InvoiceController@final_invoice')->name('invoice.final_invoice');
+
 
 Route::get('/datatables', 'PagesController@datatables');
 Route::get('/ktdatatables', 'PagesController@ktDatatables');
 Route::get('/select2', 'PagesController@select2');
+
+Route::get('/calendar', 'HomeController@calendarIndex');
+Route::get('/calendar/all', 'HomeController@allCalendar');
+Route::get('/calendar/delete/{id}', 'HomeController@deleteCalendar');
+Route::post('/calendar/add', 'HomeController@storeCalendar');
 });

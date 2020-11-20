@@ -27,6 +27,7 @@ class CartController extends Controller
           'name' => 'required',
           'qty' => 'required',
           'price' => 'required',
+
         ];
         $validator = Validator::make($inputs, $rules);
         if ($validator->fails())

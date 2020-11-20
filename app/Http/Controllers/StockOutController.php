@@ -27,10 +27,10 @@ class StockOutController extends Controller
     {
         $stockout = Historystock::with('user')->where('id', $id)->first();
         $stockout_details = HistorystockDetail::with('product')->where('stockout_id', $id)->get();
-        $stockout->user_leader_id = Historystock::with('user')->where('user_leader_id', $id)->get();
+        $user_leader_id = Historystock::with('user')->where('user_leader_id', $id)->get();
 
         $company = Setting::latest()->first();
-        return view('stockout.stockout_confirmation', compact('stockout_details', 'stockout', 'company'));
+        return view('stockout.stockout_confirmation', compact('stockout_details', 'stockout', 'company','user_leader_id'));
     }
     
     
@@ -57,7 +57,6 @@ class StockOutController extends Controller
             'historystocks.stockout_status as stockout_status',
             'tbl_users.user_firstname',
             'tbl_users.user_lastname',
-            'tbl_users.user_id',
             'tbl_users.user_leader_id',
 
         ])        
@@ -147,7 +146,15 @@ class StockOutController extends Controller
         // })
         // ->rawColumns(['action'])
         // ->make(true);   
-
+        public function stockout_print($id)
+        {
+            $stockout = Historystock::with('user')->where('id', $id)->first();
+            //return $stockout;
+            $stockout_details = HistorystockDetail::with('product')->where('stockout_id', $id)->get();
+            //return $stockout_details;
+            $company = Setting::latest()->first();
+            return view('stockout.print', compact('stockout_details', 'stockout', 'company'));
+        }
         public function edit($id)
         {
             $stockout = Historystock::find($id);      
@@ -213,14 +220,7 @@ class StockOutController extends Controller
             $stockout_item = Stationary::where('id', $details->product_id);
             $stockout_item->decrement('stock_item', $details->quantity);
         }
-        // dd(DB::getQueryLog());
-
-
-        
-        
-
-
-        
+        // dd(DB::getQueryLog());  
         Toastr::success('stockout has been Approved! Please delivery the products', 'Success');
         return redirect()->back();
     }

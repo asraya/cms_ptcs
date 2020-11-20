@@ -13,11 +13,6 @@ return [
             'new-tab' => false,
 
         ],
-
-        // Custom
-        [
-            'section' => 'Custom',
-        ],
         [
             'title' => 'User & Phone Line Information',
             'root' => true,
@@ -25,6 +20,11 @@ return [
             'page' => '/users',
             'visible' => 'preview',
         ],
+        // Custom
+        // [
+        //     'section' => 'Custom',
+        // ],
+       
         // [
         //     'title' => 'Role Permissions',
         //     'root' => true,
@@ -32,16 +32,16 @@ return [
         //     'page' => '/roles',
         //     'visible' => 'preview',
         // ],  
-        [
-            'title' => 'send mail',
-            'root' => true,
-            'icon' => 'media/svg/icons/Home/Library.svg',
-            'page' => 'sendemail',
-            'visible' => 'preview',
-        ],      
+        // [
+        //     'title' => 'send mail',
+        //     'root' => true,
+        //     'icon' => 'media/svg/icons/Home/Library.svg',
+        //     'page' => 'sendemail',
+        //     'visible' => 'preview',
+        // ],      
         // Layout
         [
-            'section' => 'Layout',
+            'section' => 'CONTENT',
         ],
         [
             'title' => 'List IT Stock',

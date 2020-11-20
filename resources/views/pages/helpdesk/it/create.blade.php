@@ -44,9 +44,9 @@
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-lg-3 col-sm-12">Jabatan</label>
+            <label class="col-form-label col-lg-3 col-sm-12">Division</label>
             <div class=" col-lg-5 col-md-5 col-sm-7">
-               <input type="text" name="jabatan"  class="form-control form-control-solid form-control-lg" value="{{ Auth::user()->user_division }}"/>
+               <input type="text" name="user_division"  class="form-control form-control-solid form-control-lg" value="{{ Auth::user()->user_division }}"/>
             </div>
         </div>
 

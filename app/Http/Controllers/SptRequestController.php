@@ -10,6 +10,7 @@ use App\User;
 use auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
+use Carbon;
 
 class SptRequestController extends Controller
 {
@@ -90,6 +91,7 @@ class SptRequestController extends Controller
 
             ]);
             $contact = new Spt([
+                
                 'spt_no' => $request->get('spt_no'),
                 'requester_id' => $request->get('requester_id'),
                 'emp_id' => $request->get('emp_id'),
@@ -100,6 +102,13 @@ class SptRequestController extends Controller
                 'spt_end' => $request->get('spt_end'),
                 'status' => $request->get('status'),
 
+                $table_no = '0001',
+                $tgl = substr(str_replace( '-', '', Carbon\carbon::now()), 0,8),
+                
+                $no= $tgl.$table_no,
+                $auto=substr($no,8),
+                $auto=intval($auto)+1,
+                $auto_number=substr($no,0,8).str_repeat(0,(4-strlen($auto))).$auto,
 
             ]);
             Mail::to('asep.rayana@ymail.com')->send(new SendMail($contact));

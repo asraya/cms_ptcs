@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\tbl_users;
 
 use App\User;
 use App\Historystock;

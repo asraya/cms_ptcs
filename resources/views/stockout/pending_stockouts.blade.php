@@ -7,10 +7,10 @@
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
-            <h3 class="card-label">Corporate Management Systems
+            <!-- <h3 class="card-label">Corporate Management Systems
 
-<!-- <div class="text-muted pt-2 font-size-sm">Datatable initialized from HTML table</div> -->
-</h3>
+<div class="text-muted pt-2 font-size-sm">Datatable initialized from HTML table</div>
+</h3> -->
 <a href="/souvenir" class="btn btn-danger font-weight-bolder">
 <span class="svg-icon svg-icon-md">
 <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
@@ -204,16 +204,16 @@
                     <div class="form-group row">                    
                     <label class="col-xl-3 col-lg-3 col-form-label text-right">employee ID</label>
                     <div class="col-lg-9 col-xl-6">
-                    <input class="form-control form-control-lg form-control-solid" id="emp_id" name="emp_id" placeholder="Enter Name" value="" maxlength="50" required="">
+                    <input class="form-control form-control-lg form-control-solid" id="emp_id" name="emp_id" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                     <label class="col-xl-3 col-lg-3 col-form-label text-right">Status</label>
                     <div class="col-lg-9 col-xl-6">
-                            <input class="form-control form-control-lg form-control-solid" id="stockout_status" name="stockout_status" placeholder="Enter Name" value="" maxlength="50" required="">
+                            <input class="form-control form-control-lg form-control-solid" id="stockout_status" name="stockout_status" readonly>
                         </div>
                     </div>
-                    
+                   
                      <!-- <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Save changes </button> -->
                     </div>
                 </form>
@@ -241,7 +241,7 @@
        {{-- page scripts --}}
        <script src="{{ asset('js/pages/crud/datatables/basic/basic.js') }}" type="text/javascript"></script>
 
-       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" type="text/javascript"></script>
+       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
        <!-- <script src="{{ asset('js/app.js') }}" type="text/javascript"></script> -->
        <script> 

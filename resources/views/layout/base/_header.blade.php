@@ -4,7 +4,8 @@
     {{-- Container --}}
     <div class="container-fluid d-flex align-items-center justify-content-between">
         @if (config('layout.header.self.display'))
-
+        <h1>Corporate Management Systems</h1>
+        </a>
             @php
                 $kt_logo_image = 'logo-light.png';
             @endphp
