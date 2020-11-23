@@ -22,34 +22,6 @@
     
  </div>
  
- <!-- <div class="row">
-
- <div class="col-xl-4">
-        <div class="card card-custom">
-					<div class="card-body d-flex align-items-center py-0 mt-8">
-						        <div class="d-flex flex-column flex-grow-1 py-2 py-lg-5">
-
-                            <div class="card-header user-header alt">
-                                <div>
-                                  
-
-                                    <strong class="card-title">Your Tasks</strong>
-                                </div>
-                            </div>
-							
-                            <ul class="list-group list-group-flush">
-                                @foreach(getTasks() as $task)
-                                <li class="list-group-item">
-                                    <a href="#" > <i class="fa fa-bell-o"></i> {{ $task->title }} <span class="badge  pull-right">{{ $task->date }}</span></a>
-                                </li>
-                                @endforeach
-                            </ul>
-							</div>
-							</div>
-							</div>
-
-							</div>
-							</div> -->
 
     </div>
     <!--begin::Content-->
