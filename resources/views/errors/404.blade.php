@@ -40,6 +40,7 @@
     <body>
         <div class="container">
             <div class="content">
+            <img src="{{ asset('media/logos/ptcs.png') }}" class="max-h-20px" width="270" height="170"/>
                 <div class="title">Oops.. Page Not Found.</div>
                 <button onclick="goBack()">Go Back</button>
             </div>
