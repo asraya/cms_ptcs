@@ -95,7 +95,9 @@
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $content->name }}</td>
+
                                                     <td>{{ $content->qty }}</td>
+                                                    
                                                     <td>{{ $content->price, 2 }}</td>
                                                     <td>{{ $content->subtotal() }}</td>
 
@@ -178,9 +180,10 @@
                         <div class="form-group col-md-6">
                                 <input type="hidden" value="{{ Cart::total() }}"name="pay" class="form-control form-control-solid form-control-lg" readonly >
                             </div>
+                            
                         <div class="form-row">
                         <div class="form-group col-md-6">
-                                <label for="inputConfirm">Method</label>
+                                <label for="inputConfirm">Purpose</label>
     <select id="selectBox" onchange="changeFunc();">
 <option value="PurposeType">Purpose Type:</option>
 <option value="Office">Office</option>
@@ -188,7 +191,7 @@
 </select>
     </div> 
     <div class="form-group col-md-6">
-<input class="form-control form-control-lg" name="dd_number3" placeholder="SO Number" type="text" style="display: none" id="textboxes3">
+<input class="form-control form-control-lg" name="so_number" placeholder="SO Number" type="text" style="display: none" id="so_number">
 
 </div>
 <div class="form-group col-md-6">
@@ -223,6 +226,11 @@
                                             class="form-control form-control-solid form-control-lg" 
                                             value="{{ Auth::user()->user_leader_id }}" readonly/>
                             </div>                            -->
+                            <div class="form-group col-md-6">
+                            <label for="note">Note</label>
+                            <textarea id="note" class="form-control" name="note">
+                            </textarea>
+                            </div>    
                         </div>                        
                     </div>
                     <input type="hidden" name="user_id" value="{{ $content->qty }}">
@@ -255,11 +263,11 @@ if (selectedValue=="Office"){
 $('#textboxes2').show();
 $('#textboxes4').show();
 
-$('#textboxes3').hide();
+$('#so_number').hide();
 
 }
 if (selectedValue=="Project"){
-$('#textboxes3').show();
+$('#so_number').show();
 $('#textboxes2').show();
 $('#textboxes4').show();
 

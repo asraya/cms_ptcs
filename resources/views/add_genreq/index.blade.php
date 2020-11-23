@@ -60,28 +60,28 @@
 <div class="col-lg-9 col-md-9 col-sm-12">
 <input type="text" name="emp_id" class="form-control form-control-solid form-control-lg" value="{{ Auth::user()->emp_id }}" readonly/>
 </div>
-    </div>
+    <!-- </div>
     <div class="form-group row">
  <label class="col-form-label col-lg-3 col-sm-10">Lead ID</label>
 <div class="col-lg-9 col-md-9 col-sm-12">
 <input type="text" name="user_leader_id" class="form-control form-control-solid form-control-lg" value="" />
-</div>
-    </div>
+</div> -->
+    <!-- </div>
     <div class="form-group row">
  <label class="col-form-label col-lg-3 col-sm-10">Note</label>
 <div class="col-lg-9 col-md-9 col-sm-12">
 <textarea id="note" class="form-control" name="note">
 </textarea>
-</div>    
+</div>     -->
     </div>
-    <div class="form-group row">
+    <!-- <div class="form-group row">
     <label class="col-form-label col-lg-3 col-sm-10">Purpose</label>
     <select class="col-lg-9 col-md-9 col-sm-12" id="selectBox" onchange="changeFunc();">
 <option value="PurposeType">Purpose Type:</option>
 <option value="Office">Office</option>
 <option value="Project">Project</option>
 </select>
-    </div> 
+    </div>  -->
         </div>
         </div>
 
@@ -254,18 +254,19 @@
                                                 <td>{{ $product->limit_stat }}</td>
 
                                                 <td>
-                                                @if($product->stock_item == 65)
+                                                @if($product->stock_item == 0)
 
-                                                    <button type="submit" class="btn btn-sm btn-danger px-2 disabled">
-                                                        <i class="fa fa-plus" aria-hidden="true"></i>
-                                                    </button>
+                                                <img class="card-img-top gambar" src="{{ $product->image }}">
+                                        <button class="btn btn-primary btn-sm cart-btn disabled" style="display: none"><i
+                                                class="fas fa-plus"></i></button>
 
                                                     @else
+                                                    <img class="card-img-top gambar" src="{{ $product->image }}"
+                                            style="cursor: pointer"
+                                            onclick="this.closest('form').submit();return false;">
+                                        <button type="submit" class="btn btn-primary btn-sm cart-btn"><i
+                                                class="fas fa-plus"></i></button>
 
-
-                                                    <button type="submit" class="btn btn-sm btn-danger px-2 " >
-                                                        <i class="fa fa-plus" aria-hidden="true"></i>
-                                                    </button>
 
                                                     @endif
 
@@ -315,6 +316,63 @@ $('#textboxes2').show();
 
 
 
+@push('style')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+    <style>
+        .gambar {
+            width: 100%;
+            height: 175px;
+            padding: 0.9rem 0.9rem
+        }
+
+        @media only screen and (max-width: 600px) {
+            .gambar {
+                width: 100%;
+                height: 100%;
+                padding: 0.9rem 0.9rem
+            }
+        }
+
+        html {
+            overflow: scroll;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0px;
+            /* Remove scrollbar space */
+            background: transparent;
+            /* Optional: just make scrollbar invisible */
+        }
+
+        /* Optional: show position indicator in red */
+        ::-webkit-scrollbar-thumb {
+            background: #FF0000;
+        }
+
+        .cart-btn {
+            position: absolute;
+            display: block;
+            top: 5%;
+            right: 5%;
+            cursor: pointer;
+            transition: all 0.3s linear;
+            padding: 0.6rem 0.8rem !important;
+
+        }
+
+        .productCard {
+            cursor: pointer;
+
+        }
+
+        .productCard:hover {
+            border: solid 1px rgb(172, 172, 172);
+
+        }
+
+    </style>
+    @endpush
 
 @push('js')
 

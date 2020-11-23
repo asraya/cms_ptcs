@@ -108,6 +108,7 @@ class InvoiceController extends Controller
         $stockout->user_id = $request->input('user_id');
         $stockout->emp_id = $request->input('emp_id');
         $stockout->user_leader_id = $request->input('user_leader_id');
+        $stockout->so_number = $request->input('so_number');
 
         $stockout->payment_status = $request->input('payment_status');
         $stockout->pay = $pay;

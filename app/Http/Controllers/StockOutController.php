@@ -73,10 +73,7 @@ class StockOutController extends Controller
         // }
         $data->get();
 
-        return DataTables::of($data)
-
-        
-     
+        return DataTables::of($data)    
         ->addColumn('employee_name', function($data){
                     return $data->user_firstname . " " . $data->user_lastname;
                 })

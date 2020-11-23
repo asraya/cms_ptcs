@@ -108,9 +108,6 @@ Route::get('stockout/confirmMgr/{id}', 'StockOutController@stockout_confirm_mgr'
 Route::delete('stockout/delete/{id}', 'StockOutController@destroy')->name('stockout.destroy');
 Route::get('stockout/download/{id}', 'StockOutController@download')->name('stockout.download');
 
-
-
-
 Route::get('/datatables', 'PagesController@datatables');
 Route::get('/ktdatatables', 'PagesController@ktDatatables');
 Route::get('/select2', 'PagesController@select2');
@@ -119,4 +116,44 @@ Route::get('/calendar', 'HomeController@calendarIndex');
 Route::get('/calendar/all', 'HomeController@allCalendar');
 Route::get('/calendar/delete/{id}', 'HomeController@deleteCalendar');
 Route::post('/calendar/add', 'HomeController@storeCalendar');
+
+// maintenance
+Route::get('docapprove', 'DocApproveController@index')->name('docapprove.index');
+Route::get('shipment', 'ShipmentController@index')->name('shipment.index');
+Route::get('finger_data', 'FingerPrintController@index')->name('finger_data.index');
+Route::get('crh', 'CorporateRateHotelController@index')->name('crh.index');
+Route::get('psd', 'PSDController@index')->name('psd.index');
+Route::get('hse', 'HSEreportController@index')->name('hse.index');
+Route::get('ai_psg', 'AiPsgController@index')->name('ai_psg.index');
+
+Route::get('meeting_room', 'MeetRoomController@index')->name('meeting_room.index');
+Route::get('/meeting')->name('api.meeting_room')->uses('MeetRoomController@meeting_room');
+
+Route::get('trip_request', 'TripRequestController@index')->name('trip_request.index');
+Route::get('/trip')->name('api.trip_request')->uses('TripRequestController@trip_request');
+
+//car
+Route::get('car_request', 'CarRequestController@index')->name('car_request.index');
+Route::get('/datatables_car_request')->name('api.datatables_car_request')->uses('CarRequestController@datatables_car_request');
+
+Route::get('car_list', 'CarRequestController@car_list')->name('car_request.car_list');
+Route::get('/datatables_car_list')->name('api.datatables_car_list')->uses('CarRequestController@datatables_car_list');
+
+Route::get('driver_list', 'CarRequestController@driver_list')->name('car_request.driver_list');
+Route::get('/datatables_driver_list')->name('api.datatables_driver_list')->uses('CarRequestController@datatables_driver_list');
+
+Route::get('unlock_ER', 'CarRequestController@unlock_ER')->name('car_request.unlock_ER');
+Route::get('/datatables_unlock_ER')->name('api.datatables_unlock_ER')->uses('CarRequestController@datatables_unlock_ER');
+
+Route::get('schedule', 'CarRequestController@schedule')->name('car_request.schedule');
+Route::get('/datatables_schedule')->name('api.datatables_schedule')->uses('CarRequestController@datatables_schedule');
+
+Route::get('config', 'CarRequestController@config')->name('car_request.config');
+Route::get('/datatables_config')->name('api.datatables_config')->uses('CarRequestController@datatables_config');
+
+Route::get('config', 'CarRequestController@config')->name('car_request.config');
+
+Route::get('car_allow', 'TaxiRequestController@car_allow')->name('car_request.car_allow');
+Route::get('/datatables_car_allow')->name('api.datatables_car_allow')->uses('TaxiRequestController@datatables_car_allow');
+
 });
