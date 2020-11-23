@@ -179,6 +179,32 @@
                                 <input type="hidden" value="{{ Cart::total() }}"name="pay" class="form-control form-control-solid form-control-lg" readonly >
                             </div>
                         <div class="form-row">
+                        <div class="form-group col-md-6">
+                                <label for="inputConfirm">Method</label>
+    <select id="selectBox" onchange="changeFunc();">
+<option value="PurposeType">Purpose Type:</option>
+<option value="Office">Office</option>
+<option value="Project">Project</option>
+</select>
+    </div> 
+    <div class="form-group col-md-6">
+<input class="form-control form-control-lg" name="dd_number3" placeholder="SO Number" type="text" style="display: none" id="textboxes3">
+
+</div>
+<div class="form-group col-md-6">
+<label style="display: none" id="textboxes4">Manager Approver</label>
+
+
+<!-- <input class="form-control form-control-lg" value="{{ Auth::user()->user_leader_id }}" name="user_leader_id" type="text" style="display: none" id="textboxes2" readonly> -->
+
+ <select class="form-control form-control-lg" name="user_leader_id" placeholder="Manager Approver" type="text" style="display: none" id="textboxes2">
+    @foreach($users as $stockout)
+        <option name="user_leader_id" value="{{ Auth::user()->user_leader_id }}">{{ $stockout->user_leader_id}}</option>
+    @endforeach 
+</select>
+
+</div>
+    
                             <div class="form-group col-md-6">
                                 <label for="inputConfirm">Method</label>
                                 <input name="payment_status" value="Confirm Admin" class="form-control form-control-solid form-control-lg" readonly >
@@ -191,14 +217,16 @@
                                             class="form-control form-control-solid form-control-lg" 
                                             value="{{ Auth::user()->emp_id }}" readonly/>
                             </div> 
-                            <div class="form-group col-md-6">
+                            <!-- <div class="form-group col-md-6">
                                 <label for="inputemp_id">leader id</label>
                                     <input type="text" name="user_leader_id" 
                                             class="form-control form-control-solid form-control-lg" 
                                             value="{{ Auth::user()->user_leader_id }}" readonly/>
-                            </div>                           
+                            </div>                            -->
                         </div>                        
                     </div>
+                    <input type="hidden" name="user_id" value="{{ $content->qty }}">
+
                     <input type="hidden" name="user_id" value="{{ $user->id }}">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -219,3 +247,23 @@
 @push('js')
 
 @endpush
+<script type="text/javascript">
+function changeFunc() {
+var selectBox = document.getElementById("selectBox");
+var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+if (selectedValue=="Office"){
+$('#textboxes2').show();
+$('#textboxes4').show();
+
+$('#textboxes3').hide();
+
+}
+if (selectedValue=="Project"){
+$('#textboxes3').show();
+$('#textboxes2').show();
+$('#textboxes4').show();
+
+}
+
+}
+</script>
