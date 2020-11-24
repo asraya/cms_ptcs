@@ -160,7 +160,7 @@
     <form action="{{ route('invoice.final_invoice') }}" method="post">
         @csrf
         <div class="modal fade" id="exampleModalCenter" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
         
                     <div class="modal-header">
@@ -182,6 +182,14 @@
                             </div>
                             
                         <div class="form-row">
+                        <input type="hidden" name="gen_participant" value="0" class="form-control form-control-solid form-control-lg">
+                            <input type="hidden" name="gen_company" value="-" class="form-control form-control-solid form-control-lg">
+                            <input type="hidden" name="gen_id" value="<?php echo Str::random(10);?>" class="form-control form-control-solid form-control-lg">
+                            <input type="hidden" name="gen_status" value="1" class="form-control form-control-solid form-control-lg">
+                            <input type="hidden" name="gen_mgr_app" value="n/a" class="form-control form-control-solid form-control-lg">
+                            <input type="hidden" name="gen_purpose" value="1" class="form-control form-control-solid form-control-lg">
+                            <input type="hidden" name="gen_subject" value="-" class="form-control form-control-solid form-control-lg" readonly >
+                      
                         <div class="form-group col-md-6">
                                 <label for="inputConfirm">Purpose</label>
     <select id="selectBox" onchange="changeFunc();">
@@ -191,50 +199,42 @@
 </select>
     </div> 
     <div class="form-group col-md-6">
-<input class="form-control form-control-lg" name="so_number" placeholder="SO Number" type="text" style="display: none" id="so_number">
+    <label style="display: none" id="textboxes3">So number</label>
+<input class="form-control form-control-lg" name="gen_sonumber" value="-" placeholder="SO Number" type="text" style="display: none" id="gen_sonumber">
 
 </div>
 <div class="form-group col-md-6">
 <label style="display: none" id="textboxes4">Manager Approver</label>
+                            <select class="form-control form-control-lg" name="user_leader_id" placeholder="Manager Approver" type="text" style="display: none" id="user_leader_id">
+                                @foreach($users as $stockout)
+                                    <option name="user_leader_id" value="{{ Auth::user()->user_leader_id }}">{{ $stockout->user_leader_id}}</option>
+                                @endforeach 
+                            </select>
 
-
-<!-- <input class="form-control form-control-lg" value="{{ Auth::user()->user_leader_id }}" name="user_leader_id" type="text" style="display: none" id="textboxes2" readonly> -->
-
- <select class="form-control form-control-lg" name="user_leader_id" placeholder="Manager Approver" type="text" style="display: none" id="textboxes2">
-    @foreach($users as $stockout)
-        <option name="user_leader_id" value="{{ Auth::user()->user_leader_id }}">{{ $stockout->user_leader_id}}</option>
-    @endforeach 
-</select>
-
-</div>
-    
-                            <div class="form-group col-md-6">
-                                <label for="inputConfirm">Method</label>
-                                <input name="payment_status" value="Confirm Admin" class="form-control form-control-solid form-control-lg" readonly >
-                                   
                             </div>
+                               
                          
+                            <div class="form-group col-md-6">
+                                <label for="ticket">Ticket</label>
+                                <input name="gen_ticket" value="0000{{ date('y') }}G0000{{ $stockout->gen_ticket + 4  }}" class="form-control form-control-solid form-control-lg">
+                             </div>
+                            
+                                   
                             <div class="form-group col-md-6">
                                 <label for="inputemp_id">Employee Id</label>
                                     <input type="text" name="emp_id" 
                                             class="form-control form-control-solid form-control-lg" 
                                             value="{{ Auth::user()->emp_id }}" readonly/>
                             </div> 
-                            <!-- <div class="form-group col-md-6">
-                                <label for="inputemp_id">leader id</label>
-                                    <input type="text" name="user_leader_id" 
-                                            class="form-control form-control-solid form-control-lg" 
-                                            value="{{ Auth::user()->user_leader_id }}" readonly/>
-                            </div>                            -->
+                                                
                             <div class="form-group col-md-6">
-                            <label for="note">Note</label>
-                            <textarea id="note" class="form-control" name="note">
+                            <label for="gen_notes">Note</label>
+                            <textarea id="gen_notes" value="-" class="form-control" name="gen_notes">
                             </textarea>
                             </div>    
                         </div>                        
                     </div>
                     <input type="hidden" name="user_id" value="{{ $content->qty }}">
-
                     <input type="hidden" name="user_id" value="{{ $user->id }}">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -260,16 +260,17 @@ function changeFunc() {
 var selectBox = document.getElementById("selectBox");
 var selectedValue = selectBox.options[selectBox.selectedIndex].value;
 if (selectedValue=="Office"){
-$('#textboxes2').show();
+$('#user_leader_id').show();
 $('#textboxes4').show();
-
-$('#so_number').hide();
+$('#gen_sonumber').hide();
+$('#textboxes3').hide();
 
 }
 if (selectedValue=="Project"){
-$('#so_number').show();
-$('#textboxes2').show();
+$('#gen_sonumber').show();
+$('#user_leader_id').show();
 $('#textboxes4').show();
+$('#textboxes3').show();
 
 }
 

@@ -27,6 +27,7 @@ class CartController extends Controller
           'name' => 'required',
           'qty' => 'required',
           'price' => 'required',
+          'user_leader_id' => 'required',
 
         ];
         $validator = Validator::make($inputs, $rules);
@@ -39,8 +40,9 @@ class CartController extends Controller
         $name = $request->input('name');
         $qty = $request->input('qty');
         $price = $request->input('price');
+        $user_leader_id = $request->input('user_leader_id');
 
-        $add = Cart::add(['id' => $id, 'name' => $name, 'qty' => $qty, 'price' => $price, 'weight' => 1 ]);
+        $add = Cart::add(['id' => $id, 'name' => $name, 'qty' => $qty, 'price' => $price, 'user_leader_id' => $user_leader_id, 'weight' => 1 ]);
         if ($add)
         {
             Toastr::success('Product successfully added to list', 'Success');

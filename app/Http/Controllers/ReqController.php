@@ -24,6 +24,7 @@ class ReqController extends Controller
         $products = Stationary::get();
         $users = User::all();
         $cart_products = Cart::content();
+        
 
 
         

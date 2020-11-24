@@ -10,7 +10,6 @@
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                   
                 </div>
             </div><!-- /.container-fluid -->
         </section>
@@ -60,12 +59,12 @@
 <div class="col-lg-9 col-md-9 col-sm-12">
 <input type="text" name="emp_id" class="form-control form-control-solid form-control-lg" value="{{ Auth::user()->emp_id }}" readonly/>
 </div>
-    <!-- </div>
+    </div>
     <div class="form-group row">
  <label class="col-form-label col-lg-3 col-sm-10">Lead ID</label>
 <div class="col-lg-9 col-md-9 col-sm-12">
 <input type="text" name="user_leader_id" class="form-control form-control-solid form-control-lg" value="" />
-</div> -->
+</div>
     <!-- </div>
     <div class="form-group row">
  <label class="col-form-label col-lg-3 col-sm-10">Note</label>
@@ -127,6 +126,7 @@
                                         No Product Added
                                     </div>
                                 @else
+                                
                                     <table id="example2" class="table table-bordered table-striped text-center mb-3">
                                         <thead>
                                         <tr>
@@ -180,6 +180,7 @@
                                 </div>
                                 <div class="alert alert-primary">
                                     Total : {{ Cart::total() }}
+                                    
                                 </div>
                             </div>
                             <!-- /.card-body -->
@@ -245,6 +246,7 @@
                                                 <input type="hidden" name="name" value="{{ $product->name_stat }}">
                                                 <input type="hidden" name="qty" value="1">
                                                 <input type="hidden" name="price" value="{{ $product->price_stat }}">
+                                                <input type="hidden" name="user_leader_id" value="{{ Auth::user()->user_leader_id }}">
 
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $product->name_stat }}</td>  

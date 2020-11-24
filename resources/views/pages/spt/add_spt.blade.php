@@ -52,7 +52,7 @@
             <input type="hidden" name="spt_no" class="form-control form-control-solid form-control-lg" value="" />
             <input type="hidden" name="requester_id" class="form-control form-control-solid form-control-lg" value="" />
             <input type="hidden" name="status" class="form-control form-control-solid form-control-lg" value="3" readonly/>
-               <input type="text" name="emp_id" class="form-control form-control-solid form-control-lg" value="{{ Auth::user()->emp_id }}" readonly/>
+            <input type="text" name="emp_id" class="form-control form-control-solid form-control-lg" value="{{ Auth::user()->emp_id }}" readonly/>
             </div>
         </div>
 
