@@ -49,8 +49,9 @@
     <div class="form-group row">
             <label class="col-form-label col-lg-3 col-sm-12">Employee ID</label>
             <div class=" col-lg-9 col-md-9 col-sm-12">
-            <input type="hidden" name="spt_no" class="form-control form-control-solid form-control-lg" value="" />
-            <input type="hidden" name="requester_id" class="form-control form-control-solid form-control-lg" value="" />
+            <input type="hidden" name="spt_no" value="<?php echo $spt->spt_no ?? '';?>" class="form-control form-control-solid form-control-lg">
+           
+            <input type="hidden" name="requester_id" class="form-control form-control-solid form-control-lg" value="{{ Auth::user()->emp_id }}" readonly/>
             <input type="hidden" name="status" class="form-control form-control-solid form-control-lg" value="3" readonly/>
             <input type="text" name="emp_id" class="form-control form-control-solid form-control-lg" value="{{ Auth::user()->emp_id }}" readonly/>
             </div>

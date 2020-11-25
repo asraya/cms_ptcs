@@ -175,10 +175,11 @@
                 <tr>
                     <th>Ticket</th>
                     <th>Request Form</th>
-                    <!-- <th>Type Request</th> -->
                     <th>Date</th>
                     <th>Status</th>
                     <th>Actions</th>
+                 
+
                 </tr>
                 </thead>
                
@@ -209,9 +210,33 @@
     var table = $('.atc').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route ('api.pending_stockout') }}",
+        ajax: "{{ route ('api.general_request') }}",
         columns: [
-                {data: 'user_id', name: 'user_id'},         
+                {data: 'gen_ticket', name: 'tran_general.gen_ticket'},
+                {data: 'employee_name', employee_name: 'tbl_users.employee_name'},
+                {data: 'gen_date_req', employee_name: 'tran_general.gen_date_req'},
+                {data:  'gen_status',name: 'tran_general.gen_status', render: function ( data, type, row ) {
+                var text = "";
+                var label = "";
+                if (data == '1'){
+                text = "WAITING PROCESS ADMIN";
+                label = "success";
+                } else 
+                if (data == '6'){
+                text = "Done Process";
+                label = "danger";                
+                } else 
+                if (data == '1'){
+                text = "Pending";
+                label = "warning";
+                } else
+                if (data == '4'){
+                text = "Approved Manajer Div";
+                label = "danger";
+
+                }
+                return "<span class='badge badge-" + label + "'>"+ text + "</span>";
+                }},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
 
             ],

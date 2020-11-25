@@ -24,7 +24,6 @@ class InvoiceController extends Controller
           'user_id' => 'required | integer',
           'email'  =>  'required|email',
           'user_name'  =>  'required',
-          'user_leader_id'  =>  'required',
 
 
         ];
@@ -33,7 +32,6 @@ class InvoiceController extends Controller
             'user_id.integer' => 'Invalid User!.',
             'email' => 'Invalid email!.',
             'user_name' => 'Invalid user!.',
-            'user_leader_id' => 'Invalid user_leader_id!.',
 
         ];
         Mail::to('asep.rayana@ymail.com')->send(new SendMail($inputs, $rules, $customMessages));
@@ -50,7 +48,38 @@ class InvoiceController extends Controller
         $company = Setting::latest()->first();
         return view('invoice', compact('user', 'contents', 'company','users'));
     }
-
+    
+        public function createsouvenir(Request $request)
+        {
+            $inputs = $request->except('_token');
+            $rules = [
+              'user_id' => 'required | integer',
+              'email'  =>  'required|email',
+              'user_name'  =>  'required',
+    
+    
+            ];
+            $customMessages = [
+                'user_id.required' => 'Select a User first!.',
+                'user_id.integer' => 'Invalid User!.',
+                'email' => 'Invalid email!.',
+                'user_name' => 'Invalid user!.',
+    
+            ];
+            Mail::to('asep.rayana@ymail.com')->send(new SendMail($inputs, $rules, $customMessages));
+            $validator = Validator::make($inputs, $rules, $customMessages);
+            if ($validator->fails())
+            {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+    
+            $user_id = $request->input('user_id');
+            $user = User::findOrFail($user_id);
+            $users = User::all();
+            $contents = Cart::content();
+            $company = Setting::latest()->first();
+            return view('invoice_souvenir', compact('user', 'contents', 'company','users'));
+        }
     public function print($user_id)
     {
         $user = User::findOrFail($user_id);
@@ -90,6 +119,7 @@ class InvoiceController extends Controller
         $customMessages = [
             'emp_id.required' => 'Select a Payment method first!.',
             'user_leader_id.required' => 'Select a Payment method first!.',
+            'user_leader_id' => 'Select a Payment method first!.',
 
         ];
         // dd($rules);
@@ -120,7 +150,8 @@ class InvoiceController extends Controller
         $stockout->total = $total;
         $stockout->save();
 
-        $genreq = new GeneralRequest();        
+        $genreq = new GeneralRequest();  
+              
         $genreq->gen_id = Str::random(10);
         $genreq->gen_ticket = $request->input('gen_ticket');
         $genreq->emp_id = $request->input('emp_id');

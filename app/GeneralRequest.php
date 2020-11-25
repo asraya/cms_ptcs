@@ -8,6 +8,8 @@ use Alfa6661\AutoNumber\AutoNumberTrait;
 class GeneralRequest extends Model
 
 {
+    use AutoNumberTrait;
+
     protected $table = 'tran_general';
     protected $fillable = ['gen_id', 'gen_date_req', 'gen_update'];
     protected $primaryKey = 'gen_id';
@@ -18,11 +20,17 @@ class GeneralRequest extends Model
     public function getAutoNumberOptions()
     {
         return [
-            'code' => [
-                'format' => 'SO.?', // Format kode yang akan digunakan.
-                'length' => 10 // Jumlah digit yang akan digunakan sebagai nomor urut
+            'gen_ticket' => [
+                'format' => function () {
+                    return $this->gen_ticket . '0000' .  date('y') . 'G' . '?' . $this->spt_id; 
+                },
+                'length' => 5
             ]
         ];
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
 

@@ -11,6 +11,7 @@ use auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
 use Carbon;
+use Alfa6661\AutoNumber\AutoNumberTrait;
 
 class SptRequestController extends Controller
 {
@@ -80,8 +81,7 @@ class SptRequestController extends Controller
         public function send(Request $request)
         {
             $request->validate([
-                'spt_no' => 'required',
-                'requester_id' => 'required',
+             
                 'emp_id' => 'required',
                 'position' => 'required',
                 'destination' => 'required',
@@ -90,8 +90,9 @@ class SptRequestController extends Controller
                 'spt_end' => 'required',
 
             ]);
-            $contact = new Spt([
-                
+            
+                $spt = Spt::create([
+
                 'spt_no' => $request->get('spt_no'),
                 'requester_id' => $request->get('requester_id'),
                 'emp_id' => $request->get('emp_id'),
@@ -102,18 +103,12 @@ class SptRequestController extends Controller
                 'spt_end' => $request->get('spt_end'),
                 'status' => $request->get('status'),
 
-                $table_no = '0001',
-                $tgl = substr(str_replace( '-', '', Carbon\carbon::now()), 0,8),
-                
-                $no= $tgl.$table_no,
-                $auto=substr($no,8),
-                $auto=intval($auto)+1,
-                $auto_number=substr($no,0,8).str_repeat(0,(4-strlen($auto))).$auto,
 
             ]);
-            Mail::to('asep.rayana@ymail.com')->send(new SendMail($contact));
-            $contact->save();
-            return redirect('/spt_request')->with('success', 'Spt saved!');
+            Mail::to('asep.rayana@ymail.com')->send(new SendMail($spt));
+            $spt->save();
+            return redirect('/spt_request')->with('success', 'Spt saved!', $spt);
+            
 
         }
         // public function send(Request $request)

@@ -36,6 +36,6 @@ Route::get('/stationary')->name('api.stationary')->uses('StationaryController@st
 
 Route::get('/souvenir')->name('api.souvenir')->uses('SouveneryController@souvenirdatatables');
 
-Route::get('/general_request')->name('api.general_request')->uses('GeneralRequestController@general_requestdatatables');
+// Route::get('/general_request')->name('api.general_request')->uses('GeneralRequestController@general_requestdatatables');
 
 Route::get('/fbo')->name('api.fbo')->uses('FboRequestController@fbodatatables');

@@ -75,10 +75,11 @@ Route::get('/add_stationary', 'PagesController@add_stationary');
 
 
 
-// Route::get('/general_request', 'PagesController@general_requestdatatables');
+Route::get('/general_request_server', 'PagesController@general_requestdatatables');
 // Route::get('/add_genreq', 'GeneralRequestController@create');
 
 Route::get('/souvenir', 'PagesController@souvenirdatatables');
+Route::post('invoicesouvenir', 'InvoiceController@createsouvenir')->name('invoice.createsouvenir');
 
 Route::post('invoice', 'InvoiceController@create')->name('invoice.create');
 Route::get('print/{id}', 'InvoiceController@print')->name('invoice.print');
@@ -95,10 +96,13 @@ Route::put('stockout/update/', 'StockOutController@update')->name('stockout.upda
 
 Route::get('stockout/show/{id}', 'StockOutController@show')->name('stockout.show');
 Route::get('general_request', 'StockOutController@index')->name('stockout.pending');
+
 Route::get('general_request/{id}', 'StockOutController@edit');
 // Route::get('elearn/{id}', 'ElearnController@show');
+Route::get('general_request_server', 'GeneralRequestController@index')->name('stockout.pending');
 
 Route::get('/pending')->name('api.pending_stockout')->uses('StockOutController@pending_stockout');
+Route::get('/genreq')->name('api.general_request')->uses('GeneralRequestController@general_requestdatatables');
 
 Route::get('stockout/approved', 'StockOutController@approved_stockout')->name('stockout.approved');
 Route::get('stockout/confirm/{id}', 'StockOutController@stockout_confirm')->name('stockout.confirm');

@@ -22,7 +22,7 @@
                     <!-- left column -->
                     <div class="col-md-6">
                         <div class="card">
-                            <form action="{{ route('invoice.create') }}" method="post">
+                            <form action="{{ route('invoice.createsouvenir') }}" method="post">
                                 @csrf
                                 <div class="card-header">
                                     <h3 class="card-title">
@@ -187,7 +187,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Souvenir</h3> 
-                                <a href="/stationary" class="btn btn-danger font-weight-bolder">
+                                <a href="/add_genreq" class="btn btn-danger font-weight-bolder">
                   <span class="svg-icon svg-icon-md">
                      <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -198,7 +198,7 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>Request Souvenir</a>
+                </span>Request Stationary</a>
             </div>                               
                             <!-- /.card-header -->
                             <div class="card-body">

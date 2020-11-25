@@ -194,33 +194,31 @@
                                 <label for="inputConfirm">Purpose</label>
     <select id="selectBox" onchange="changeFunc();">
 <option value="PurposeType">Purpose Type:</option>
-<option value="Office">Office</option>
+<option value="Training">Training</option>
 <option value="Project">Project</option>
 </select>
     </div> 
-    <div class="form-group col-md-6">
-    <label style="display: none" id="textboxes3">So number</label>
-<input class="form-control form-control-lg" name="gen_sonumber" value="-" placeholder="SO Number" type="text" style="display: none" id="gen_sonumber">
-
+<div class="form-group col-md-6">
+<label style="display: none" id="textboxes7">Project Name</label>
+<input class="form-control form-control-lg" name="pro" value="-" placeholder="Project Name" type="text" style="display: none" id="pro">
 </div>
 <div class="form-group col-md-6">
-<label style="display: none" id="textboxes4">Manager Approver</label>
-                            <select class="form-control form-control-lg" name="user_leader_id" placeholder="Manager Approver" type="text" style="display: none" id="user_leader_id">
-                                @foreach($users as $stockout)
-                                    <option name="user_leader_id" id="user_leader_id" value="{{ Auth::user()->user_leader_id }}">{{ $stockout->user_leader_id}}</option>
-                                @endforeach 
-                            </select>
-
-                            </div>
-                               
-                         
-                            <div class="form-group col-md-6">
-                                <label for="ticket">Ticket</label>
-                                <input type="text" name="gen_ticket" value="<?php echo $genreq->gen_ticket ?? '';?>" class="form-control form-control-solid form-control-lg">
-
-                             </div>
-                            
-                                   
+<label style="display: none" id="textboxes3">So number</label>
+<input class="form-control form-control-lg" name="gen_sonumber" value="-" placeholder="SO Number" type="text" style="display: none" id="gen_sonumber">
+</div>
+<div class="form-group col-md-6">
+<label style="display: none" id="textboxes4">Participants Tranning</label>
+<input type="file" class="form-control form-control-lg" name="user_leader_id" placeholder="Participants Tranning" type="text" style="display: none" id="user_leader_id">
+</div>
+<div class="form-group col-md-6">
+<label style="display: none" id="textboxes5">Company Name</label>
+<input type="text" class="form-control form-control-lg" name="com" value="-" placeholder="Company Name" type="text" style="display: none" id="com">
+</div>
+<div class="form-group col-md-6">
+<label type="text" style="display: none" id="textboxes6">Training Subject</label>
+<input type="text" class="form-control form-control-lg" name="sub" placeholder="Training Subject" type="text" style="display: none" id="sub">
+</div>                
+<input type="hidden" name="gen_ticket" value="<?php echo $genreq->gen_ticket ?? '';?>" class="form-control form-control-solid form-control-lg">
                             <div class="form-group col-md-6">
                                 <label for="inputemp_id">Employee Id</label>
                                     <input type="text" name="emp_id" 
@@ -229,10 +227,11 @@
                             </div> 
                                                 
                             <div class="form-group col-md-6">
-                            <label for="gen_notes">Note</label>
+                            <label class="col-form-label col-lg-3 col-sm-10">Note</label>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
                             <textarea id="gen_notes" value="-" class="form-control" name="gen_notes">
                             </textarea>
-                            </div>    
+                            </div>   
                         </div>                        
                     </div>
                     <input type="hidden" name="user_id" value="{{ $content->qty }}">
@@ -260,18 +259,33 @@
 function changeFunc() {
 var selectBox = document.getElementById("selectBox");
 var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-if (selectedValue=="Office"){
+if (selectedValue=="Training"){
 $('#user_leader_id').show();
+$('#com').show();
+$('#sub').show();
 $('#textboxes4').show();
+$('#textboxes5').show();
+$('#textboxes6').show();
+
 $('#gen_sonumber').hide();
+$('#pro').hide();
+
 $('#textboxes3').hide();
+$('#textboxes7').hide();
 
 }
 if (selectedValue=="Project"){
 $('#gen_sonumber').show();
+$('#pro').show();
+
 $('#user_leader_id').show();
+$('#com').hide();
+$('#sub').hide();
+$('#textboxes6').hide();
+$('#textboxes5').hide();
 $('#textboxes4').show();
 $('#textboxes3').show();
+$('#textboxes7').show();
 
 }
 

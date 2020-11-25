@@ -33,8 +33,6 @@ class StockOutController extends Controller
         return view('stockout.stockout_confirmation', compact('stockout_details', 'stockout', 'company','user_leader_id'));
     }
     
-    
-
     public function index()
     {
           $page_title = 'test';
