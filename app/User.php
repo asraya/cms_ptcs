@@ -62,5 +62,7 @@ class User extends Authenticatable
     public function cart()
     {
         return $this->belongsToMany(Stationary::class, 'para_stationary')->withPivot('stock_item');
+        return $this->belongsToMany(Souvenir::class, 'para_merchandise')->withPivot('stock_item');
+
     }
 }

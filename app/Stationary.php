@@ -9,7 +9,8 @@ class Stationary extends Model
         protected $guarded = [];
 		protected $hidden = ['created_at'];
 
-    protected $table = 'para_stationary';
+	protected $table = 'para_stationary';
+	
     public function user_modify()
 	{
 		return $this->belongsTo('App\Model\User', 'user_modified');

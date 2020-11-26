@@ -141,7 +141,7 @@
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
                                     <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
-                                    <select class="form-control" id="test_search_status">
+                                    <select class="form-control" id="levelFilter" name="levelFilter">
                                         <option value="">All</option>
                                         <option value="1">Pending</option>
                                         <option value="2">Delivered</option>
@@ -248,7 +248,13 @@
     var table = $('.test').DataTable({
            processing: true,
            serverSide: true,
-           ajax: "{{ route ('api.pending_stockout') }}",
+         
+                    ajax: {
+                        url :   "{{ route ('api.pending_stockout') }}",
+                        data: function(d){
+                            d.level =   $('#levelFilter').val()
+                        }
+                    },
                columns: [
                 {data: 'user_leader_id', name: 'tbl_users.user_leader_id'},
                 {data: 'emp_id', name: 'historystocks.emp_id'},

@@ -216,21 +216,21 @@
                 {data: 'employee_name', employee_name: 'tbl_users.employee_name'},
                 {data: 'gen_date_req', employee_name: 'tran_general.gen_date_req'},
                 {data:  'gen_status',name: 'tran_general.gen_status', render: function ( data, type, row ) {
-                var text = "";
+                    var text = "";
                 var label = "";
-                if (data == '1'){
+                if (data == 'approved'){
                 text = "WAITING PROCESS ADMIN";
                 label = "success";
                 } else 
-                if (data == '6'){
+                if (data == 'WAITING PROCESS ADMIN'){
                 text = "Done Process";
                 label = "danger";                
                 } else 
-                if (data == '1'){
+                if (data == 'pending'){
                 text = "Pending";
                 label = "warning";
                 } else
-                if (data == '4'){
+                if (data == 'Approved Manajer Div'){
                 text = "Approved Manajer Div";
                 label = "danger";
 

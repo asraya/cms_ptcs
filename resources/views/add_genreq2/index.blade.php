@@ -61,21 +61,21 @@
 <input type="text" name="emp_id" class="form-control form-control-solid form-control-lg" value="{{ Auth::user()->emp_id }}" readonly/>
 </div>
     </div>
-    <div class="form-group row">
+    <!-- <div class="form-group row">
  <label class="col-form-label col-lg-3 col-sm-10">Note</label>
 <div class="col-lg-9 col-md-9 col-sm-12">
 <textarea id="note" class="form-control" name="note">
 </textarea>
 </div>    
-    </div>
-    <div class="form-group row">
+    </div> -->
+    <!-- <div class="form-group row">
     <label class="col-form-label col-lg-3 col-sm-10">Purpose</label>
     <select class="col-lg-9 col-md-9 col-sm-12" id="selectBox" onchange="changeFunc();">
 <option value="PurposeType">Purpose Type:</option>
 <option value="Training">Training</option>
 <option value="Project">Project</option>
 </select>
-    </div> 
+    </div>  -->
         </div>
         </div>
 <div class="form-group row">
@@ -113,12 +113,13 @@
                             </div> -->
                             <!-- /.card-header -->
                             <div class="card-body">
-                            Add Lists
-                                @if($cart_products->count() < 1)
+                            Add Lists Souvenir
+                                @if($cart_products_souvenir->count() < 1)
                                     <div class="alert alert-danger">
                                         No Product Added
                                     </div>
                                 @else
+
                                     <table id="example2" class="table table-bordered table-striped text-center mb-3">
                                         <thead>
                                         <tr>
@@ -132,7 +133,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($cart_products as $product)
+                                        @foreach($cart_products_souvenir as $product)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td class="text-left">{{ $product->name }}</td>

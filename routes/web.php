@@ -75,11 +75,13 @@ Route::get('/add_stationary', 'PagesController@add_stationary');
 
 
 
-Route::get('/general_request_server', 'PagesController@general_requestdatatables');
 // Route::get('/add_genreq', 'GeneralRequestController@create');
 
 Route::get('/souvenir', 'PagesController@souvenirdatatables');
 Route::post('invoicesouvenir', 'InvoiceController@createsouvenir')->name('invoice.createsouvenir');
+Route::post('final_invoicesouvenir', 'InvoiceController@final_invoicesouvenir')->name('invoice.final_invoicesouvenir');
+Route::get('print_souvenir/{id}', 'InvoiceController@print_souvenir')->name('invoice.print_souvenir');
+
 
 Route::post('invoice', 'InvoiceController@create')->name('invoice.create');
 Route::get('print/{id}', 'InvoiceController@print')->name('invoice.print');
@@ -92,23 +94,25 @@ Route::get('/add_genreq', 'ReqController@index');
 Route::get('/add_genreq/edit/{id}', 'ReqController@edit')->name('req.edit');
 Route::get('/add_genreq2', 'ReqController2@index');
 
-Route::put('stockout/update/', 'StockOutController@update')->name('stockout.update');
 
-Route::get('stockout/show/{id}', 'StockOutController@show')->name('stockout.show');
-Route::get('general_request', 'StockOutController@index')->name('stockout.pending');
-
-Route::get('general_request/{id}', 'StockOutController@edit');
-// Route::get('elearn/{id}', 'ElearnController@show');
+Route::get('general_request_server/show/{gen_ticket}', 'GeneralRequestController@show')->name('genreq.show');
 Route::get('general_request_server', 'GeneralRequestController@index')->name('stockout.pending');
+Route::get('/general_request_server', 'PagesController@general_requestdatatables');
+Route::get('/genreq')->name('api.general_request')->uses('GeneralRequestController@general_requestdatatables');
+
+Route::get('general_request', 'StockOutController@index')->name('stockout.pending');
+Route::put('stockout/update/', 'StockOutController@update')->name('stockout.update');
+Route::get('stockout/show/{id}', 'StockOutController@show')->name('stockout.show');
+Route::get('general_request/{id}', 'StockOutController@edit');
+
+// Route::get('elearn/{id}', 'ElearnController@show');
 
 Route::get('/pending')->name('api.pending_stockout')->uses('StockOutController@pending_stockout');
-Route::get('/genreq')->name('api.general_request')->uses('GeneralRequestController@general_requestdatatables');
 
 Route::get('stockout/approved', 'StockOutController@approved_stockout')->name('stockout.approved');
 Route::get('stockout/confirm/{id}', 'StockOutController@stockout_confirm')->name('stockout.confirm');
 Route::get('stockout/confirmGa/{id}', 'StockOutController@stockout_confirm_ga')->name('stockout.confirmGa');
 Route::get('stockout/confirmMgr/{id}', 'StockOutController@stockout_confirm_mgr')->name('stockout.confirmMgr');
-
 Route::delete('stockout/delete/{id}', 'StockOutController@destroy')->name('stockout.destroy');
 Route::get('stockout/download/{id}', 'StockOutController@download')->name('stockout.download');
 

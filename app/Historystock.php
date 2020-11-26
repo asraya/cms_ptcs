@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Historystock extends Model
 {
+    const CREATED_AT = 'gen_date_req';
+
     public function user()
     {
         return $this->belongsTo(User::class);

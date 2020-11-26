@@ -120,7 +120,7 @@
                             </div> -->
                             <!-- /.card-header -->
                             <div class="card-body">
-                            Add Lists
+                            Add Lists Stationary
                                 @if($cart_products->count() < 1)
                                     <div class="alert alert-danger">
                                         No Product Added

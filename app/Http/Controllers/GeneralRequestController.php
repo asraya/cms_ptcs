@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
+use App\Role;
 use Spatie\Permission\Models\Permission;
 use DataTables;
 use Validator,Redirect,Response;
@@ -17,6 +17,13 @@ use Darryldecode\Cart\CartCondition;
 use DB;
 use Session;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use App\Historystock;
+use App\HistorystockDetail;
+use App\Setting;
+use Barryvdh\DomPDF\Facade as PDF;
+use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Storage;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class GeneralRequestController extends Controller
 {
@@ -24,28 +31,12 @@ class GeneralRequestController extends Controller
     {
         $this->middleware('auth');
     }
-    //tanpajoin
-    // public function general_requestdatatables()
-    // {        
-    //     return datatables ( GeneralRequest::all())
-    //     ->addIndexColumn()
-    //             ->addColumn('action', function($data){
-                       
-    //                    $editUrl = url('edit/'.$data->id);
-    //                    $btn = '<a href="'.$editUrl.'" data-toggle="tooltip" data-original-title="Edit" class="btn-sm fa fa-bars"></a>';
-    //                 //    $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->user_id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteTodo">Delete</a>';
-    
-    //                     return $btn;
-                        
-    //             })
-    //  ->rawColumns(['action'])
-    //  ->make(true);
-    // }
-    public function show($id)
+   
+    public function show($gen_ticket)
     {
-        $stockout = GeneralRequest::with('user')->where('id', $id)->first();
-        $stockout_details = HistorystockDetail::with('product')->where('stockout_id', $id)->get();
-        $user_leader_id = Historystock::with('user')->where('user_leader_id', $id)->get();
+        $stockout = GeneralRequest::with('user')->where('gen_ticket', $gen_ticket)->first();
+        $stockout_details = GeneralRequest::with('product')->where('gen_ticket', $gen_ticket)->get();
+        $user_leader_id = Historystock::with('user')->where('user_leader_id', $gen_ticket)->get();
 
         $company = Setting::latest()->first();
         return view('stockout.stockout_confirmation', compact('stockout_details', 'stockout', 'company','user_leader_id'));
@@ -68,7 +59,7 @@ class GeneralRequestController extends Controller
                 $data = DB::table('tran_general')
                 
                 ->select([   
-                    
+
                     'tran_general.emp_id as emp_id',
                     'tran_general.gen_id as gen_id',
                     'tran_general.gen_ticket as gen_ticket',
@@ -101,7 +92,7 @@ class GeneralRequestController extends Controller
                     $button = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$stockout->gen_ticket.'" data-original-title="Edit"  class="btn-sm fa fa-bars editStockout"></a>'; 
                     // $button = '<a class="btn btn-sm btn-info" href="' . route('stockout.show', $stockout->id) . '" >Show <i class="fa fa-eye"></i></a>';
                     if (\Auth::user()->can('role-show-req-stationary')) {
-                        $button = '&nbsp;&nbsp;&nbsp;<a class="btn btn-sm btn-primary" href="' . route('stockout.show', $stockout->gen_ticket) . '" >Edit <i class="fa fa-edit"></i></a>';
+                        $button = '&nbsp;&nbsp;&nbsp;<a class="btn btn-sm btn-primary" href="' . route('genreq.show', $stockout->gen_ticket) . '" >Edit <i class="fa fa-edit"></i></a>';
                     }
                     elseif(\Auth::user()->can('users-delete')) {
                         $button = '&nbsp;&nbsp;&nbsp;<a id="' . $stockout->gen_ticket . '" class="delete btn btn-sm btn-danger" href="#" >Delete <i class="fa fa-trash"></i></a>';

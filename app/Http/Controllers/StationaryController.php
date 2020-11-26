@@ -25,7 +25,7 @@ class StationaryController extends Controller
                            $editUrl = url('edit/'.$data->id);
                            $btn = '<a href="'.$editUrl.'" data-toggle="tooltip" data-original-title="Edit" class="btn-sm fa fa-bars"></a>';
                         //    $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->user_id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteTodo">Delete</a>';
-        
+
                             return $btn;
                             
                     })

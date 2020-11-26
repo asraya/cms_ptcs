@@ -21,11 +21,11 @@ class ReqController2 extends Controller
     {
         $products = Souvenir::get();
         $users = User::all();
-        $cart_products = Cart::content();
+        $cart_products_souvenir = Cart::content();
 
 
         
-        return view('add_genreq2.index', compact('products', 'users', 'cart_products'));
+        return view('add_genreq2.index', compact('products', 'users', 'cart_products_souvenir'));
     }
 
     /**

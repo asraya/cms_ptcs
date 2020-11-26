@@ -59,18 +59,18 @@
                                 <div class="col-sm-4 invoice-col">
                                     To
                                     <address>
-                                        <strong>{{ $stockout->user->user_name }}</strong><br>                                      
-                                        Email: {{ $stockout->user->email }}
+                                        <strong>{{ $stockout->user['user_name'] }}</strong><br>                                      
+                                        Email: {{ $stockout->user['email'] }}
                                     </address>
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-sm-4 invoice-col">
-                                    <b>Invoice #IMS-{{ $stockout->created_at->format('Ymd') }}{{ $stockout->id }}</b><br><br>
+                                    <b>Invoice #IMS-{{ $stockout->gen_date_req->format('Ymd') }}{{ $stockout->id }}</b><br><br>
                                     <!-- <b>stockout ID:</b> {{ str_pad($stockout->id,9,"0",STR_PAD_LEFT) }}<br> -->
                                     <b>stockout Status:</b> <span class="badge {{ $stockout->stockout_status == 'approved' ? 'badge-success' : 'badge-warning'  }}">{{ $stockout->stockout_status }}</span><br>
                                     <b>approve leader</b> <span class="badge {{ $stockout->stockout_status == 'approved' ? 'badge-success' : 'badge-warning'  }}">{{ $stockout->user_leader_id }}</span><br>
 
-                                    <b>Account:</b> {{ $stockout->user->id }}
+                                    <b>Account:</b> {{ $stockout->user['id'] }}
                                 </div>
                                 <!-- /.col -->
                             </div>
@@ -95,8 +95,8 @@
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
 
-                                                    <td>{{ $stockout_detail->product->name_stat }}</td>
-                                                    <td>{{ $stockout_detail->product->id }}</td>
+                                                    <td>{{ $stockout_detail->product['name_stat'] }}</td>
+                                                    <td>{{ $stockout_detail->product['id'] }}</td>
                                                     <!-- <td>{{ $stockout_detail->quantity }}</td> -->
                                                     <td><input type="number" name="quantity" class="form-control" value="{{ $stockout_detail->quantity }}"><td>
 

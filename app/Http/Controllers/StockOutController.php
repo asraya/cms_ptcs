@@ -65,7 +65,9 @@ class StockOutController extends Controller
         }elseif($who_login->hasRole(['HRD'])){
             
         }
-
+        if (!empty($request->get('stockout_status')) and $request->get('stockout_status') != 'all') {
+            $data = $data->whereLevel($request->get('stockout_status'));
+        }
         // if($filter_status){
         //     $data->where('status', $status);
         // }

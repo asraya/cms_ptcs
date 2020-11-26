@@ -140,7 +140,7 @@
                             <!-- this row will not appear when printing -->
                             <div class="row no-print">
                                 <div class="col-12">
-                                    <a href="{{ route('invoice.print', $user->id) }}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+                                    <a href="{{ route('invoice.print_souvenir', $user->id) }}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
                                     <button type="button" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-success float-right"><i class="fa fa-credit-card"></i>
                                         Submit
                                     </button>
@@ -157,7 +157,7 @@
     <!-- /.content-wrapper -->
 
     <!--payment modal -->
-    <form action="{{ route('invoice.final_invoice') }}" method="post">
+    <form action="{{ route('invoice.final_invoicesouvenir') }}" method="post">
         @csrf
         <div class="modal fade" id="exampleModalCenter" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -182,7 +182,6 @@
                             </div>
                             
                         <div class="form-row">
-                        <input type="hidden" name="gen_participant" value="0" class="form-control form-control-solid form-control-lg">
                             <input type="hidden" name="gen_company" value="-" class="form-control form-control-solid form-control-lg">
                             <input type="hidden" name="gen_id" value="<?php echo Str::random(10);?>" class="form-control form-control-solid form-control-lg">
                             <input type="hidden" name="gen_status" value="1" class="form-control form-control-solid form-control-lg">
@@ -200,7 +199,7 @@
     </div> 
 <div class="form-group col-md-6">
 <label style="display: none" id="textboxes7">Project Name</label>
-<input class="form-control form-control-lg" name="pro" value="-" placeholder="Project Name" type="text" style="display: none" id="pro">
+<input class="form-control form-control-lg" name="nameproj" value="-" placeholder="Project Name" type="text" style="display: none" id="pro">
 </div>
 <div class="form-group col-md-6">
 <label style="display: none" id="textboxes3">So number</label>
@@ -208,23 +207,32 @@
 </div>
 <div class="form-group col-md-6">
 <label style="display: none" id="textboxes4">Participants Tranning</label>
-<input type="file" class="form-control form-control-lg" name="user_leader_id" placeholder="Participants Tranning" type="text" style="display: none" id="user_leader_id">
+<input type="text" class="form-control form-control-lg" name="gen_participant" value="0" placeholder="Participants Tranning" type="text" style="display: none" id="user_leader_id">
 </div>
 <div class="form-group col-md-6">
 <label style="display: none" id="textboxes5">Company Name</label>
-<input type="text" class="form-control form-control-lg" name="com" value="-" placeholder="Company Name" type="text" style="display: none" id="com">
+<input type="text" class="form-control form-control-lg" name="gen_company" value="-" placeholder="Company Name" type="text" style="display: none" id="com">
 </div>
 <div class="form-group col-md-6">
 <label type="text" style="display: none" id="textboxes6">Training Subject</label>
-<input type="text" class="form-control form-control-lg" name="sub" placeholder="Training Subject" type="text" style="display: none" id="sub">
+<input type="text" class="form-control form-control-lg" name="gen_subject" value="-"  placeholder="Training Subject" type="text" style="display: none" id="sub">
 </div>                
-<input type="hidden" name="gen_ticket" value="<?php echo $genreq->gen_ticket ?? '';?>" class="form-control form-control-solid form-control-lg">
+<input type="text" name="gen_ticket" value="<?php echo $genreq->gen_ticket ?? '';?>" class="form-control form-control-solid form-control-lg">
                             <div class="form-group col-md-6">
                                 <label for="inputemp_id">Employee Id</label>
                                     <input type="text" name="emp_id" 
                                             class="form-control form-control-solid form-control-lg" 
                                             value="{{ Auth::user()->emp_id }}" readonly/>
                             </div> 
+                            <div class="form-group col-md-6">
+<label style="display: none" id="textboxes4">Manager Approver</label>
+                            <select class="form-control form-control-lg" name="user_leader_id" placeholder="Manager Approver" type="text" style="display: none" id="user_leader_id">
+                                @foreach($users as $stockout)
+                                    <option name="user_leader_id" id="user_leader_id" value="{{ Auth::user()->user_leader_id }}">{{ $stockout->user_leader_id}}</option>
+                                @endforeach 
+                            </select>
+
+                            </div>
                                                 
                             <div class="form-group col-md-6">
                             <label class="col-form-label col-lg-3 col-sm-10">Note</label>

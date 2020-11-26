@@ -19,6 +19,39 @@ class CartController extends Controller
         //
     }
 
+    public function souvenir(Request $request)
+    {
+        $inputs = $request->except('_token');
+        $rules = [
+          'id' => 'required',
+          'name' => 'required',
+          'qty' => 'required',
+          'price' => 'required',
+
+        ];
+        $validator = Validator::make($inputs, $rules);
+        if ($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $id = $request->input('id');
+        $name = $request->input('name');
+        $qty = $request->input('qty');
+        $price = $request->input('price');
+
+        $add = Cart::add(['id' => $id, 'name' => $name, 'qty' => $qty, 'price' => $price, 'weight' => 1 ]);
+        if ($add)
+        {
+            Toastr::success('Product successfully added to list', 'Success');
+            return redirect()->back();
+
+        } else {
+
+            Toastr::error('Product not added to cart', 'Error');
+            return redirect()->back();
+        }
+    }
     public function store(Request $request)
     {
         $inputs = $request->except('_token');
