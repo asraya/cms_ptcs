@@ -60,11 +60,11 @@
 <input type="text" name="emp_id" class="form-control form-control-solid form-control-lg" value="{{ Auth::user()->emp_id }}" readonly/>
 </div>
     </div>
-    <div class="form-group row">
+    <!-- <div class="form-group row">
  <label class="col-form-label col-lg-3 col-sm-10">Lead ID</label>
 <div class="col-lg-9 col-md-9 col-sm-12">
 <input type="text" name="user_leader_id" class="form-control form-control-solid form-control-lg" value="" />
-</div>
+</div> -->
     <!-- </div>
     <div class="form-group row">
  <label class="col-form-label col-lg-3 col-sm-10">Note</label>
@@ -72,7 +72,6 @@
 <textarea id="note" class="form-control" name="note">
 </textarea>
 </div>     -->
-    </div>
     <!-- <div class="form-group row">
     <label class="col-form-label col-lg-3 col-sm-10">Purpose</label>
     <select class="col-lg-9 col-md-9 col-sm-12" id="selectBox" onchange="changeFunc();">
@@ -141,7 +140,9 @@
                                         </thead>
                                         <tbody>
                                         @foreach($cart_products as $product)
+                                        
                                             <tr>
+                                            
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td class="text-left">{{ $product->name }}</td>
                                                 <form action="{{ route('cart.update', $product->rowId) }}" method="post">
@@ -174,14 +175,14 @@
                                     </table>
                                 @endif
 
-                                <div class="alert alert-danger">
+                                <!-- <div class="alert alert-danger">
                                     <p>Quantity : {{ Cart::count() }}</p>
                                     <p>Sub Total : {{ Cart::subtotal() }}</p>
                                 </div>
                                 <div class="alert alert-primary">
                                     Total : {{ Cart::total() }}
                                     
-                                </div>
+                                </div> -->
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -196,6 +197,11 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Item Stationary</h3> 
+                                 <!-- <select name="name_stat">
+    @foreach($products as $product)
+        <option value="{{ $product->id }}">{{ $product->name_stat}}</option>
+    @endforeach 
+</select> -->
                                 <a href="/add_genreq2" class="btn btn-danger font-weight-bolder">
                   <span class="svg-icon svg-icon-md">
                      <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
@@ -209,6 +215,8 @@
                     <!--end::Svg Icon-->
                 </span>Request Souvenir</a>
             </div>                               
+
+
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <table id="example1" class="table table-bordered table-striped text-center">
@@ -239,6 +247,7 @@
                                     <tbody>
                                   
                                     @foreach($products as $key => $product)
+                                    
                                         <tr>
                                             <form action="{{ route('cart.store') }}" method="post">
                                                 @csrf

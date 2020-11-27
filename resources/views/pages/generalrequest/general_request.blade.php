@@ -214,7 +214,7 @@
         columns: [
                 {data: 'gen_ticket', name: 'tran_general.gen_ticket'},
                 {data: 'employee_name', employee_name: 'tbl_users.employee_name'},
-                {data: 'gen_date_req', employee_name: 'tran_general.gen_date_req'},
+                {data: 'gen_date_req', name: 'tran_general.gen_date_req'},
                 {data:  'gen_status',name: 'tran_general.gen_status', render: function ( data, type, row ) {
                     var text = "";
                 var label = "";

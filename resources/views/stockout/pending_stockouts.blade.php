@@ -132,7 +132,8 @@
                         <div class="row align-items-center">
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="input-icon">
-                                    <input type="text" class="form-control" placeholder="Search..." id="test_search_query"/>
+
+                                <input type="text" name="emp_id" class="form-control col-sm-12 filter-emp_id" placeholder="Filter Berdasarkan ID">
                                     <span><i class="flaticon2-search-1 text-muted"></i></span>
                                 </div>
                             </div>
@@ -140,29 +141,28 @@
                           
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
-                                    <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
-                                    <select class="form-control" id="levelFilter" name="levelFilter">
-                                        <option value="">All</option>
-                                        <option value="1">Pending</option>
-                                        <option value="2">Delivered</option>
-                                        <option value="3">Canceled</option>
-                                        <option value="4">Success</option>
-                                        <option value="5">Info</option>
-                                        <option value="6">Danger</option>
-                                    </select>
+
+<select name="stockout_status" id="stockout_status" class="form-control">
+   <option value=""> Pilih Periode </option>
+   <option value="7"> 7 Hari Terakhir </option>
+   <option value="14"> 14 Hari Terakhir </option>
+   <option value="21"> 21 Hari Terakhir </option>
+   <option value="31"> 31 Hari Terakhir </option>
+   <option value="365"> 365 Hari Terakhir </option>
+</select>
                                 </div>
                             </div>
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
-                                    <label class="mr-3 mb-0 d-none d-md-block">Type:</label>
-                                    <select class="form-control" id="test_search_type">
-                                        <option value="">All</option>
-                                        <option value="1">Online</option>
-                                        <option value="2">Retail</option>
-                                        <option value="3">Direct</option>
+                                    
+                                    <select data-column="1" class="form-control col-sm-12 filter-satuan" placeholder="Filter Berdasarkan Satuan">
+                                      <option value=""> Status </option>
+                                      <option value="pending"> pending </option>
+                                      <option value="WAITING PROCESS ADMIN"> WAITING PROCESS ADMIN </option>
                                     </select>
                                 </div>
                             </div>
+                           
                         </div>
                     </div>
                     <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
@@ -170,16 +170,16 @@
                             Search
                         </a>
                     </div>
+                    
                 </div>
+                
             </div>
             <!--end::Search Form-->
             <table class="table table-bordered table-hover test">
 
                                     <thead>
                                     <tr>
-                                    <th>user learder</th>
-
-                                        <th>ID</th>
+                                        <th>emp_id</th>
                                         <th>Request Form</th>    
                                         <th>Status</th>                            
                                         <th>Actions</th>
@@ -245,21 +245,42 @@
 
        <!-- <script src="{{ asset('js/app.js') }}" type="text/javascript"></script> -->
        <script> 
+           $(document).ready(function(){
+
     var table = $('.test').DataTable({
+        
+        pageLength: 10,
+        searching: true,
            processing: true,
            serverSide: true,
-         
+           dom: '<"html5buttons">Blfrtip',
+           language: {
+                buttons: {
+                    colvis : 'show / hide', // label button show / hide
+                    colvisRestore: "Reset Kolom" //lael untuk reset kolom ke default
+                }
+        },
+        
+        buttons : [
+                    {extend: 'colvis', postfixButtons: [ 'colvisRestore' ] },
+                    {extend:'csv'},
+                    {extend: 'pdf', title:'Contoh File PDF Datatables'},
+                    {extend: 'excel', title: 'Contoh File Excel Datatables'},
+                    {extend:'print',title: 'Contoh Print Datatables'},
+        ],
+
                     ajax: {
                         url :   "{{ route ('api.pending_stockout') }}",
-                        data: function(d){
-                            d.level =   $('#levelFilter').val()
-                        }
-                    },
-               columns: [
-                {data: 'user_leader_id', name: 'tbl_users.user_leader_id'},
+                        "data" : function (d) {
+                    d.stockout_status = $('#stockout_status').val();
+            }
+      
+        },
+        
+        columns: [
                 {data: 'emp_id', name: 'historystocks.emp_id'},
-               {data: 'employee_name', employee_name: 'tbl_users.employee_name'},
-               {data:  'stockout_status',name: 'historystocks.stockout_status', render: function ( data, type, row ) {
+                {data: 'employee_name', employee_name: 'tbl_users.employee_name'},
+                {data:  'stockout_status',name: 'historystocks.stockout_status', render: function ( data, type, row ) {
                 var text = "";
                 var label = "";
                 if (data == 'approved'){
@@ -271,7 +292,7 @@
                 label = "danger";                
                 } else 
                 if (data == 'pending'){
-                text = "Pending";
+                text = "pending";
                 label = "warning";
                 } else
                 if (data == 'Approved Manajer Div'){
@@ -283,9 +304,24 @@
                 }},
                {data: 'action', name: 'action', orderable: false, searchable: false},
    
-            ],
+            ],         
+          
+
+        
     });
-    
+    $('#stockout_status').change(function () {
+        table.draw();
+    });
+    $('.filter-satuan').change(function () {
+        table.column( $(this).data('column'))
+        .search( $(this).val() )
+        .draw();
+    });
+    $('.filter-emp_id').keyup(function () {
+        table.column( $(this).data('column'))
+        .search( $(this).val() )
+        .draw();
+    });
     $('#createNewCustomer').click(function () {
         $('#saveBtn').val("create-Customer");
         $('#id').val('');
@@ -365,5 +401,7 @@
    });
 }
     });
+});
+
 </script>
 @endsection

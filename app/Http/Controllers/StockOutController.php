@@ -46,6 +46,7 @@ class StockOutController extends Controller
         $who_login = User::find(Auth::user()->id);
         //dd($who_login);
         //dd($who_login->getRoleNames()[0]);
+        
         $data = DB::table('historystocks')
         
         ->select([   
@@ -61,12 +62,12 @@ class StockOutController extends Controller
         ->leftJoin('tbl_users', 'historystocks.emp_id', '=', 'tbl_users.emp_id');
         if($who_login->hasRole(['User', 'IT','Sekretaris'])){
             $data->where('historystocks.emp_id', $users);
-            // ->orwhere('id', '1', $users1);
         }elseif($who_login->hasRole(['HRD'])){
             
         }
-        if (!empty($request->get('stockout_status')) and $request->get('stockout_status') != 'all') {
-            $data = $data->whereLevel($request->get('stockout_status'));
+        if (request('stockout_status')) {
+            $stockout_status = now()->subDays(request('stockout_status'))->toDateString();
+            $data->where('gen_date_req', '>=', $stockout_status);
         }
         // if($filter_status){
         //     $data->where('status', $status);

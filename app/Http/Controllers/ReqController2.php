@@ -7,7 +7,7 @@ use App\Historystock;
 use App\HistorystockDetail;
 use App\Souvenir;
 use Brian2694\Toastr\Facades\Toastr;
-use Gloudemans\Shoppingcart\Facades\Cart;
+use Gloudemans\Shoppingcart\Facades\CartSouvenir;
 use Illuminate\Http\Request;
 
 class ReqController2 extends Controller
@@ -19,9 +19,9 @@ class ReqController2 extends Controller
      */
     public function index()
     {
-        $products = Souvenir::get();
+        $products  = Souvenir::get();
         $users = User::all();
-        $cart_products_souvenir = Cart::content();
+        $cart_products_souvenir = CartSouvenir::content();
 
 
         

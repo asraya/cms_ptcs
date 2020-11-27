@@ -64,7 +64,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/sendemail', 'SendEmailController@index');
 Route::post('/sendemail/send', 'SendEmailController@send');
 
-
+Route::resource('cartsouvenir', 'CartSouvenirController');
 Route::resource('cart', 'CartController');
 Route::resource('customer', 'CustomerController');
 

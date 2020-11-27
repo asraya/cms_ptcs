@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\tbl_users;
 
+use App\tbl_users;
 use App\User;
 use App\Historystock;
 use App\HistorystockDetail;
@@ -23,11 +23,7 @@ class ReqController extends Controller
     {
         $products = Stationary::get();
         $users = User::all();
-        $cart_products = Cart::content();
-        
-
-
-        
+        $cart_products = Cart::content();        
         return view('add_genreq.index', compact('products', 'users', 'cart_products'));
     }
 

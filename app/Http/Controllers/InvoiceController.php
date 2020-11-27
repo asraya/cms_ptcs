@@ -114,7 +114,7 @@ class InvoiceController extends Controller
     public function final_invoice(Request $request)
     {
         $inputs = $request->except('_token');
-        dd($inputs);
+        // dd($inputs);
         $rules = [
             
           'user_id' => 'required | integer',

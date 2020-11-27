@@ -120,7 +120,7 @@
                                     </div>
                                 @else
 
-                                    <table id="example2" class="table table-bordered table-striped text-center mb-3">
+                                    <table id="example4" class="table table-bordered table-striped text-center mb-3">
                                         <thead>
                                         <tr>
                                             <th>No</th>
@@ -137,7 +137,7 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td class="text-left">{{ $product->name }}</td>
-                                                <form action="{{ route('cart.update', $product->rowId) }}" method="post">
+                                                <form action="{{ route('cartsouvenir.update', $product->rowId) }}" method="post">
                                                     @csrf
                                                     @method('PUT')
                                                     <td>
@@ -155,7 +155,7 @@
                                                     <button class="btn btn-danger" type="button" onclick="deleteItem({{ $product->id }})">
                                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                                     </button>
-                                                    <form id="delete-form-{{ $product->id }}" action="{{ route('cart.destroy', $product->rowId) }}" method="post"
+                                                    <form id="delete-form-{{ $product->id }}" action="{{ route('cartsouvenir.destroy', $product->rowId) }}" method="post"
                                                           style="display:none;">
                                                         @csrf
                                                         @method('DELETE')
@@ -203,7 +203,7 @@
             </div>                               
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped text-center">
+                                <table id="example3" class="table table-bordered table-striped text-center">
                                     <thead>
                                     <tr>
                                         <th>No</th>
@@ -224,7 +224,7 @@
                                   
                                     @foreach($products as $key => $product)
                                         <tr>
-                                            <form action="{{ route('cart.store') }}" method="post">
+                                            <form action="{{ route('cartsouvenir.store') }}" method="post">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $product->id_item }}">
                                                 <input type="hidden" name="name" value="{{ $product->name_merc }}">
@@ -309,8 +309,8 @@ $('#textboxes1').hide();
     <script>
     
         $(function () {
-            $("#example1").DataTable();
-            $('#example2').DataTable({
+            $("#example3").DataTable();
+            $('#example4').DataTable({
                 "paging": true,
                 "lengthChange": false,
                 "searching": false,
@@ -322,7 +322,7 @@ $('#textboxes1').hide();
     </script>
  <script> 
 
-var table = $('.example1').DataTable({
+var table = $('.example3').DataTable({
     processing: true,
     serverSide: true,
     ajax: "{{ route ('api.pending_stockout') }}",

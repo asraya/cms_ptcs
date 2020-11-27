@@ -191,12 +191,21 @@
                             <input type="hidden" name="gen_subject" value="-" class="form-control form-control-solid form-control-lg" readonly >
                       
                         <div class="form-group col-md-6">
+
+
+
+
+
+
+
                                 <label for="inputConfirm">Purpose</label>
     <select id="selectBox" onchange="changeFunc();">
 <option value="PurposeType">Purpose Type:</option>
 <option value="Office">Office</option>
 <option value="Project">Project</option>
 </select>
+
+
     </div> 
     <div class="form-group col-md-6">
     <label style="display: none" id="textboxes3">So number</label>
@@ -214,11 +223,8 @@
                             </div>
                                
                          
-                            <div class="form-group col-md-6">
-                                <label for="ticket">Ticket</label>
-                                <input type="text" name="gen_ticket" value="<?php echo $genreq->gen_ticket ?? '';?>" class="form-control form-control-solid form-control-lg">
+                                <input type="hidden" name="gen_ticket" value="<?php echo $genreq->gen_ticket ?? '';?>" class="form-control form-control-solid form-control-lg">
 
-                             </div>
                             
                                    
                             <div class="form-group col-md-6">
