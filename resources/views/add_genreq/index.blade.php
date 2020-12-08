@@ -249,13 +249,15 @@
                                     @foreach($products as $key => $product)
                                     
                                         <tr>
+                                        
                                             <form action="{{ route('cart.store') }}" method="post">
                                                 @csrf
+
+
                                                 <input type="hidden" name="id" value="{{ $product->id }}">
                                                 <input type="hidden" name="name" value="{{ $product->name_stat }}">
                                                 <input type="hidden" name="qty" value="1">
                                                 <input type="hidden" name="price" value="{{ $product->price_stat }}">
-                                                <input type="hidden" name="user_leader_id" value="{{ Auth::user()->user_leader_id }}">
 
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $product->name_stat }}</td>  

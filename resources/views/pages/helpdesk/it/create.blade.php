@@ -14,7 +14,9 @@
       </div><br />
     @endif
 
-    <form id="add-user" method="post" action="{{ url('post-user') }}"> 
+    <form method="post" action="{{url('it_helpdesk/send')}}">
+    {{ csrf_field() }}
+
 <div class="card">
  <div class="card-body">
 
@@ -22,12 +24,21 @@
 				<div class="col-xl-7"></div>
 				<div class="col-xl-12">
 					<!--begin::Input-->
-                    <div class="form-group row">
-            <label class="col-form-label col-lg-3 col-sm-12">Ticket</label>
-            <div class=" col-lg-5 col-md-5 col-sm-7">
-               <input type="text" name="emp_id" class="form-control form-control-solid form-control-lg"  placeholder="Enter your Employee ID"/>
-            </div>
-        </div>
+                
+               <input type="hidden" name="help_id" class="form-control form-control-solid form-control-lg" value="<?php echo Str::random(10);?>"/>
+        
+               <input type="hidden" name="help_ticket" value="<?php echo $spt->help_ticket ?? '';?>" class="form-control form-control-solid form-control-lg" readonly>
+
+               <input type="hidden" name="help_level" class="form-control form-control-solid form-control-lg" value="0"/>
+
+               <input type="hidden" name="help_solve" class="form-control form-control-solid form-control-lg" value="-"/>
+
+               <input type="hidden" name="help_solver" class="form-control form-control-solid form-control-lg" value="-"/>
+
+                <input type="hidden" name="help_status" class="form-control form-control-solid form-control-lg" value="3"/>
+
+               <input type="hidden" name="logs_id" class="form-control form-control-solid form-control-lg" value="<?php echo Str::random(50);?>"/>
+
 
                     <div class="form-group row">
             <label class="col-form-label col-lg-3 col-sm-12">Employee ID</label>
@@ -60,14 +71,15 @@
         <div class="form-group row">
         <label class="col-form-label col-lg-3 col-sm-12">Attactment</label>
         <div class=" col-lg-5 col-md-5 col-sm-7">
-                        <input type="file" name="file"  class="form-control" />
+                        <input type="file" value="3" name="help_file"  class="form-control" />
 					</div>
-                    </div>
+                </div>
+
 
         <div class="form-group row">
         <label for="" class="col-form-label col-lg-3 col-sm-12">Problem Type</label>
         <div class=" col-lg-5 col-md-5 col-sm-7">
-        <select class="form-control">
+        <select class="form-control" name="help_note">
         <option style="padding-left: 0.4em; padding-right: 3px;" value=>-- Choise Problem --</option>
                     <option disabled></option>
                     <!-- <option style="padding-left: 0.4em; padding-right: 3px;" value="1">COMPANY APPLICATION</option> -->
@@ -98,8 +110,8 @@
 
 					<!--begin::Input-->
                   
-		<!--end::Input-->                    
-				</div>
+			<!--end::Input-->                    
+            </div>
 				<div class="col-xl-3"></div>
 			</div>
 		</div>
@@ -108,7 +120,7 @@
 			<div class="row">
 				<div class="col-xl-3"></div>
 				<div class="col-xl-6">
-					<button type="reset" class="btn btn-primary font-weight-bold mr-2">Submit</button>
+                <input type="submit" name="createit" class="btn btn-info" value="Send" />
 					<button type="reset" class="btn btn-clean font-weight-bold">Cancel</button>
 				</div>
 				<div class="col-xl-3"></div>
@@ -122,11 +134,7 @@
 
 {{-- Scripts Section --}}
 @section('scripts')
-    <script>
-        $(document).ready(function() {
-            $('.add_spt').add_spt();
-        });
-    </script>
+  
     <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
 <script>
   var konten = document.getElementById("konten");

@@ -28,6 +28,7 @@ Route::get('elearn/{id}', 'ElearnController@show');
 // Route::get('/role', 'PagesController@role');
 Route::get('/profile', 'ProfileController@index')->name('profile');
 
+Route::post('/it_helpdesk/send', 'HelpdeskRequestController@createit');
 Route::get('/it_helpdesk')->name('api.it_helpdesk')->uses('HelpdeskRequestController@itdatatables');
 Route::get('/it_helpdesk', 'PagesController@itdatatables');
 Route::get('/it_helpdesk/create', 'HelpdeskRequestController@create')->name('it_helpdesk.create');
@@ -163,5 +164,39 @@ Route::get('config', 'CarRequestController@config')->name('car_request.config');
 
 Route::get('car_allow', 'TaxiRequestController@car_allow')->name('car_request.car_allow');
 Route::get('/datatables_car_allow')->name('api.datatables_car_allow')->uses('TaxiRequestController@datatables_car_allow');
+
+
+  //clients
+    Route::get('/clients', 'ClientController@index')->name('clients.index');
+    Route::get('/clients/create', 'ClientController@create')->name('clients.create');
+    Route::post('/clients/create', 'ClientController@store')->name('clients.store');
+    Route::get('/clients/edit/{id}', 'ClientController@edit')->name('clients.edit');
+    Route::patch('/clients/update/{id}', 'ClientController@update')->name('clients.update');
+    Route::delete('/clients/delete/{id}', 'ClientController@destroy')->name('clients.destroy');
+
+    //providers
+    Route::get('/providers', 'ProviderController@allProviders');
+    Route::get('/providers/add', 'ProviderController@createProvider');
+    Route::post('/providers/add', 'ProviderController@storeProvider');
+    Route::get('/provider/edit/{id}', 'ProviderController@editProvider');
+    Route::patch('/provider/update/{id}', 'ProviderController@updateProvider');
+    Route::get('/provider/delete/{id}', 'ProviderController@destroyProvider');
+
+    //stock
+    Route::get('/stock', 'StockController@allStock');
+    Route::get('/stock/add', 'StockController@createStock');
+    Route::post('/stock/add', 'StockController@storeStock');
+    Route::get('/stock/edit/{id}', 'StockController@editStock');
+    Route::patch('/stock/update/{id}', 'StockController@updateStock');
+    Route::get('/stock/delete/{id}', 'StockController@destroyStock');
+
+    //orders
+    Route::get('/orders', 'OrderController@allOrders');
+    Route::get('/orders/add', 'OrderController@createOrder');
+    Route::get('/orders/price/{id}', 'OrderController@orderPrice'); //ajax call
+    Route::post('/orders/add', 'OrderController@storeOrder');
+    Route::get('/order/show/{id}', 'OrderController@showOrder');
+    Route::get('/order/bill/{id}', 'OrderController@billOrder');
+    Route::get('/order/delete/{id}', 'OrderController@destroyOrder');
 
 });

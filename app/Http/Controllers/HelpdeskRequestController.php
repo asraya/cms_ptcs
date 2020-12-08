@@ -13,6 +13,8 @@ use Session;
 use App\IThelpdesk;
 use App\GAhelpdesk;
 use App\User;
+use App\Mail\SendMail;
+use Illuminate\Support\Facades\Mail;
 
 class HelpdeskRequestController extends Controller
 {
@@ -21,6 +23,36 @@ class HelpdeskRequestController extends Controller
         $roles = Role::pluck('name','name')->all();
         return view('pages.helpdesk.it.create',compact('roles'));
     }
+
+    function createit(Request $request)
+    {
+     $this->validate($request, [
+      'help_id'     =>  'required',
+      'email'  =>  'required|email',
+     ]);
+
+     
+     $IThelpdesk = IThelpdesk::create([
+       
+        'help_id' => $request->get('help_id'),
+        'help_ticket' => $request->get('help_ticket'),       
+        'help_level' => $request->get('help_level'),       
+        'emp_id' => $request->get('emp_id'),       
+        'help_type' => $request->get('help_type'),       
+        'help_note' => $request->get('help_note'),       
+        'help_solve' => $request->get('help_solve'),       
+        'help_solver' => $request->get('help_solver'),       
+        'help_status' => $request->get('help_status'),       
+        'help_file' => "0",       
+        'logs_id' => $request->get('logs_id'),       
+
+            ]);
+            Mail::to('asep.rayana@ymail.com')->send(new SendMail($IThelpdesk));
+            $IThelpdesk->save();
+            return redirect('/spt_request')->with('success', 'IThelpdesk saved!', $IThelpdesk);
+
+    }
+
     public function ga_create()
     {
         $roles = Role::pluck('name','name')->all();
